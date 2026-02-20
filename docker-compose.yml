@@ -1,0 +1,85 @@
+# ==================================================================
+# ACTION Platform - Docker Compose
+# ==================================================================
+# Deploys the ENTIRE stack on a fresh server with ONLY Docker.
+#
+# What gets installed automatically:
+#   1. Ollama (LLM inference server)
+#   2. MedGemma model (~2.5 GB, downloaded on first start)
+#   3. FastAPI backend + all Python dependencies
+#
+# Usage:
+#   docker-compose up --build        (first time / after code changes)
+#   docker-compose up -d             (detached / production mode)
+#   docker-compose logs -f           (watch logs)
+#   docker-compose down              (stop everything)
+#
+# First start takes ~5 min (model download). Subsequent starts: ~10s.
+# Model weights persist in a Docker volume across restarts / upgrades.
+# ==================================================================
+
+services:
+
+  # ----------------------------------------------------------------
+  # Ollama - Local LLM server (installs + runs + pulls model)
+  # ----------------------------------------------------------------
+  ollama:
+    image: ollama/ollama:latest
+    container_name: sparc-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:11434/api/tags | grep -q alibayram"]
+      interval: 10s
+      timeout: 5s
+      retries: 60
+      start_period: 60s
+
+  # ----------------------------------------------------------------
+  # Model puller - one-shot job that ensures MedGemma is downloaded
+  # ----------------------------------------------------------------
+  model-puller:
+    image: ollama/ollama:latest
+    container_name: sparc-model-puller
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        echo "Waiting for Ollama to be ready..."
+        until curl -sf http://ollama:11434/api/tags > /dev/null 2>&1; do
+          sleep 2
+        done
+        echo "Ollama is ready. Checking for MedGemma model..."
+        if curl -sf http://ollama:11434/api/tags | grep -q "alibayram/medgemma"; then
+          echo "MedGemma already available. Skipping download."
+        else
+          echo "Pulling MedGemma model (~2.5 GB). This may take a few minutes..."
+          ollama pull alibayram/medgemma
+          echo "MedGemma model ready!"
+        fi
+    depends_on:
+      - ollama
+
+  # ----------------------------------------------------------------
+  # FastAPI backend
+  # ----------------------------------------------------------------
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sparc-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    depends_on:
+      ollama:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  ollama_data:

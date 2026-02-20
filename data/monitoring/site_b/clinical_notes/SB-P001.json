@@ -1,0 +1,53 @@
+{
+  "patient_id": "SB-P001",
+  "documents": [
+    {
+      "visit_number": 1,
+      "date": "2025-06-04",
+      "type": "progress_note",
+      "text": "--- Visit 1 | Date: 2025-06-04 ---\n\nPatient SB-P001 presents for scheduled cycle 1 visit.\n\nVS: 148/74 | HR 81 | Wt 81.6 kg. Patient well-nourished and in no acute distress.\n\nRoutine labs obtained:\n  - PSA: 4.54 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 6.02 U/L [ref 7.0-56.0] (LOW)\n  - AST: 28.95 U/L [ref 10.0-40.0]\n  - Hemoglobin: 14.38 g/dL [ref 12.0-17.5]\n  - WBC: 8.86 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.06 mg/dL [ref 0.7-1.3]\n\nAssessment: Tolerating therapy. Plan to continue protocol. Next visit in 3 weeks.\n"
+    },
+    {
+      "visit_number": 2,
+      "date": "2025-06-25",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 2 | Date: 2025-06-25 ---\n\nFollow-up visit #2 for patient SB-P001.\n\nVS: 157/76 | HR 80 | Wt 82.5 kg. Patient mildly fatigued but alert and oriented.\n\nNo new adverse events reported since last visit.\n\nLabs drawn today:\n  - PSA: 5.33 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 5.34 U/L [ref 7.0-56.0] (LOW)\n  - AST: 31.21 U/L [ref 10.0-40.0]\n  - Hemoglobin: 14.58 g/dL [ref 12.0-17.5]\n  - WBC: 8.09 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.11 mg/dL [ref 0.7-1.3]\n\nCT restaging shows partial response. Target lesions reduced significantly (35.8% decrease from baseline). No new lesions identified. RECIST: PR.\n\nSerum PSA: 7.72 ng/mL, representing a decrease of 35.8% compared to baseline.\n\nPlan: Continue current regimen. Follow up in 3 weeks.\n"
+    },
+    {
+      "visit_number": 3,
+      "date": "2025-07-16",
+      "type": "progress_note",
+      "text": "--- Visit 3 | Date: 2025-07-16 ---\n\nFollow-up visit #3 for patient SB-P001.\n\nOn exam, BP is 135/81, pulse 59, wt 109.1 kg. Patient appears well-appearing, cooperative with exam.\n\nNo new adverse events reported since last visit.\n\nLabs drawn today:\n  - PSA: 6.35 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 7.27 U/L [ref 7.0-56.0]\n  - AST: 28.41 U/L [ref 10.0-40.0]\n  - Hemoglobin: 14.11 g/dL [ref 12.0-17.5]\n  - WBC: 7.89 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.08 mg/dL [ref 0.7-1.3]\n\nPlan: Continue current dose. Return for cycle 4 in 3 weeks.\n"
+    },
+    {
+      "visit_number": 4,
+      "date": "2025-08-06",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 4 | Date: 2025-08-06 ---\n\nPatient SB-P001 presents for scheduled cycle 4 visit.\n\nVitals: BP 138/100 mmHg, HR 61 bpm, Weight 72.7 kg.\n\nNo new adverse events reported since last visit.\n\nLab panel results from today's draw:\n  - PSA: 4.34 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 8.78 U/L [ref 7.0-56.0]\n  - AST: 31.75 U/L [ref 10.0-40.0]\n  - Hemoglobin: 14.21 g/dL [ref 12.0-17.5]\n  - WBC: 7.84 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.09 mg/dL [ref 0.7-1.3]\n\nImaging: Target lesion measurements stable \u2014 neither sufficient shrinkage for PR nor increase for PD. Classified as stable disease (SD) per RECIST.\n\nSerum PSA: 10.61 ng/mL, representing a decrease of 11.8% compared to baseline.\n\nContinue study protocol. Monitor labs. Return visit 5 scheduled in 3 weeks.\n"
+    },
+    {
+      "visit_number": 5,
+      "date": "2025-08-27",
+      "type": "progress_note",
+      "text": "--- Visit 5 | Date: 2025-08-27 ---\n\nVisit 5 clinical encounter for SB-P001.\n\nVS: 133/99 | HR 77 | Wt 62.3 kg. Patient comfortable, no distress noted.\n\nNo new adverse events reported since last visit.\n\nRoutine labs obtained:\n  - PSA: 3.98 ng/mL [ref 0.0-4.0]\n  - ALT: 9.6 U/L [ref 7.0-56.0]\n  - AST: 32.66 U/L [ref 10.0-40.0]\n  - Hemoglobin: 13.75 g/dL [ref 12.0-17.5]\n  - WBC: 7.89 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.1 mg/dL [ref 0.7-1.3]\n\nAssessment: Tolerating therapy. Plan to continue protocol. Next visit in 3 weeks.\n"
+    },
+    {
+      "visit_number": 6,
+      "date": "2025-09-17",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 6 | Date: 2025-09-17 ---\n\nFollow-up visit #6 for patient SB-P001.\n\nVital signs obtained: blood pressure 174/79, heart rate 57, weight 72.6 kg.\n\nNo new adverse events reported since last visit.\n\nLabs drawn today:\n  - PSA: 2.8 ng/mL [ref 0.0-4.0]\n  - ALT: 6.87 U/L [ref 7.0-56.0] (LOW)\n  - AST: 32.99 U/L [ref 10.0-40.0]\n  - Hemoglobin: 13.78 g/dL [ref 12.0-17.5]\n  - WBC: 7.58 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.2 mg/dL [ref 0.7-1.3]\n\nImaging: Target lesion measurements stable \u2014 neither sufficient shrinkage for PR nor increase for PD. Classified as stable disease (SD) per RECIST.\n\nPSA now 11.67 ng/mL \u2014 decrease 2.9% from initial value.\n\nPlan: Continue current dose. Return for cycle 7 in 3 weeks.\n"
+    },
+    {
+      "visit_number": 7,
+      "date": "2025-10-08",
+      "type": "progress_note",
+      "text": "--- Visit 7 | Date: 2025-10-08 ---\n\nSB-P001 \u2014 Cycle 7, Day 1 visit.\n\nVS: 135/78 | HR 63 | Wt 94.4 kg. Patient well-appearing, cooperative with exam.\n\nBlood work results:\n  - PSA: 3.76 ng/mL [ref 0.0-4.0]\n  - ALT: 8.5 U/L [ref 7.0-56.0]\n  - AST: 33.43 U/L [ref 10.0-40.0]\n  - Hemoglobin: 13.46 g/dL [ref 12.0-17.5]\n  - WBC: 7.21 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.12 mg/dL [ref 0.7-1.3]\n\nPlan: Continue current regimen. Follow up in 3 weeks.\n"
+    },
+    {
+      "visit_number": 8,
+      "date": "2025-10-29",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 8 | Date: 2025-10-29 ---\n\nRoutine protocol visit 8. Patient ID: SB-P001.\n\nVitals: BP 142/83 mmHg, HR 81 bpm, Weight 87.0 kg.\n\nNo new adverse events reported since last visit.\n\nLaboratory results:\n  - PSA: 3.31 ng/mL [ref 0.0-4.0]\n  - ALT: 9.02 U/L [ref 7.0-56.0]\n  - AST: 31.79 U/L [ref 10.0-40.0]\n  - Hemoglobin: 13.44 g/dL [ref 12.0-17.5]\n  - WBC: 6.73 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.13 mg/dL [ref 0.7-1.3]\n\nRestaging CT shows stable disease. Target lesions within +/-15% of prior measurements. No new lesions. RECIST: SD.\n\nSerum PSA: 12.9 ng/mL, representing a increase of 7.3% compared to baseline.\n\nPlan: Continue current regimen. Follow up in 3 weeks.\n"
+    }
+  ]
+}

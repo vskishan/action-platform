@@ -1,0 +1,53 @@
+{
+  "patient_id": "SA-P009",
+  "documents": [
+    {
+      "visit_number": 1,
+      "date": "2025-06-02",
+      "type": "progress_note",
+      "text": "--- Visit 1 | Date: 2025-06-02 ---\n\nSA-P009 \u2014 Cycle 1, Day 1 visit.\n\nVital signs obtained: blood pressure 128/85, heart rate 70, weight 79.8 kg.\n\nAdverse event noted: Headache \u2014 moderate (CTCAE Grade 2). Onset day 19. Resolved by day 35. Assessed as unlikely to study drug. No dose modification required.\n\nLaboratory results:\n  - PSA: 4.85 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 27.89 U/L [ref 7.0-56.0]\n  - AST: 18.43 U/L [ref 10.0-40.0]\n  - Hemoglobin: 12.19 g/dL [ref 12.0-17.5]\n  - WBC: 10.27 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.75 mg/dL [ref 0.7-1.3]\n\nPlan: Continue current regimen. Follow up in 3 weeks.\n"
+    },
+    {
+      "visit_number": 2,
+      "date": "2025-06-23",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 2 | Date: 2025-06-23 ---\n\nSA-P009 \u2014 Cycle 2, Day 1 visit.\n\nOn exam, BP is 129/100, pulse 55, wt 96.7 kg. Patient appears mildly fatigued but alert and oriented.\n\nSignificant tiredness reported \u2014 classified as Grade 1 fatigue. Onset day 22. Resolved by day 25. No dose modification required.\n\nRoutine labs obtained:\n  - PSA: 4.74 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 26.25 U/L [ref 7.0-56.0]\n  - AST: 17.89 U/L [ref 10.0-40.0]\n  - Hemoglobin: 12.67 g/dL [ref 12.0-17.5]\n  - WBC: 10.12 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.77 mg/dL [ref 0.7-1.3]\n\nImaging: Target lesion measurements stable \u2014 neither sufficient shrinkage for PR nor increase for PD. Classified as stable disease (SD) per RECIST.\n\nPSA now 6.71 ng/mL \u2014 decrease 5.2% from initial value.\n\nPlan: Continue current regimen. Follow up in 3 weeks.\n"
+    },
+    {
+      "visit_number": 3,
+      "date": "2025-07-14",
+      "type": "progress_note",
+      "text": "--- Visit 3 | Date: 2025-07-14 ---\n\nPatient SA-P009 presents for scheduled cycle 3 visit.\n\nVitals: BP 142/75 mmHg, HR 67 bpm, Weight 87.4 kg.\n\nRoutine labs obtained:\n  - PSA: 3.45 ng/mL [ref 0.0-4.0]\n  - ALT: 27.99 U/L [ref 7.0-56.0]\n  - AST: 20.17 U/L [ref 10.0-40.0]\n  - Hemoglobin: 12.32 g/dL [ref 12.0-17.5]\n  - WBC: 9.82 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.79 mg/dL [ref 0.7-1.3]\n\nContinue study protocol. Monitor labs. Return visit 4 scheduled in 3 weeks.\n"
+    },
+    {
+      "visit_number": 4,
+      "date": "2025-08-04",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 4 | Date: 2025-08-04 ---\n\nVisit 4 clinical encounter for SA-P009.\n\nOn exam, BP is 136/58, pulse 69, wt 60.5 kg. Patient appears slightly pale but hemodynamically stable.\n\nNo new adverse events reported since last visit.\n\nRoutine labs obtained:\n  - PSA: 4.26 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 26.29 U/L [ref 7.0-56.0]\n  - AST: 18.69 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.59 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 9.57 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.84 mg/dL [ref 0.7-1.3]\n\nImaging assessment (CT chest/abdomen/pelvis): Complete response \u2014 no measurable disease identified. All previously noted target lesions have resolved. Classified as CR per RECIST 1.1.\n\nSerum PSA: 1.96 ng/mL, representing a decrease of 72.3% compared to baseline.\n\nAssessment: Tolerating therapy. Plan to continue protocol. Next visit in 3 weeks.\n"
+    },
+    {
+      "visit_number": 5,
+      "date": "2025-08-25",
+      "type": "progress_note",
+      "text": "--- Visit 5 | Date: 2025-08-25 ---\n\nPatient SA-P009 presents for scheduled cycle 5 visit.\n\nOn exam, BP is 108/69, pulse 70, wt 79.7 kg. Patient appears mildly fatigued but alert and oriented.\n\nNo new adverse events reported since last visit.\n\nLaboratory results:\n  - PSA: 2.89 ng/mL [ref 0.0-4.0]\n  - ALT: 28.3 U/L [ref 7.0-56.0]\n  - AST: 19.19 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.94 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 9.48 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.85 mg/dL [ref 0.7-1.3]\n\nPlan: Monitor closely and reassess at next visit. Return for cycle 6 in 3 weeks.\n"
+    },
+    {
+      "visit_number": 6,
+      "date": "2025-09-15",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 6 | Date: 2025-09-15 ---\n\nVisit 6 clinical encounter for SA-P009.\n\nVital signs obtained: blood pressure 153/83, heart rate 78, weight 98.1 kg.\n\nReports moderate fatigue (Grade 2) since approximately day 112. Resolved by day 136. No dose modification required.\n\nLab panel results from today's draw:\n  - PSA: 2.52 ng/mL [ref 0.0-4.0]\n  - ALT: 27.22 U/L [ref 7.0-56.0]\n  - AST: 21.46 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.69 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 9.06 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.86 mg/dL [ref 0.7-1.3]\n\nConcerning findings on restaging: tumor growth of 42.2%. Progressive disease per RECIST criteria.\n\nSerum PSA: 10.07 ng/mL, representing a increase of 42.2% compared to baseline.\n\nPlan: Continue current regimen. Follow up in 3 weeks.\n"
+    },
+    {
+      "visit_number": 7,
+      "date": "2025-10-06",
+      "type": "missed_visit_note",
+      "text": "--- Visit 7 | Date: 2025-10-06 ---\n\nPatient did not present for scheduled visit 7. Attempted phone contact \u2014 patient's family member confirmed patient was unwell.\n\nPatient removed from study protocol following confirmed disease progression on latest imaging. Referred to alternate treatment pathway.\n"
+    },
+    {
+      "visit_number": 8,
+      "date": "2025-10-27",
+      "type": "missed_visit_note",
+      "text": "--- Visit 8 | Date: 2025-10-27 ---\n\nPatient did not present for scheduled visit 8. Attempted phone contact \u2014 patient reported feeling too unwell to travel to site.\n"
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:P990006",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "P990006",
+        "name": [
+          {
+            "use": "official",
+            "family": "Wilson",
+            "given": [
+              "David"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1966-11-13",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race",
+            "extension": [
+              {
+                "url": "text",
+                "valueString": "White"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "subject": {
+          "reference": "Patient/P990006"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "254837009",
+              "display": "Malignant neoplasm of breast"
+            },
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10-cm",
+              "code": "C50",
+              "display": "Malignant neoplasm of breast"
+            }
+          ],
+          "text": "Malignant neoplasm of breast"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "onsetDateTime": "2022-11-24"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "status": "final",
+        "subject": {
+          "reference": "Patient/P990006"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "6690-2",
+              "display": "White blood cell count"
+            }
+          ],
+          "text": "White blood cell count"
+        },
+        "valueQuantity": {
+          "value": 14.2,
+          "unit": "10*3/uL",
+          "system": "http://unitsofmeasure.org"
+        },
+        "effectiveDateTime": "2024-12-28"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "status": "final",
+        "subject": {
+          "reference": "Patient/P990006"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "1742-6",
+              "display": "Alanine aminotransferase"
+            }
+          ],
+          "text": "Alanine aminotransferase"
+        },
+        "valueQuantity": {
+          "value": 61.72,
+          "unit": "U/L",
+          "system": "http://unitsofmeasure.org"
+        },
+        "effectiveDateTime": "2024-09-17"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "status": "active",
+        "subject": {
+          "reference": "Patient/P990006"
+        },
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "10324",
+              "display": "Tamoxifen"
+            }
+          ],
+          "text": "Tamoxifen"
+        },
+        "effectivePeriod": {
+          "start": "2020-02-26",
+          "end": "2026-02-19"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "status": "active",
+        "subject": {
+          "reference": "Patient/P990006"
+        },
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "1191",
+              "display": "Aspirin"
+            }
+          ],
+          "text": "Aspirin"
+        },
+        "effectivePeriod": {
+          "start": "2020-01-14",
+          "end": "2026-06-18"
+        }
+      }
+    }
+  ]
+}

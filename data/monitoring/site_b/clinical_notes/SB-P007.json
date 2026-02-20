@@ -1,0 +1,53 @@
+{
+  "patient_id": "SB-P007",
+  "documents": [
+    {
+      "visit_number": 1,
+      "date": "2025-06-19",
+      "type": "progress_note",
+      "text": "--- Visit 1 | Date: 2025-06-19 ---\n\nVisit 1 clinical encounter for SB-P007.\n\nVS: 157/110 | HR 54 | Wt 83.1 kg. Patient slightly pale but hemodynamically stable.\n\nNo new adverse events reported since last visit.\n\nLabs drawn today:\n  - PSA: 7.11 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 12.28 U/L [ref 7.0-56.0]\n  - AST: 11.25 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.72 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 5.47 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.91 mg/dL [ref 0.7-1.3]\n\nAssessment: Tolerating therapy. Plan to continue protocol. Next visit in 3 weeks.\n"
+    },
+    {
+      "visit_number": 2,
+      "date": "2025-07-10",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 2 | Date: 2025-07-10 ---\n\nVisit 2 clinical encounter for SB-P007.\n\nVital signs obtained: blood pressure 143/87, heart rate 67, weight 80.4 kg.\n\nLab panel results from today's draw:\n  - PSA: 6.11 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 12.69 U/L [ref 7.0-56.0]\n  - AST: 11.69 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.47 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 5.67 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.94 mg/dL [ref 0.7-1.3]\n\nRestaging CT demonstrates complete disappearance of all target lesions. No new lesions. RECIST assessment: Complete Response (CR).\n\nPSA level is 0.66 ng/mL (decrease 86.1% from baseline).\n\nContinue study protocol. Monitor labs. Return visit 3 scheduled in 3 weeks.\n"
+    },
+    {
+      "visit_number": 3,
+      "date": "2025-07-31",
+      "type": "progress_note",
+      "text": "--- Visit 3 | Date: 2025-07-31 ---\n\nVisit 3 clinical encounter for SB-P007.\n\nOn exam, BP is 142/84, pulse 58, wt 64.7 kg. Patient appears well-appearing, cooperative with exam.\n\nBlood work results:\n  - PSA: 5.38 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 13.8 U/L [ref 7.0-56.0]\n  - AST: 13.19 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.0 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 5.19 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.99 mg/dL [ref 0.7-1.3]\n\nContinue study protocol. Monitor labs. Return visit 4 scheduled in 3 weeks.\n"
+    },
+    {
+      "visit_number": 4,
+      "date": "2025-08-21",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 4 | Date: 2025-08-21 ---\n\nRoutine protocol visit 4. Patient ID: SB-P007.\n\nVS: 130/83 | HR 78 | Wt 82.0 kg. Patient well-nourished and in no acute distress.\n\nNo new adverse events reported since last visit.\n\nRoutine labs obtained:\n  - PSA: 6.25 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 14.21 U/L [ref 7.0-56.0]\n  - AST: 15.61 U/L [ref 10.0-40.0]\n  - Hemoglobin: 10.93 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 5.27 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.05 mg/dL [ref 0.7-1.3]\n\nRestaging CT demonstrates complete disappearance of all target lesions. No new lesions. RECIST assessment: Complete Response (CR).\n\nPSA level is 0.76 ng/mL (decrease 84.1% from baseline).\n\nContinue study protocol. Monitor labs. Return visit 5 scheduled in 3 weeks.\n"
+    },
+    {
+      "visit_number": 5,
+      "date": "2025-09-11",
+      "type": "progress_note",
+      "text": "--- Visit 5 | Date: 2025-09-11 ---\n\nFollow-up visit #5 for patient SB-P007.\n\nVital signs obtained: blood pressure 120/90, heart rate 77, weight 79.1 kg.\n\nNo new adverse events reported since last visit.\n\nLaboratory results:\n  - PSA: 5.88 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 15.99 U/L [ref 7.0-56.0]\n  - AST: 15.92 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.37 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 4.55 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.04 mg/dL [ref 0.7-1.3]\n\nContinue study protocol. Monitor labs. Return visit 6 scheduled in 3 weeks.\n"
+    },
+    {
+      "visit_number": 6,
+      "date": "2025-10-02",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 6 | Date: 2025-10-02 ---\n\nPatient SB-P007 presents for scheduled cycle 6 visit.\n\nVital signs obtained: blood pressure 122/88, heart rate 66, weight 86.6 kg.\n\nNo new adverse events reported since last visit.\n\nLabs drawn today:\n  - PSA: 4.46 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 15.05 U/L [ref 7.0-56.0]\n  - AST: 14.59 U/L [ref 10.0-40.0]\n  - Hemoglobin: 10.95 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 4.76 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.0 mg/dL [ref 0.7-1.3]\n\nRestaging CT shows stable disease. Target lesions within +/-15% of prior measurements. No new lesions. RECIST: SD.\n\nPSA level is 3.68 ng/mL (decrease 22.6% from baseline).\n\nPlan: Continue current dose. Return for cycle 7 in 3 weeks.\n"
+    },
+    {
+      "visit_number": 7,
+      "date": "2025-10-23",
+      "type": "progress_note",
+      "text": "--- Visit 7 | Date: 2025-10-23 ---\n\nPatient SB-P007 presents for scheduled cycle 7 visit.\n\nVitals: BP 140/70 mmHg, HR 70 bpm, Weight 74.0 kg.\n\nNo new adverse events reported since last visit.\n\nBlood work results:\n  - PSA: 4.12 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 17.6 U/L [ref 7.0-56.0]\n  - AST: 15.42 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.08 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 3.99 10^3/uL [ref 4.5-11.0] (LOW)\n  - Creatinine: 1.13 mg/dL [ref 0.7-1.3]\n\nAssessment: Tolerating therapy. Plan to continue protocol. Next visit in 3 weeks.\n"
+    },
+    {
+      "visit_number": 8,
+      "date": "2025-11-13",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 8 | Date: 2025-11-13 ---\n\nVisit 8 clinical encounter for SB-P007.\n\nVital signs obtained: blood pressure 99/103, heart rate 65, weight 73.9 kg.\n\nNo new adverse events reported since last visit.\n\nLab panel results from today's draw:\n  - PSA: 4.5 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 20.21 U/L [ref 7.0-56.0]\n  - AST: 16.25 U/L [ref 10.0-40.0]\n  - Hemoglobin: 10.59 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 4.46 10^3/uL [ref 4.5-11.0] (LOW)\n  - Creatinine: 1.06 mg/dL [ref 0.7-1.3]\n\nCT restaging shows partial response. Target lesions reduced significantly (35.7% decrease from baseline). No new lesions identified. RECIST: PR.\n\nSerum PSA: 3.06 ng/mL, representing a decrease of 35.7% compared to baseline.\n\nPlan: Monitor closely and reassess at next visit. Return for cycle 9 in 3 weeks.\n"
+    }
+  ]
+}

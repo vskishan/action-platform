@@ -1,0 +1,53 @@
+{
+  "patient_id": "SA-P005",
+  "documents": [
+    {
+      "visit_number": 1,
+      "date": "2025-06-23",
+      "type": "progress_note",
+      "text": "--- Visit 1 | Date: 2025-06-23 ---\n\nPatient SA-P005 presents for scheduled cycle 1 visit.\n\nVitals: BP 131/97 mmHg, HR 91 bpm, Weight 78.7 kg.\n\nBlood work results:\n  - PSA: 6.79 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 19.24 U/L [ref 7.0-56.0]\n  - AST: 20.86 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.94 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 9.43 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.84 mg/dL [ref 0.7-1.3]\n\nPlan: Continue current dose. Return for cycle 2 in 3 weeks.\n"
+    },
+    {
+      "visit_number": 2,
+      "date": "2025-07-14",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 2 | Date: 2025-07-14 ---\n\nVisit 2 clinical encounter for SA-P005.\n\nVS: 142/89 | HR 85 | Wt 105.0 kg. Patient comfortable, no distress noted.\n\nNo new adverse events reported since last visit.\n\nLabs drawn today:\n  - PSA: 5.74 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 22.27 U/L [ref 7.0-56.0]\n  - AST: 21.26 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.62 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 8.72 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.9 mg/dL [ref 0.7-1.3]\n\nConcerning findings on restaging: tumor growth of 11.4%. Progressive disease per RECIST criteria.\n\nPSA level is 5.97 ng/mL (increase 11.4% from baseline).\n\nContinue study protocol. Monitor labs. Return visit 3 scheduled in 3 weeks.\n"
+    },
+    {
+      "visit_number": 3,
+      "date": "2025-08-04",
+      "type": "progress_note",
+      "text": "--- Visit 3 | Date: 2025-08-04 ---\n\nPatient SA-P005 presents for scheduled cycle 3 visit.\n\nVital signs obtained: blood pressure 141/84, heart rate 80, weight 67.2 kg.\n\nPatient noted to have moderate anemia (Grade 2) on routine labs, first detected day 60. Currently ongoing. No dose modification required.\n\nLabs drawn today:\n  - PSA: 5.86 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 23.67 U/L [ref 7.0-56.0]\n  - AST: 21.89 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.23 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 8.96 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.96 mg/dL [ref 0.7-1.3]\n\nContinue study protocol. Monitor labs. Return visit 4 scheduled in 3 weeks.\n"
+    },
+    {
+      "visit_number": 4,
+      "date": "2025-08-25",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 4 | Date: 2025-08-25 ---\n\nRoutine protocol visit 4. Patient ID: SA-P005.\n\nVital signs obtained: blood pressure 108/56, heart rate 54, weight 61.4 kg.\n\nNo new adverse events reported since last visit.\n\nLabs drawn today:\n  - PSA: 5.64 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 24.47 U/L [ref 7.0-56.0]\n  - AST: 22.85 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.27 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 8.01 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.94 mg/dL [ref 0.7-1.3]\n\nCT restaging shows partial response. Target lesions reduced significantly (30.7% decrease from baseline). No new lesions identified. RECIST: PR.\n\nSerum PSA: 3.71 ng/mL, representing a decrease of 30.7% compared to baseline.\n\nPlan: Continue current dose. Return for cycle 5 in 3 weeks.\n"
+    },
+    {
+      "visit_number": 5,
+      "date": "2025-09-15",
+      "type": "progress_note",
+      "text": "--- Visit 5 | Date: 2025-09-15 ---\n\nVisit 5 clinical encounter for SA-P005.\n\nVital signs obtained: blood pressure 112/72, heart rate 55, weight 77.3 kg.\n\nBlood work results:\n  - PSA: 5.72 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 25.32 U/L [ref 7.0-56.0]\n  - AST: 22.66 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.11 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 8.56 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.94 mg/dL [ref 0.7-1.3]\n\nPlan: Continue current regimen. Follow up in 3 weeks.\n"
+    },
+    {
+      "visit_number": 6,
+      "date": "2025-10-06",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 6 | Date: 2025-10-06 ---\n\nSA-P005 \u2014 Cycle 6, Day 1 visit.\n\nVital signs obtained: blood pressure 150/72, heart rate 66, weight 79.5 kg.\n\nPatient reports tingling/numbness in extremities \u2014 severe peripheral neuropathy, Grade 3. Onset day 107. Resolved by day 136. Study drug dose was reduced per protocol guidelines.\n\nLaboratory results:\n  - PSA: 5.93 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 26.1 U/L [ref 7.0-56.0]\n  - AST: 24.33 U/L [ref 10.0-40.0]\n  - Hemoglobin: 9.99 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 8.4 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.94 mg/dL [ref 0.7-1.3]\n\nConcerning findings on restaging: tumor growth of 30.3%. Progressive disease per RECIST criteria.\n\nPSA now 6.98 ng/mL \u2014 increase 30.3% from initial value.\n\nContinue study protocol. Monitor labs. Return visit 7 scheduled in 3 weeks.\n"
+    },
+    {
+      "visit_number": 7,
+      "date": "2025-10-27",
+      "type": "progress_note",
+      "text": "--- Visit 7 | Date: 2025-10-27 ---\n\nFollow-up visit #7 for patient SA-P005.\n\nVital signs obtained: blood pressure 113/69, heart rate 60, weight 75.8 kg.\n\nNo new adverse events reported since last visit.\n\nLaboratory results:\n  - PSA: 5.53 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 25.67 U/L [ref 7.0-56.0]\n  - AST: 23.32 U/L [ref 10.0-40.0]\n  - Hemoglobin: 10.55 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 8.24 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.96 mg/dL [ref 0.7-1.3]\n\nPlan: Continue therapy per protocol with supportive medications. Return for cycle 8 in 3 weeks.\n"
+    },
+    {
+      "visit_number": 8,
+      "date": "2025-11-17",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 8 | Date: 2025-11-17 ---\n\nSA-P005 \u2014 Cycle 8, Day 1 visit.\n\nVital signs obtained: blood pressure 141/86, heart rate 73, weight 88.4 kg.\n\nLabs drawn today:\n  - PSA: 4.8 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 25.89 U/L [ref 7.0-56.0]\n  - AST: 26.56 U/L [ref 10.0-40.0]\n  - Hemoglobin: 10.44 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 8.07 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.06 mg/dL [ref 0.7-1.3]\n\nCT shows disease progression \u2014 new lesion identified in the liver. Target measurements also increased (40.0%). RECIST classification: PD.\n\nPSA now 7.49 ng/mL \u2014 increase 40.0% from initial value.\n\nPlan: Continue current regimen. Follow up in 3 weeks.\n"
+    }
+  ]
+}

@@ -1,0 +1,877 @@
+[
+  {
+    "patient_id": "SA-P001",
+    "visit_number": 1,
+    "visit_date": "2025-06-21",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 128,
+      "blood_pressure_diastolic": 67,
+      "heart_rate": 77,
+      "weight_kg": 74.8
+    }
+  },
+  {
+    "patient_id": "SA-P001",
+    "visit_number": 2,
+    "visit_date": "2025-07-12",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 140,
+      "blood_pressure_diastolic": 83,
+      "heart_rate": 72,
+      "weight_kg": 77.9
+    }
+  },
+  {
+    "patient_id": "SA-P001",
+    "visit_number": 3,
+    "visit_date": "2025-08-02",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 119,
+      "blood_pressure_diastolic": 72,
+      "heart_rate": 76,
+      "weight_kg": 93.7
+    }
+  },
+  {
+    "patient_id": "SA-P001",
+    "visit_number": 4,
+    "visit_date": "2025-08-23",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 157,
+      "blood_pressure_diastolic": 83,
+      "heart_rate": 71,
+      "weight_kg": 67.6
+    }
+  },
+  {
+    "patient_id": "SA-P001",
+    "visit_number": 5,
+    "visit_date": "2025-09-13",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 143,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 78,
+      "weight_kg": 81.0
+    }
+  },
+  {
+    "patient_id": "SA-P001",
+    "visit_number": 6,
+    "visit_date": "2025-10-04",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 108,
+      "blood_pressure_diastolic": 71,
+      "heart_rate": 72,
+      "weight_kg": 63.2
+    }
+  },
+  {
+    "patient_id": "SA-P001",
+    "visit_number": 7,
+    "visit_date": "2025-10-25",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 116,
+      "blood_pressure_diastolic": 91,
+      "heart_rate": 81,
+      "weight_kg": 63.4
+    }
+  },
+  {
+    "patient_id": "SA-P001",
+    "visit_number": 8,
+    "visit_date": "2025-11-15",
+    "status": "missed",
+    "vitals": null,
+    "dropout_reason": "disease_progression"
+  },
+  {
+    "patient_id": "SA-P002",
+    "visit_number": 1,
+    "visit_date": "2025-06-04",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 117,
+      "blood_pressure_diastolic": 71,
+      "heart_rate": 84,
+      "weight_kg": 94.7
+    }
+  },
+  {
+    "patient_id": "SA-P002",
+    "visit_number": 2,
+    "visit_date": "2025-06-25",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 133,
+      "blood_pressure_diastolic": 70,
+      "heart_rate": 83,
+      "weight_kg": 78.0
+    }
+  },
+  {
+    "patient_id": "SA-P002",
+    "visit_number": 3,
+    "visit_date": "2025-07-16",
+    "status": "missed",
+    "vitals": null
+  },
+  {
+    "patient_id": "SA-P002",
+    "visit_number": 4,
+    "visit_date": "2025-08-06",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 69,
+      "heart_rate": 73,
+      "weight_kg": 81.9
+    }
+  },
+  {
+    "patient_id": "SA-P002",
+    "visit_number": 5,
+    "visit_date": "2025-08-27",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 136,
+      "blood_pressure_diastolic": 81,
+      "heart_rate": 70,
+      "weight_kg": 78.4
+    }
+  },
+  {
+    "patient_id": "SA-P002",
+    "visit_number": 6,
+    "visit_date": "2025-09-17",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 131,
+      "blood_pressure_diastolic": 77,
+      "heart_rate": 62,
+      "weight_kg": 80.3
+    }
+  },
+  {
+    "patient_id": "SA-P002",
+    "visit_number": 7,
+    "visit_date": "2025-10-08",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 141,
+      "blood_pressure_diastolic": 74,
+      "heart_rate": 77,
+      "weight_kg": 92.5
+    }
+  },
+  {
+    "patient_id": "SA-P002",
+    "visit_number": 8,
+    "visit_date": "2025-10-29",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 134,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 88,
+      "weight_kg": 77.5
+    }
+  },
+  {
+    "patient_id": "SA-P003",
+    "visit_number": 1,
+    "visit_date": "2025-06-24",
+    "status": "missed",
+    "vitals": null
+  },
+  {
+    "patient_id": "SA-P003",
+    "visit_number": 2,
+    "visit_date": "2025-07-15",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 121,
+      "blood_pressure_diastolic": 93,
+      "heart_rate": 68,
+      "weight_kg": 91.4
+    }
+  },
+  {
+    "patient_id": "SA-P003",
+    "visit_number": 3,
+    "visit_date": "2025-08-05",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 136,
+      "blood_pressure_diastolic": 85,
+      "heart_rate": 76,
+      "weight_kg": 85.9
+    }
+  },
+  {
+    "patient_id": "SA-P003",
+    "visit_number": 4,
+    "visit_date": "2025-08-26",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 118,
+      "blood_pressure_diastolic": 70,
+      "heart_rate": 68,
+      "weight_kg": 82.8
+    }
+  },
+  {
+    "patient_id": "SA-P003",
+    "visit_number": 5,
+    "visit_date": "2025-09-16",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 132,
+      "blood_pressure_diastolic": 74,
+      "heart_rate": 71,
+      "weight_kg": 76.8
+    }
+  },
+  {
+    "patient_id": "SA-P003",
+    "visit_number": 6,
+    "visit_date": "2025-10-07",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 152,
+      "blood_pressure_diastolic": 81,
+      "heart_rate": 79,
+      "weight_kg": 69.9
+    }
+  },
+  {
+    "patient_id": "SA-P003",
+    "visit_number": 7,
+    "visit_date": "2025-10-28",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 117,
+      "blood_pressure_diastolic": 83,
+      "heart_rate": 73,
+      "weight_kg": 66.8
+    }
+  },
+  {
+    "patient_id": "SA-P003",
+    "visit_number": 8,
+    "visit_date": "2025-11-18",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 117,
+      "blood_pressure_diastolic": 70,
+      "heart_rate": 71,
+      "weight_kg": 85.5
+    }
+  },
+  {
+    "patient_id": "SA-P004",
+    "visit_number": 1,
+    "visit_date": "2025-06-14",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 111,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 73,
+      "weight_kg": 69.0
+    }
+  },
+  {
+    "patient_id": "SA-P004",
+    "visit_number": 2,
+    "visit_date": "2025-07-05",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 126,
+      "blood_pressure_diastolic": 73,
+      "heart_rate": 85,
+      "weight_kg": 81.3
+    }
+  },
+  {
+    "patient_id": "SA-P004",
+    "visit_number": 3,
+    "visit_date": "2025-07-26",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 142,
+      "blood_pressure_diastolic": 77,
+      "heart_rate": 83,
+      "weight_kg": 56.0
+    }
+  },
+  {
+    "patient_id": "SA-P004",
+    "visit_number": 4,
+    "visit_date": "2025-08-16",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 122,
+      "blood_pressure_diastolic": 73,
+      "heart_rate": 73,
+      "weight_kg": 82.5
+    }
+  },
+  {
+    "patient_id": "SA-P004",
+    "visit_number": 5,
+    "visit_date": "2025-09-06",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 119,
+      "blood_pressure_diastolic": 92,
+      "heart_rate": 66,
+      "weight_kg": 57.1
+    }
+  },
+  {
+    "patient_id": "SA-P004",
+    "visit_number": 6,
+    "visit_date": "2025-09-27",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 160,
+      "blood_pressure_diastolic": 86,
+      "heart_rate": 73,
+      "weight_kg": 93.8
+    }
+  },
+  {
+    "patient_id": "SA-P004",
+    "visit_number": 7,
+    "visit_date": "2025-10-18",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 85,
+      "heart_rate": 64,
+      "weight_kg": 95.4
+    }
+  },
+  {
+    "patient_id": "SA-P004",
+    "visit_number": 8,
+    "visit_date": "2025-11-08",
+    "status": "missed",
+    "vitals": null,
+    "dropout_reason": "physician_decision"
+  },
+  {
+    "patient_id": "SA-P005",
+    "visit_number": 1,
+    "visit_date": "2025-06-23",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 131,
+      "blood_pressure_diastolic": 97,
+      "heart_rate": 91,
+      "weight_kg": 78.7
+    }
+  },
+  {
+    "patient_id": "SA-P005",
+    "visit_number": 2,
+    "visit_date": "2025-07-14",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 142,
+      "blood_pressure_diastolic": 89,
+      "heart_rate": 85,
+      "weight_kg": 105.0
+    }
+  },
+  {
+    "patient_id": "SA-P005",
+    "visit_number": 3,
+    "visit_date": "2025-08-04",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 141,
+      "blood_pressure_diastolic": 84,
+      "heart_rate": 80,
+      "weight_kg": 67.2
+    }
+  },
+  {
+    "patient_id": "SA-P005",
+    "visit_number": 4,
+    "visit_date": "2025-08-25",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 108,
+      "blood_pressure_diastolic": 56,
+      "heart_rate": 54,
+      "weight_kg": 61.4
+    }
+  },
+  {
+    "patient_id": "SA-P005",
+    "visit_number": 5,
+    "visit_date": "2025-09-15",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 112,
+      "blood_pressure_diastolic": 72,
+      "heart_rate": 55,
+      "weight_kg": 77.3
+    }
+  },
+  {
+    "patient_id": "SA-P005",
+    "visit_number": 6,
+    "visit_date": "2025-10-06",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 72,
+      "heart_rate": 66,
+      "weight_kg": 79.5
+    }
+  },
+  {
+    "patient_id": "SA-P005",
+    "visit_number": 7,
+    "visit_date": "2025-10-27",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 113,
+      "blood_pressure_diastolic": 69,
+      "heart_rate": 60,
+      "weight_kg": 75.8
+    }
+  },
+  {
+    "patient_id": "SA-P005",
+    "visit_number": 8,
+    "visit_date": "2025-11-17",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 141,
+      "blood_pressure_diastolic": 86,
+      "heart_rate": 73,
+      "weight_kg": 88.4
+    }
+  },
+  {
+    "patient_id": "SA-P006",
+    "visit_number": 1,
+    "visit_date": "2025-07-01",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 148,
+      "blood_pressure_diastolic": 94,
+      "heart_rate": 68,
+      "weight_kg": 87.8
+    }
+  },
+  {
+    "patient_id": "SA-P006",
+    "visit_number": 2,
+    "visit_date": "2025-07-22",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 122,
+      "blood_pressure_diastolic": 86,
+      "heart_rate": 87,
+      "weight_kg": 82.3
+    }
+  },
+  {
+    "patient_id": "SA-P006",
+    "visit_number": 3,
+    "visit_date": "2025-08-12",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": 77,
+      "heart_rate": 88,
+      "weight_kg": 85.3
+    }
+  },
+  {
+    "patient_id": "SA-P006",
+    "visit_number": 4,
+    "visit_date": "2025-09-02",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 105,
+      "blood_pressure_diastolic": 94,
+      "heart_rate": 77,
+      "weight_kg": 75.6
+    }
+  },
+  {
+    "patient_id": "SA-P006",
+    "visit_number": 5,
+    "visit_date": "2025-09-23",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 125,
+      "blood_pressure_diastolic": 92,
+      "heart_rate": 75,
+      "weight_kg": 65.2
+    }
+  },
+  {
+    "patient_id": "SA-P006",
+    "visit_number": 6,
+    "visit_date": "2025-10-14",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 131,
+      "blood_pressure_diastolic": 91,
+      "heart_rate": 67,
+      "weight_kg": 82.3
+    }
+  },
+  {
+    "patient_id": "SA-P006",
+    "visit_number": 7,
+    "visit_date": "2025-11-04",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 138,
+      "blood_pressure_diastolic": 74,
+      "heart_rate": 63,
+      "weight_kg": 96.1
+    }
+  },
+  {
+    "patient_id": "SA-P006",
+    "visit_number": 8,
+    "visit_date": "2025-11-25",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 117,
+      "blood_pressure_diastolic": 88,
+      "heart_rate": 62,
+      "weight_kg": 74.0
+    }
+  },
+  {
+    "patient_id": "SA-P007",
+    "visit_number": 1,
+    "visit_date": "2025-06-25",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 102,
+      "blood_pressure_diastolic": 89,
+      "heart_rate": 83,
+      "weight_kg": 77.4
+    }
+  },
+  {
+    "patient_id": "SA-P007",
+    "visit_number": 2,
+    "visit_date": "2025-07-16",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 111,
+      "blood_pressure_diastolic": 72,
+      "heart_rate": 80,
+      "weight_kg": 75.4
+    }
+  },
+  {
+    "patient_id": "SA-P007",
+    "visit_number": 3,
+    "visit_date": "2025-08-06",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 125,
+      "blood_pressure_diastolic": 77,
+      "heart_rate": 76,
+      "weight_kg": 82.2
+    }
+  },
+  {
+    "patient_id": "SA-P007",
+    "visit_number": 4,
+    "visit_date": "2025-08-27",
+    "status": "missed",
+    "vitals": null
+  },
+  {
+    "patient_id": "SA-P007",
+    "visit_number": 5,
+    "visit_date": "2025-09-17",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": 77,
+      "heart_rate": 76,
+      "weight_kg": 96.7
+    }
+  },
+  {
+    "patient_id": "SA-P007",
+    "visit_number": 6,
+    "visit_date": "2025-10-08",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 108,
+      "blood_pressure_diastolic": 86,
+      "heart_rate": 90,
+      "weight_kg": 68.3
+    }
+  },
+  {
+    "patient_id": "SA-P007",
+    "visit_number": 7,
+    "visit_date": "2025-10-29",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 111,
+      "blood_pressure_diastolic": 62,
+      "heart_rate": 63,
+      "weight_kg": 84.8
+    }
+  },
+  {
+    "patient_id": "SA-P007",
+    "visit_number": 8,
+    "visit_date": "2025-11-19",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 154,
+      "blood_pressure_diastolic": 72,
+      "heart_rate": 79,
+      "weight_kg": 81.1
+    }
+  },
+  {
+    "patient_id": "SA-P008",
+    "visit_number": 1,
+    "visit_date": "2025-06-30",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 156,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 71,
+      "weight_kg": 74.6
+    }
+  },
+  {
+    "patient_id": "SA-P008",
+    "visit_number": 2,
+    "visit_date": "2025-07-21",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 115,
+      "blood_pressure_diastolic": 71,
+      "heart_rate": 76,
+      "weight_kg": 82.8
+    }
+  },
+  {
+    "patient_id": "SA-P008",
+    "visit_number": 3,
+    "visit_date": "2025-08-11",
+    "status": "missed",
+    "vitals": null,
+    "dropout_reason": "patient_withdrawal"
+  },
+  {
+    "patient_id": "SA-P008",
+    "visit_number": 4,
+    "visit_date": "2025-09-01",
+    "status": "missed",
+    "vitals": null
+  },
+  {
+    "patient_id": "SA-P008",
+    "visit_number": 5,
+    "visit_date": "2025-09-22",
+    "status": "missed",
+    "vitals": null
+  },
+  {
+    "patient_id": "SA-P008",
+    "visit_number": 6,
+    "visit_date": "2025-10-13",
+    "status": "missed",
+    "vitals": null
+  },
+  {
+    "patient_id": "SA-P008",
+    "visit_number": 7,
+    "visit_date": "2025-11-03",
+    "status": "missed",
+    "vitals": null
+  },
+  {
+    "patient_id": "SA-P008",
+    "visit_number": 8,
+    "visit_date": "2025-11-24",
+    "status": "missed",
+    "vitals": null
+  },
+  {
+    "patient_id": "SA-P009",
+    "visit_number": 1,
+    "visit_date": "2025-06-02",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 128,
+      "blood_pressure_diastolic": 85,
+      "heart_rate": 70,
+      "weight_kg": 79.8
+    }
+  },
+  {
+    "patient_id": "SA-P009",
+    "visit_number": 2,
+    "visit_date": "2025-06-23",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 129,
+      "blood_pressure_diastolic": 100,
+      "heart_rate": 55,
+      "weight_kg": 96.7
+    }
+  },
+  {
+    "patient_id": "SA-P009",
+    "visit_number": 3,
+    "visit_date": "2025-07-14",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 142,
+      "blood_pressure_diastolic": 75,
+      "heart_rate": 67,
+      "weight_kg": 87.4
+    }
+  },
+  {
+    "patient_id": "SA-P009",
+    "visit_number": 4,
+    "visit_date": "2025-08-04",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 136,
+      "blood_pressure_diastolic": 58,
+      "heart_rate": 69,
+      "weight_kg": 60.5
+    }
+  },
+  {
+    "patient_id": "SA-P009",
+    "visit_number": 5,
+    "visit_date": "2025-08-25",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 108,
+      "blood_pressure_diastolic": 69,
+      "heart_rate": 70,
+      "weight_kg": 79.7
+    }
+  },
+  {
+    "patient_id": "SA-P009",
+    "visit_number": 6,
+    "visit_date": "2025-09-15",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 153,
+      "blood_pressure_diastolic": 83,
+      "heart_rate": 78,
+      "weight_kg": 98.1
+    }
+  },
+  {
+    "patient_id": "SA-P009",
+    "visit_number": 7,
+    "visit_date": "2025-10-06",
+    "status": "missed",
+    "vitals": null,
+    "dropout_reason": "disease_progression"
+  },
+  {
+    "patient_id": "SA-P009",
+    "visit_number": 8,
+    "visit_date": "2025-10-27",
+    "status": "missed",
+    "vitals": null
+  },
+  {
+    "patient_id": "SA-P010",
+    "visit_number": 1,
+    "visit_date": "2025-06-24",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 137,
+      "blood_pressure_diastolic": 87,
+      "heart_rate": 91,
+      "weight_kg": 86.2
+    }
+  },
+  {
+    "patient_id": "SA-P010",
+    "visit_number": 2,
+    "visit_date": "2025-07-15",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": 81,
+      "heart_rate": 80,
+      "weight_kg": 102.7
+    }
+  },
+  {
+    "patient_id": "SA-P010",
+    "visit_number": 3,
+    "visit_date": "2025-08-05",
+    "status": "completed",
+    "vitals": {
+      "blood_pressure_systolic": 111,
+      "blood_pressure_diastolic": 76,
+      "heart_rate": 93,
+      "weight_kg": 82.5
+    }
+  },
+  {
+    "patient_id": "SA-P010",
+    "visit_number": 4,
+    "visit_date": "2025-08-26",
+    "status": "missed",
+    "vitals": null
+  },
+  {
+    "patient_id": "SA-P010",
+    "visit_number": 5,
+    "visit_date": "2025-09-16",
+    "status": "missed",
+    "vitals": null,
+    "dropout_reason": "disease_progression"
+  },
+  {
+    "patient_id": "SA-P010",
+    "visit_number": 6,
+    "visit_date": "2025-10-07",
+    "status": "missed",
+    "vitals": null
+  },
+  {
+    "patient_id": "SA-P010",
+    "visit_number": 7,
+    "visit_date": "2025-10-28",
+    "status": "missed",
+    "vitals": null
+  },
+  {
+    "patient_id": "SA-P010",
+    "visit_number": 8,
+    "visit_date": "2025-11-18",
+    "status": "missed",
+    "vitals": null
+  }
+]

@@ -1,0 +1,53 @@
+{
+  "patient_id": "SA-P010",
+  "documents": [
+    {
+      "visit_number": 1,
+      "date": "2025-06-24",
+      "type": "progress_note",
+      "text": "--- Visit 1 | Date: 2025-06-24 ---\n\nPatient SA-P010 presents for scheduled cycle 1 visit.\n\nVS: 137/87 | HR 91 | Wt 86.2 kg. Patient comfortable, no distress noted.\n\nNew AE: Thrombocytopenia. Severity: severe (Grade 3). Onset: day 2. Resolved by day 8. Relatedness: unlikely. Study drug dose was reduced per protocol guidelines.\n\nLab panel results from today's draw:\n  - PSA: 8.47 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 37.01 U/L [ref 7.0-56.0]\n  - AST: 37.13 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.55 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 6.28 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 0.96 mg/dL [ref 0.7-1.3]\n\nContinue study protocol. Monitor labs. Return visit 2 scheduled in 3 weeks.\n"
+    },
+    {
+      "visit_number": 2,
+      "date": "2025-07-15",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 2 | Date: 2025-07-15 ---\n\nVisit 2 clinical encounter for SA-P010.\n\nVitals: BP 120/81 mmHg, HR 80 bpm, Weight 102.7 kg.\n\nLab panel results from today's draw:\n  - PSA: 8.55 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 38.29 U/L [ref 7.0-56.0]\n  - AST: 37.06 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.1 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 5.71 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.03 mg/dL [ref 0.7-1.3]\n\nImaging assessment (CT chest/abdomen/pelvis): Complete response \u2014 no measurable disease identified. All previously noted target lesions have resolved. Classified as CR per RECIST 1.1.\n\nPSA level is 1.11 ng/mL (decrease 70.4% from baseline).\n\nPlan: Continue therapy per protocol with supportive medications. Return for cycle 3 in 3 weeks.\n"
+    },
+    {
+      "visit_number": 3,
+      "date": "2025-08-05",
+      "type": "progress_note",
+      "text": "--- Visit 3 | Date: 2025-08-05 ---\n\nRoutine protocol visit 3. Patient ID: SA-P010.\n\nVitals: BP 111/76 mmHg, HR 93 bpm, Weight 82.5 kg.\n\nANC decreased \u2014 Grade 4 neutropenia identified on day 51 labs. Currently ongoing. No dose modification required.\n\nLaboratory results:\n  - PSA: 6.48 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 35.71 U/L [ref 7.0-56.0]\n  - AST: 37.69 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.02 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 5.83 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.08 mg/dL [ref 0.7-1.3]\n\nPlan: Continue current regimen. Follow up in 3 weeks.\n"
+    },
+    {
+      "visit_number": 4,
+      "date": "2025-08-26",
+      "type": "missed_visit_note",
+      "text": "--- Visit 4 | Date: 2025-08-26 ---\n\nScheduled visit 4 was not completed. voicemail left.\n"
+    },
+    {
+      "visit_number": 5,
+      "date": "2025-09-16",
+      "type": "missed_visit_note",
+      "text": "--- Visit 5 | Date: 2025-09-16 ---\n\nScheduled visit 5 was not completed. patient reported feeling too unwell to travel to site.\n\nPatient removed from study protocol following confirmed disease progression on latest imaging. Referred to alternate treatment pathway.\n"
+    },
+    {
+      "visit_number": 6,
+      "date": "2025-10-07",
+      "type": "missed_visit_note",
+      "text": "--- Visit 6 | Date: 2025-10-07 ---\n\nPatient did not present for scheduled visit 6. Attempted phone contact \u2014 no answer.\n"
+    },
+    {
+      "visit_number": 7,
+      "date": "2025-10-28",
+      "type": "missed_visit_note",
+      "text": "--- Visit 7 | Date: 2025-10-28 ---\n\nPatient did not present for scheduled visit 7. Attempted phone contact \u2014 spoke with patient, rescheduling.\n"
+    },
+    {
+      "visit_number": 8,
+      "date": "2025-11-18",
+      "type": "missed_visit_note",
+      "text": "--- Visit 8 | Date: 2025-11-18 ---\n\nVisit 8 \u2014 MISSED. Patient called to reschedule but did not attend. voicemail left.\n"
+    }
+  ]
+}

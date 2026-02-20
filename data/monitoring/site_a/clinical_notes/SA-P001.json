@@ -1,0 +1,53 @@
+{
+  "patient_id": "SA-P001",
+  "documents": [
+    {
+      "visit_number": 1,
+      "date": "2025-06-21",
+      "type": "progress_note",
+      "text": "--- Visit 1 | Date: 2025-06-21 ---\n\nRoutine protocol visit 1. Patient ID: SA-P001.\n\nVital signs obtained: blood pressure 128/67, heart rate 77, weight 74.8 kg.\n\nLiver enzymes elevated \u2014 classified as Grade 2 hepatotoxicity. Detected on day 18 labs. Currently ongoing. Treatment was held pending resolution. Dose interruption documented.\nAdverse event noted: Rash \u2014 mild (CTCAE Grade 1). Onset day 19. Resolved by day 27. Assessed as probable to study drug. No dose modification required.\n\nLabs drawn today:\n  - PSA: 10.18 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 4.23 U/L [ref 7.0-56.0] (LOW)\n  - AST: 13.15 U/L [ref 10.0-40.0]\n  - Hemoglobin: 14.12 g/dL [ref 12.0-17.5]\n  - WBC: 2.25 10^3/uL [ref 4.5-11.0] (LOW)\n  - Creatinine: 0.99 mg/dL [ref 0.7-1.3]\n\nAssessment: Tolerating therapy. Plan to continue protocol. Next visit in 3 weeks.\n"
+    },
+    {
+      "visit_number": 2,
+      "date": "2025-07-12",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 2 | Date: 2025-07-12 ---\n\nFollow-up visit #2 for patient SA-P001.\n\nVitals: BP 140/83 mmHg, HR 72 bpm, Weight 77.9 kg.\n\nLab panel results from today's draw:\n  - PSA: 10.67 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 4.5 U/L [ref 7.0-56.0] (LOW)\n  - AST: 10.29 U/L [ref 10.0-40.0]\n  - Hemoglobin: 13.73 g/dL [ref 12.0-17.5]\n  - WBC: 2.22 10^3/uL [ref 4.5-11.0] (LOW)\n  - Creatinine: 1.04 mg/dL [ref 0.7-1.3]\n\nImaging: Target lesion measurements stable \u2014 neither sufficient shrinkage for PR nor increase for PD. Classified as stable disease (SD) per RECIST.\n\nSerum PSA: 8.07 ng/mL, representing a increase of 17.6% compared to baseline.\n\nAssessment: Tolerating therapy. Plan to continue protocol. Next visit in 3 weeks.\n"
+    },
+    {
+      "visit_number": 3,
+      "date": "2025-08-02",
+      "type": "progress_note",
+      "text": "--- Visit 3 | Date: 2025-08-02 ---\n\nRoutine protocol visit 3. Patient ID: SA-P001.\n\nVital signs obtained: blood pressure 119/72, heart rate 76, weight 93.7 kg.\n\nNo new adverse events reported since last visit.\n\nLabs drawn today:\n  - PSA: 10.68 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 5.16 U/L [ref 7.0-56.0] (LOW)\n  - AST: 16.61 U/L [ref 10.0-40.0]\n  - Hemoglobin: 13.43 g/dL [ref 12.0-17.5]\n  - WBC: 1.95 10^3/uL [ref 4.5-11.0] (LOW)\n  - Creatinine: 1.01 mg/dL [ref 0.7-1.3]\n\nPlan: Continue current dose. Return for cycle 4 in 3 weeks.\n"
+    },
+    {
+      "visit_number": 4,
+      "date": "2025-08-23",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 4 | Date: 2025-08-23 ---\n\nVisit 4 clinical encounter for SA-P001.\n\nVS: 157/83 | HR 71 | Wt 67.6 kg. Patient well-nourished and in no acute distress.\n\nNo new adverse events reported since last visit.\n\nLaboratory results:\n  - PSA: 10.92 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 8.2 U/L [ref 7.0-56.0]\n  - AST: 14.87 U/L [ref 10.0-40.0]\n  - Hemoglobin: 13.33 g/dL [ref 12.0-17.5]\n  - WBC: 2.26 10^3/uL [ref 4.5-11.0] (LOW)\n  - Creatinine: 1.01 mg/dL [ref 0.7-1.3]\n\nCT restaging shows partial response. Target lesions reduced significantly (47.7% decrease from baseline). No new lesions identified. RECIST: PR.\n\nPSA now 3.59 ng/mL \u2014 decrease 47.7% from initial value.\n\nPlan: Continue current regimen. Follow up in 3 weeks.\n"
+    },
+    {
+      "visit_number": 5,
+      "date": "2025-09-13",
+      "type": "progress_note",
+      "text": "--- Visit 5 | Date: 2025-09-13 ---\n\nSA-P001 \u2014 Cycle 5, Day 1 visit.\n\nVitals: BP 143/80 mmHg, HR 78 bpm, Weight 81.0 kg.\n\nPatient reports Elevated ALT (mild, Grade 1). First noted day 98. Currently ongoing. No dose modification required.\n\nBlood work results:\n  - PSA: 9.55 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 9.32 U/L [ref 7.0-56.0]\n  - AST: 15.53 U/L [ref 10.0-40.0]\n  - Hemoglobin: 13.61 g/dL [ref 12.0-17.5]\n  - WBC: 1.35 10^3/uL [ref 4.5-11.0] (LOW)\n  - Creatinine: 0.97 mg/dL [ref 0.7-1.3]\n\nAssessment: Tolerating therapy. Plan to continue protocol. Next visit in 3 weeks.\n"
+    },
+    {
+      "visit_number": 6,
+      "date": "2025-10-04",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 6 | Date: 2025-10-04 ---\n\nPatient SA-P001 presents for scheduled cycle 6 visit.\n\nVital signs obtained: blood pressure 108/71, heart rate 72, weight 63.2 kg.\n\nNo new adverse events reported since last visit.\n\nLabs drawn today:\n  - PSA: 9.57 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 5.8 U/L [ref 7.0-56.0] (LOW)\n  - AST: 15.05 U/L [ref 10.0-40.0]\n  - Hemoglobin: 13.09 g/dL [ref 12.0-17.5]\n  - WBC: 1.52 10^3/uL [ref 4.5-11.0] (LOW)\n  - Creatinine: 1.07 mg/dL [ref 0.7-1.3]\n\nRestaging CT demonstrates complete disappearance of all target lesions. No new lesions. RECIST assessment: Complete Response (CR).\n\nPSA now 2.42 ng/mL \u2014 decrease 64.7% from initial value.\n\nAssessment: Tolerating therapy. Plan to continue protocol. Next visit in 3 weeks.\n"
+    },
+    {
+      "visit_number": 7,
+      "date": "2025-10-25",
+      "type": "progress_note",
+      "text": "--- Visit 7 | Date: 2025-10-25 ---\n\nPatient SA-P001 presents for scheduled cycle 7 visit.\n\nVitals: BP 116/91 mmHg, HR 81 bpm, Weight 63.4 kg.\n\nNo new adverse events reported since last visit.\n\nLab panel results from today's draw:\n  - PSA: 8.95 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 8.41 U/L [ref 7.0-56.0]\n  - AST: 13.08 U/L [ref 10.0-40.0]\n  - Hemoglobin: 13.14 g/dL [ref 12.0-17.5]\n  - WBC: 1.01 10^3/uL [ref 4.5-11.0] (LOW)\n  - Creatinine: 1.05 mg/dL [ref 0.7-1.3]\n\nPlan: Continue current regimen. Follow up in 3 weeks.\n"
+    },
+    {
+      "visit_number": 8,
+      "date": "2025-11-15",
+      "type": "missed_visit_note",
+      "text": "--- Visit 8 | Date: 2025-11-15 ---\n\nPatient did not present for scheduled visit 8. Attempted phone contact \u2014 voicemail left.\n\nPatient removed from study protocol following confirmed disease progression on latest imaging. Referred to alternate treatment pathway.\n"
+    }
+  ]
+}

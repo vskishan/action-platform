@@ -1,0 +1,53 @@
+{
+  "patient_id": "SB-P004",
+  "documents": [
+    {
+      "visit_number": 1,
+      "date": "2025-06-08",
+      "type": "progress_note",
+      "text": "--- Visit 1 | Date: 2025-06-08 ---\n\nSB-P004 \u2014 Cycle 1, Day 1 visit.\n\nVital signs obtained: blood pressure 142/82, heart rate 57, weight 78.9 kg.\n\nNo new adverse events reported since last visit.\n\nLab panel results from today's draw:\n  - PSA: 1.89 ng/mL [ref 0.0-4.0]\n  - ALT: 25.41 U/L [ref 7.0-56.0]\n  - AST: 14.14 U/L [ref 10.0-40.0]\n  - Hemoglobin: 12.58 g/dL [ref 12.0-17.5]\n  - WBC: 9.46 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.2 mg/dL [ref 0.7-1.3]\n\nContinue study protocol. Monitor labs. Return visit 2 scheduled in 3 weeks.\n"
+    },
+    {
+      "visit_number": 2,
+      "date": "2025-06-29",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 2 | Date: 2025-06-29 ---\n\nFollow-up visit #2 for patient SB-P004.\n\nVS: 141/87 | HR 53 | Wt 84.2 kg. Patient well-nourished and in no acute distress.\n\nNo new adverse events reported since last visit.\n\nLaboratory results:\n  - PSA: 2.02 ng/mL [ref 0.0-4.0]\n  - ALT: 23.87 U/L [ref 7.0-56.0]\n  - AST: 12.94 U/L [ref 10.0-40.0]\n  - Hemoglobin: 12.71 g/dL [ref 12.0-17.5]\n  - WBC: 8.98 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.18 mg/dL [ref 0.7-1.3]\n\nCT restaging shows partial response. Target lesions reduced significantly (49.0% decrease from baseline). No new lesions identified. RECIST: PR.\n\nSerum PSA: 0.26 ng/mL, representing a decrease of 49.0% compared to baseline.\n\nAssessment: Tolerating therapy. Plan to continue protocol. Next visit in 3 weeks.\n"
+    },
+    {
+      "visit_number": 3,
+      "date": "2025-07-20",
+      "type": "progress_note",
+      "text": "--- Visit 3 | Date: 2025-07-20 ---\n\nSB-P004 \u2014 Cycle 3, Day 1 visit.\n\nVitals: BP 151/66 mmHg, HR 80 bpm, Weight 80.5 kg.\n\nBlood work results:\n  - PSA: 1.76 ng/mL [ref 0.0-4.0]\n  - ALT: 25.61 U/L [ref 7.0-56.0]\n  - AST: 14.07 U/L [ref 10.0-40.0]\n  - Hemoglobin: 12.13 g/dL [ref 12.0-17.5]\n  - WBC: 8.67 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.27 mg/dL [ref 0.7-1.3]\n\nAssessment: Tolerating therapy. Plan to continue protocol. Next visit in 3 weeks.\n"
+    },
+    {
+      "visit_number": 4,
+      "date": "2025-08-10",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 4 | Date: 2025-08-10 ---\n\nVisit 4 clinical encounter for SB-P004.\n\nVitals: BP 113/86 mmHg, HR 80 bpm, Weight 58.7 kg.\n\nNo new adverse events reported since last visit.\n\nLabs drawn today:\n  - PSA: 0.96 ng/mL [ref 0.0-4.0]\n  - ALT: 24.27 U/L [ref 7.0-56.0]\n  - AST: 14.32 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.92 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 8.66 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.26 mg/dL [ref 0.7-1.3]\n\nImaging assessment (CT chest/abdomen/pelvis): Complete response \u2014 no measurable disease identified. All previously noted target lesions have resolved. Classified as CR per RECIST 1.1.\n\nSerum PSA: 0.1 ng/mL, representing a decrease of 90.7% compared to baseline.\n\nAssessment: Tolerating therapy. Plan to continue protocol. Next visit in 3 weeks.\n"
+    },
+    {
+      "visit_number": 5,
+      "date": "2025-08-31",
+      "type": "missed_visit_note",
+      "text": "--- Visit 5 | Date: 2025-08-31 ---\n\nScheduled visit 5 was not completed. patient reported feeling too unwell to travel to site.\n"
+    },
+    {
+      "visit_number": 6,
+      "date": "2025-09-21",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 6 | Date: 2025-09-21 ---\n\nPatient SB-P004 presents for scheduled cycle 6 visit.\n\nVitals: BP 111/66 mmHg, HR 91 bpm, Weight 74.5 kg.\n\nNew AE: Vomiting. Severity: mild (Grade 1). Onset: day 121. Resolved with sequelae by day 124. Relatedness: definite. No dose modification required.\n\nLabs drawn today:\n  - PSA: 1.17 ng/mL [ref 0.0-4.0]\n  - ALT: 28.0 U/L [ref 7.0-56.0]\n  - AST: 16.48 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.37 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 8.3 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.35 mg/dL [ref 0.7-1.3] (HIGH)\n\nImaging assessment: Target lesion has increased by approximately 17.6% from nadir. Progressive disease (PD) per RECIST 1.1.\n\nPSA now 0.59 ng/mL \u2014 increase 17.6% from initial value.\n\nContinue study protocol. Monitor labs. Return visit 7 scheduled in 3 weeks.\n"
+    },
+    {
+      "visit_number": 7,
+      "date": "2025-10-12",
+      "type": "progress_note",
+      "text": "--- Visit 7 | Date: 2025-10-12 ---\n\nSB-P004 \u2014 Cycle 7, Day 1 visit.\n\nVS: 112/87 | HR 77 | Wt 64.3 kg. Patient well-appearing, cooperative with exam.\n\nNo new adverse events reported since last visit.\n\nBlood work results:\n  - PSA: 1.35 ng/mL [ref 0.0-4.0]\n  - ALT: 29.84 U/L [ref 7.0-56.0]\n  - AST: 16.68 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.66 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 7.73 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.35 mg/dL [ref 0.7-1.3] (HIGH)\n\nPlan: Continue current regimen. Follow up in 3 weeks.\n"
+    },
+    {
+      "visit_number": 8,
+      "date": "2025-11-02",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 8 | Date: 2025-11-02 ---\n\nFollow-up visit #8 for patient SB-P004.\n\nVitals: BP 136/100 mmHg, HR 86 bpm, Weight 88.1 kg.\n\nNew AE: Headache. Severity: mild (Grade 1). Onset: day 167. Resolved by day 174. Relatedness: probable. Treatment was held pending resolution. Dose interruption documented.\nLab-confirmed anemia \u2014 Hemoglobin trending down. Grade 3 per CTCAE. Onset day 156. Currently ongoing. No dose modification required.\n\nBlood work results:\n  - PSA: 0.01 ng/mL [ref 0.0-4.0]\n  - ALT: 29.61 U/L [ref 7.0-56.0]\n  - AST: 16.24 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.67 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 7.59 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.34 mg/dL [ref 0.7-1.3] (HIGH)\n\nRestaging CT shows stable disease. Target lesions within +/-15% of prior measurements. No new lesions. RECIST: SD.\n\nSerum PSA: 0.48 ng/mL, representing a decrease of 5.0% compared to baseline.\n\nContinue study protocol. Monitor labs. Return visit 9 scheduled in 3 weeks.\n"
+    }
+  ]
+}

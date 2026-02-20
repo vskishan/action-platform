@@ -1,0 +1,53 @@
+{
+  "patient_id": "SA-P008",
+  "documents": [
+    {
+      "visit_number": 1,
+      "date": "2025-06-30",
+      "type": "progress_note",
+      "text": "--- Visit 1 | Date: 2025-06-30 ---\n\nFollow-up visit #1 for patient SA-P008.\n\nOn exam, BP is 156/90, pulse 71, wt 74.6 kg. Patient appears mildly fatigued but alert and oriented.\n\nNew AE: Vomiting. Severity: mild (Grade 1). Onset: day 5. Currently ongoing. Relatedness: possible. Treatment was held pending resolution. Dose interruption documented.\nNew onset diarrhea, Grade 1, started day 19. Resolved by day 48. Hydration encouraged. No dose modification required.\n\nLaboratory results:\n  - PSA: 6.4 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 16.9 U/L [ref 7.0-56.0]\n  - AST: 32.68 U/L [ref 10.0-40.0]\n  - Hemoglobin: 13.51 g/dL [ref 12.0-17.5]\n  - WBC: 3.99 10^3/uL [ref 4.5-11.0] (LOW)\n  - Creatinine: 0.76 mg/dL [ref 0.7-1.3]\n\nPlan: Supportive care as needed. Return for cycle 2 in 3 weeks.\n"
+    },
+    {
+      "visit_number": 2,
+      "date": "2025-07-21",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 2 | Date: 2025-07-21 ---\n\nFollow-up visit #2 for patient SA-P008.\n\nVital signs obtained: blood pressure 115/71, heart rate 76, weight 82.8 kg.\n\nNo new adverse events reported since last visit.\n\nLabs drawn today:\n  - PSA: 6.58 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 18.2 U/L [ref 7.0-56.0]\n  - AST: 33.58 U/L [ref 10.0-40.0]\n  - Hemoglobin: 13.41 g/dL [ref 12.0-17.5]\n  - WBC: 3.4 10^3/uL [ref 4.5-11.0] (LOW)\n  - Creatinine: 0.86 mg/dL [ref 0.7-1.3]\n\nImaging reveals meaningful tumor shrinkage consistent with partial response (PR). Target lesion regression of ~48.9%.\n\nSerum PSA: 5.13 ng/mL, representing a decrease of 48.9% compared to baseline.\n\nPlan: Supportive care as needed. Return for cycle 3 in 3 weeks.\n"
+    },
+    {
+      "visit_number": 3,
+      "date": "2025-08-11",
+      "type": "missed_visit_note",
+      "text": "--- Visit 3 | Date: 2025-08-11 ---\n\nScheduled visit 3 was not completed. no answer.\n\nPatient elected to withdraw consent and discontinue participation in the trial. Reason cited: personal/family considerations.\n"
+    },
+    {
+      "visit_number": 4,
+      "date": "2025-09-01",
+      "type": "missed_visit_note",
+      "text": "--- Visit 4 | Date: 2025-09-01 ---\n\nPatient did not present for scheduled visit 4. Attempted phone contact \u2014 spoke with patient, rescheduling.\n"
+    },
+    {
+      "visit_number": 5,
+      "date": "2025-09-22",
+      "type": "missed_visit_note",
+      "text": "--- Visit 5 | Date: 2025-09-22 ---\n\nVisit 5 \u2014 MISSED. Patient called to reschedule but did not attend. voicemail left.\n"
+    },
+    {
+      "visit_number": 6,
+      "date": "2025-10-13",
+      "type": "missed_visit_note",
+      "text": "--- Visit 6 | Date: 2025-10-13 ---\n\nPatient did not present for scheduled visit 6. Attempted phone contact \u2014 patient's family member confirmed patient was unwell.\n"
+    },
+    {
+      "visit_number": 7,
+      "date": "2025-11-03",
+      "type": "missed_visit_note",
+      "text": "--- Visit 7 | Date: 2025-11-03 ---\n\nPatient did not present for scheduled visit 7. Attempted phone contact \u2014 spoke with patient, rescheduling.\n"
+    },
+    {
+      "visit_number": 8,
+      "date": "2025-11-24",
+      "type": "missed_visit_note",
+      "text": "--- Visit 8 | Date: 2025-11-24 ---\n\nNo-show for cycle 8 visit. Staff attempted follow-up: patient's family member confirmed patient was unwell.\n"
+    }
+  ]
+}

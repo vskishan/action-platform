@@ -1,0 +1,272 @@
+[
+  {
+    "patient_id": "SB-P001",
+    "assessment_date": "2025-06-25",
+    "assessment_visit": 2,
+    "response_category": "PR",
+    "biomarker_name": "PSA",
+    "biomarker_value": 7.72,
+    "biomarker_change_pct": -35.8
+  },
+  {
+    "patient_id": "SB-P001",
+    "assessment_date": "2025-08-06",
+    "assessment_visit": 4,
+    "response_category": "SD",
+    "biomarker_name": "PSA",
+    "biomarker_value": 10.61,
+    "biomarker_change_pct": -11.8
+  },
+  {
+    "patient_id": "SB-P001",
+    "assessment_date": "2025-09-17",
+    "assessment_visit": 6,
+    "response_category": "SD",
+    "biomarker_name": "PSA",
+    "biomarker_value": 11.67,
+    "biomarker_change_pct": -2.9
+  },
+  {
+    "patient_id": "SB-P001",
+    "assessment_date": "2025-10-29",
+    "assessment_visit": 8,
+    "response_category": "SD",
+    "biomarker_name": "PSA",
+    "biomarker_value": 12.9,
+    "biomarker_change_pct": 7.3
+  },
+  {
+    "patient_id": "SB-P002",
+    "assessment_date": "2025-06-23",
+    "assessment_visit": 2,
+    "response_category": "PR",
+    "biomarker_name": "PSA",
+    "biomarker_value": 6.31,
+    "biomarker_change_pct": -49.2
+  },
+  {
+    "patient_id": "SB-P002",
+    "assessment_date": "2025-08-04",
+    "assessment_visit": 4,
+    "response_category": "PR",
+    "biomarker_name": "PSA",
+    "biomarker_value": 7.36,
+    "biomarker_change_pct": -40.7
+  },
+  {
+    "patient_id": "SB-P002",
+    "assessment_date": "2025-09-15",
+    "assessment_visit": 6,
+    "response_category": "SD",
+    "biomarker_name": "PSA",
+    "biomarker_value": 10.52,
+    "biomarker_change_pct": -15.2
+  },
+  {
+    "patient_id": "SB-P002",
+    "assessment_date": "2025-10-27",
+    "assessment_visit": 8,
+    "response_category": "PR",
+    "biomarker_name": "PSA",
+    "biomarker_value": 6.61,
+    "biomarker_change_pct": -46.8
+  },
+  {
+    "patient_id": "SB-P003",
+    "assessment_date": "2025-06-27",
+    "assessment_visit": 2,
+    "response_category": "PR",
+    "biomarker_name": "PSA",
+    "biomarker_value": 3.36,
+    "biomarker_change_pct": -40.8
+  },
+  {
+    "patient_id": "SB-P003",
+    "assessment_date": "2025-08-08",
+    "assessment_visit": 4,
+    "response_category": "PR",
+    "biomarker_name": "PSA",
+    "biomarker_value": 2.97,
+    "biomarker_change_pct": -47.6
+  },
+  {
+    "patient_id": "SB-P003",
+    "assessment_date": "2025-09-19",
+    "assessment_visit": 6,
+    "response_category": "SD",
+    "biomarker_name": "PSA",
+    "biomarker_value": 5.67,
+    "biomarker_change_pct": -0.1
+  },
+  {
+    "patient_id": "SB-P003",
+    "assessment_date": "2025-10-31",
+    "assessment_visit": 8,
+    "response_category": "PD",
+    "biomarker_name": "PSA",
+    "biomarker_value": 7.25,
+    "biomarker_change_pct": 27.8
+  },
+  {
+    "patient_id": "SB-P004",
+    "assessment_date": "2025-06-29",
+    "assessment_visit": 2,
+    "response_category": "PR",
+    "biomarker_name": "PSA",
+    "biomarker_value": 0.26,
+    "biomarker_change_pct": -49.0
+  },
+  {
+    "patient_id": "SB-P004",
+    "assessment_date": "2025-08-10",
+    "assessment_visit": 4,
+    "response_category": "CR",
+    "biomarker_name": "PSA",
+    "biomarker_value": 0.1,
+    "biomarker_change_pct": -90.7
+  },
+  {
+    "patient_id": "SB-P004",
+    "assessment_date": "2025-09-21",
+    "assessment_visit": 6,
+    "response_category": "PD",
+    "biomarker_name": "PSA",
+    "biomarker_value": 0.59,
+    "biomarker_change_pct": 17.6
+  },
+  {
+    "patient_id": "SB-P004",
+    "assessment_date": "2025-11-02",
+    "assessment_visit": 8,
+    "response_category": "SD",
+    "biomarker_name": "PSA",
+    "biomarker_value": 0.48,
+    "biomarker_change_pct": -5.0
+  },
+  {
+    "patient_id": "SB-P005",
+    "assessment_date": "2025-06-30",
+    "assessment_visit": 2,
+    "response_category": "CR",
+    "biomarker_name": "PSA",
+    "biomarker_value": 0.22,
+    "biomarker_change_pct": -93.6
+  },
+  {
+    "patient_id": "SB-P005",
+    "assessment_date": "2025-08-11",
+    "assessment_visit": 4,
+    "response_category": "SD",
+    "biomarker_name": "PSA",
+    "biomarker_value": 2.95,
+    "biomarker_change_pct": -15.0
+  },
+  {
+    "patient_id": "SB-P006",
+    "assessment_date": "2025-07-11",
+    "assessment_visit": 2,
+    "response_category": "PR",
+    "biomarker_name": "PSA",
+    "biomarker_value": 2.56,
+    "biomarker_change_pct": -20.2
+  },
+  {
+    "patient_id": "SB-P006",
+    "assessment_date": "2025-08-22",
+    "assessment_visit": 4,
+    "response_category": "PD",
+    "biomarker_name": "PSA",
+    "biomarker_value": 3.92,
+    "biomarker_change_pct": 22.3
+  },
+  {
+    "patient_id": "SB-P006",
+    "assessment_date": "2025-10-03",
+    "assessment_visit": 6,
+    "response_category": "PR",
+    "biomarker_name": "PSA",
+    "biomarker_value": 1.66,
+    "biomarker_change_pct": -48.4
+  },
+  {
+    "patient_id": "SB-P006",
+    "assessment_date": "2025-11-14",
+    "assessment_visit": 8,
+    "response_category": "PR",
+    "biomarker_name": "PSA",
+    "biomarker_value": 1.62,
+    "biomarker_change_pct": -49.5
+  },
+  {
+    "patient_id": "SB-P007",
+    "assessment_date": "2025-07-10",
+    "assessment_visit": 2,
+    "response_category": "CR",
+    "biomarker_name": "PSA",
+    "biomarker_value": 0.66,
+    "biomarker_change_pct": -86.1
+  },
+  {
+    "patient_id": "SB-P007",
+    "assessment_date": "2025-08-21",
+    "assessment_visit": 4,
+    "response_category": "CR",
+    "biomarker_name": "PSA",
+    "biomarker_value": 0.76,
+    "biomarker_change_pct": -84.1
+  },
+  {
+    "patient_id": "SB-P007",
+    "assessment_date": "2025-10-02",
+    "assessment_visit": 6,
+    "response_category": "SD",
+    "biomarker_name": "PSA",
+    "biomarker_value": 3.68,
+    "biomarker_change_pct": -22.6
+  },
+  {
+    "patient_id": "SB-P007",
+    "assessment_date": "2025-11-13",
+    "assessment_visit": 8,
+    "response_category": "PR",
+    "biomarker_name": "PSA",
+    "biomarker_value": 3.06,
+    "biomarker_change_pct": -35.7
+  },
+  {
+    "patient_id": "SB-P008",
+    "assessment_date": "2025-07-09",
+    "assessment_visit": 2,
+    "response_category": "PD",
+    "biomarker_name": "PSA",
+    "biomarker_value": 6.37,
+    "biomarker_change_pct": 42.6
+  },
+  {
+    "patient_id": "SB-P008",
+    "assessment_date": "2025-08-20",
+    "assessment_visit": 4,
+    "response_category": "PD",
+    "biomarker_name": "PSA",
+    "biomarker_value": 5.82,
+    "biomarker_change_pct": 30.4
+  },
+  {
+    "patient_id": "SB-P008",
+    "assessment_date": "2025-10-01",
+    "assessment_visit": 6,
+    "response_category": "SD",
+    "biomarker_name": "PSA",
+    "biomarker_value": 5.08,
+    "biomarker_change_pct": 13.8
+  },
+  {
+    "patient_id": "SB-P008",
+    "assessment_date": "2025-11-12",
+    "assessment_visit": 8,
+    "response_category": "SD",
+    "biomarker_name": "PSA",
+    "biomarker_value": 3.88,
+    "biomarker_change_pct": -13.1
+  }
+]

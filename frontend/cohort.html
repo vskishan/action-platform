@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cohort Analytics | ACTION Platform</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="site-header scrolled">
+    <div class="container nav-wrap">
+      <a href="/" class="brand" aria-label="ACTION Home">
+        <span class="brand-text">A C T I O N</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="/workflows.html">Workflows</a>
+        <a href="#" id="nav-wf-link" class="active">Cohort Analytics</a>
+      </nav>
+      <a class="btn btn-secondary btn-sm" id="back-to-wf-btn" href="/workflows.html">Back to Workflow</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ═══ WORKFLOW CONTEXT BANNER ═══ -->
+    <div id="wf-context-banner" class="wf-context-banner" style="display:none;">
+      <div class="container wf-context-inner">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>Workflow: <strong id="wf-ctx-name"></strong></span>
+        <span class="wf-ctx-sep">|</span>
+        <span>Trial: <strong id="wf-ctx-trial"></strong></span>
+        <span class="wf-ctx-sep">|</span>
+        <span>Stage 2 of 3: <strong>Cohort Formation</strong></span>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE HEADER ═══ -->
+    <section class="section page-hero">
+      <div class="container">
+        <div class="page-hero-inner fade-up visible">
+          <p class="eyebrow">AI Control Arm</p>
+          <h1>Cohort <span class="highlight">Analytics</span></h1>
+          <p class="lead">Query the AI-driven control arm using natural language. Ask about survival rates, progression patterns, cohort demographics, and treatment outcomes — powered by MedGemma.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ QUERY INTERFACE ═══ -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="panel fade-up visible">
+          <div class="panel-header">
+            <div class="panel-icon blue">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <div>
+              <h2 class="panel-title">Ask the AI</h2>
+              <p class="panel-subtitle">Enter a natural-language query about the control arm cohort.</p>
+            </div>
+          </div>
+
+          <form id="cohort-form" class="form-grid">
+            <div class="form-group full-width">
+              <label for="cohort-query">Your Question</label>
+              <textarea id="cohort-query" rows="3" placeholder="e.g. What is the average survival rate of patients aged 60 and above?" required></textarea>
+            </div>
+
+            <!-- Quick query pills -->
+            <div class="form-group full-width">
+              <label>Quick Queries</label>
+              <div class="quick-queries">
+                <button type="button" class="pill-btn" onclick="setCohortQuery('What is the average survival rate of patients aged 60 and above?')">Survival Rate</button>
+                <button type="button" class="pill-btn" onclick="setCohortQuery('Show me a cohort summary of all patients')">Cohort Summary</button>
+                <button type="button" class="pill-btn" onclick="setCohortQuery('What is the progression-free survival for stage III patients?')">PFS Analysis</button>
+                <button type="button" class="pill-btn" onclick="setCohortQuery('Compare survival outcomes between age groups')">Age Comparison</button>
+                <button type="button" class="pill-btn" onclick="setCohortQuery('What are the demographic breakdowns of the cohort?')">Demographics</button>
+                <button type="button" class="pill-btn" onclick="setCohortQuery('What is the median overall survival?')">Median OS</button>
+              </div>
+            </div>
+
+            <div class="form-actions full-width">
+              <button type="submit" class="btn btn-primary" id="cohort-submit-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Ask MedGemma
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ RESPONSE ═══ -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="panel fade-up visible" id="cohort-results-panel" style="display:none;">
+          <div class="panel-header">
+            <div class="panel-icon green">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div>
+              <h2 class="panel-title">AI Response</h2>
+              <p class="panel-subtitle" id="cohort-results-subtitle"></p>
+            </div>
+          </div>
+
+          <!-- Chat-style conversation -->
+          <div id="cohort-conversation" class="conversation"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══ TOAST ═══ -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>Built for The MedGemma Impact Challenge &copy; <span id="year"></span></p>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="/app.js"></script>
+  <script src="/cohort.js"></script>
+</body>
+</html>

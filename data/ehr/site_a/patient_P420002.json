@@ -1,0 +1,212 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:P420002",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "P420002",
+        "name": [
+          {
+            "use": "official",
+            "family": "Johnson",
+            "given": [
+              "Patricia"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "2002-01-22",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race",
+            "extension": [
+              {
+                "url": "text",
+                "valueString": "Asian"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "subject": {
+          "reference": "Patient/P420002"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "38341003",
+              "display": "Essential hypertension"
+            },
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10-cm",
+              "code": "I10",
+              "display": "Essential hypertension"
+            }
+          ],
+          "text": "Essential hypertension"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "onsetDateTime": "2022-08-21"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "status": "final",
+        "subject": {
+          "reference": "Patient/P420002"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "718-7",
+              "display": "Hemoglobin"
+            }
+          ],
+          "text": "Hemoglobin"
+        },
+        "valueQuantity": {
+          "value": 9.89,
+          "unit": "g/dL",
+          "system": "http://unitsofmeasure.org"
+        },
+        "effectiveDateTime": "2024-12-22"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "status": "final",
+        "subject": {
+          "reference": "Patient/P420002"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2160-0",
+              "display": "Creatinine"
+            }
+          ],
+          "text": "Creatinine"
+        },
+        "valueQuantity": {
+          "value": 2.12,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org"
+        },
+        "effectiveDateTime": "2025-11-06"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "status": "final",
+        "subject": {
+          "reference": "Patient/P420002"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "6690-2",
+              "display": "White blood cell count"
+            }
+          ],
+          "text": "White blood cell count"
+        },
+        "valueQuantity": {
+          "value": 9.41,
+          "unit": "10*3/uL",
+          "system": "http://unitsofmeasure.org"
+        },
+        "effectiveDateTime": "2023-03-15"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "status": "active",
+        "subject": {
+          "reference": "Patient/P420002"
+        },
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "1313988",
+              "display": "Enzalutamide"
+            }
+          ],
+          "text": "Enzalutamide"
+        },
+        "effectivePeriod": {
+          "start": "2024-04-22",
+          "end": "2026-01-08"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "status": "active",
+        "subject": {
+          "reference": "Patient/P420002"
+        },
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "1191",
+              "display": "Aspirin"
+            }
+          ],
+          "text": "Aspirin"
+        },
+        "effectivePeriod": {
+          "start": "2020-06-13",
+          "end": "2026-02-07"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "status": "active",
+        "subject": {
+          "reference": "Patient/P420002"
+        },
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "83367",
+              "display": "Atorvastatin"
+            }
+          ],
+          "text": "Atorvastatin"
+        },
+        "effectivePeriod": {
+          "start": "2024-12-11",
+          "end": "2025-11-16"
+        }
+      }
+    }
+  ]
+}

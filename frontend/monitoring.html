@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monitoring | ACTION Platform</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="site-header scrolled">
+    <div class="container nav-wrap">
+      <a href="/" class="brand" aria-label="ACTION Home">
+        <span class="brand-text">A C T I O N</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="/workflows.html">Workflows</a>
+        <a href="#" id="nav-wf-link" class="active">Monitoring</a>
+      </nav>
+      <a class="btn btn-secondary btn-sm" id="back-to-wf-btn" href="/workflows.html">Back to Workflow</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ═══ WORKFLOW CONTEXT BANNER ═══ -->
+    <div id="wf-context-banner" class="wf-context-banner" style="display:none;">
+      <div class="container wf-context-inner">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>Workflow: <strong id="wf-ctx-name"></strong></span>
+        <span class="wf-ctx-sep">|</span>
+        <span>Trial: <strong id="wf-ctx-trial"></strong></span>
+        <span class="wf-ctx-sep">|</span>
+        <span>Stage 3 of 3: <strong>Cohort Monitoring</strong></span>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE HEADER ═══ -->
+    <section class="section page-hero">
+      <div class="container">
+        <div class="page-hero-inner fade-up visible">
+          <p class="eyebrow">Federated Monitoring</p>
+          <h1>Treatment-Arm <span class="highlight">Monitoring</span></h1>
+          <p class="lead">Query real-time monitoring data across federated clinical sites. Track adverse events, visit adherence, treatment response, and lab trends — all without exposing patient-level data.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ MONITORING QUERY ═══ -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="panel fade-up visible">
+          <div class="panel-header">
+            <div class="panel-icon red">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <h2 class="panel-title">Monitoring Query</h2>
+              <p class="panel-subtitle">Ask a natural-language question about treatment arm progress.</p>
+            </div>
+          </div>
+
+          <form id="monitoring-form" class="form-grid">
+            <div class="form-group">
+              <label for="mon-trial">Trial Name</label>
+              <input type="text" id="mon-trial" placeholder="e.g. PROSTATE-CANCER" required />
+            </div>
+
+            <div class="form-group full-width">
+              <label for="mon-query">Your Question</label>
+              <textarea id="mon-query" rows="3" placeholder="e.g. What is the Grade 3+ adverse event rate across all sites?" required></textarea>
+            </div>
+
+            <!-- Quick query pills -->
+            <div class="form-group full-width">
+              <label>Quick Queries</label>
+              <div class="quick-queries">
+                <button type="button" class="pill-btn" onclick="setQuery('What is the Grade 3+ adverse event rate across all sites?')">Adverse Events</button>
+                <button type="button" class="pill-btn" onclick="setQuery('Show me patient visit adherence across sites')">Visit Adherence</button>
+                <button type="button" class="pill-btn" onclick="setQuery('What are the treatment response rates?')">Response Rates</button>
+                <button type="button" class="pill-btn" onclick="setQuery('Are there any dropouts or withdrawals?')">Dropouts</button>
+                <button type="button" class="pill-btn" onclick="setQuery('What are the lab value trends for PSA?')">Lab Trends</button>
+                <button type="button" class="pill-btn" onclick="setQuery('Give me an overall trial progress summary')">Overall Progress</button>
+              </div>
+            </div>
+
+            <div class="form-actions full-width">
+              <button type="submit" class="btn btn-primary" id="mon-submit-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                Run Query
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ MONITORING RESULTS ═══ -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="panel fade-up visible" id="mon-results-panel" style="display:none;">
+          <div class="panel-header">
+            <div class="panel-icon green">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <h2 class="panel-title">Monitoring Results</h2>
+              <p class="panel-subtitle" id="mon-results-subtitle"></p>
+            </div>
+          </div>
+
+          <!-- AI Response -->
+          <div id="mon-ai-response" class="ai-response-card"></div>
+
+          <!-- Aggregate stats -->
+          <div id="mon-stats" class="result-stats"></div>
+
+          <!-- Per-site breakdown -->
+          <div id="mon-site-results" class="site-results-grid"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══ TOAST ═══ -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>Built for The MedGemma Impact Challenge &copy; <span id="year"></span></p>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="/app.js"></script>
+  <script src="/monitoring.js"></script>
+</body>
+</html>

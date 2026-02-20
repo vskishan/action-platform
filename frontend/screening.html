@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patient Screening | ACTION Platform</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="site-header scrolled">
+    <div class="container nav-wrap">
+      <a href="/" class="brand" aria-label="ACTION Home">
+        <span class="brand-text">A C T I O N</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="/workflows.html">Workflows</a>
+        <a href="#" id="nav-wf-link" class="active">Screening</a>
+      </nav>
+      <a class="btn btn-secondary btn-sm" id="back-to-wf-btn" href="/workflows.html">Back to Workflow</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ═══ WORKFLOW CONTEXT BANNER ═══ -->
+    <div id="wf-context-banner" class="wf-context-banner" style="display:none;">
+      <div class="container wf-context-inner">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>Workflow: <strong id="wf-ctx-name"></strong></span>
+        <span class="wf-ctx-sep">|</span>
+        <span>Trial: <strong id="wf-ctx-trial"></strong></span>
+        <span class="wf-ctx-sep">|</span>
+        <span>Stage 1 of 3: <strong>Patient Screening</strong></span>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE HEADER ═══ -->
+    <section class="section page-hero">
+      <div class="container">
+        <div class="page-hero-inner fade-up visible">
+          <p class="eyebrow">Federated Screening</p>
+          <h1>Patient <span class="highlight">Screening</span></h1>
+          <p class="lead">Run federated patient-screening across distributed clinical sites. Define inclusion and exclusion criteria, and let MedGemma identify eligible patients — without moving sensitive data.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SCREENING FORM ═══ -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="panel fade-up visible">
+          <div class="panel-header">
+            <div class="panel-icon blue">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <h2 class="panel-title">Screening Criteria</h2>
+              <p class="panel-subtitle">Define criteria using structured rules or natural language.</p>
+            </div>
+          </div>
+
+          <!-- Tab toggle -->
+          <div class="tab-bar">
+            <button class="tab active" data-tab="nl-tab" onclick="switchTab(this, 'nl-tab')">Natural Language</button>
+            <button class="tab" data-tab="structured-tab" onclick="switchTab(this, 'structured-tab')">Structured Criteria</button>
+          </div>
+
+          <!-- Natural Language Tab -->
+          <div id="nl-tab" class="tab-content active">
+            <form id="nl-screening-form" class="form-grid">
+              <div class="form-group">
+                <label for="nl-trial">Trial Name</label>
+                <input type="text" id="nl-trial" placeholder="e.g. PROSTATE-CANCER" required />
+              </div>
+              <div class="form-group full-width">
+                <label for="nl-criteria">Eligibility Criteria</label>
+                <textarea id="nl-criteria" rows="4" placeholder="e.g. Male patients aged 50-75 with confirmed prostate cancer diagnosis, PSA > 4 ng/mL, no prior chemotherapy..." required></textarea>
+              </div>
+              <div class="form-actions full-width">
+                <button type="submit" class="btn btn-primary" id="nl-submit-btn">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  Run Screening
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Structured Criteria Tab -->
+          <div id="structured-tab" class="tab-content">
+            <form id="structured-screening-form" class="form-grid">
+              <div class="form-group full-width">
+                <label for="struct-trial">Trial Name</label>
+                <input type="text" id="struct-trial" placeholder="e.g. PROSTATE-CANCER" required />
+              </div>
+
+              <!-- Inclusion criteria -->
+              <div class="form-group full-width">
+                <div class="criteria-section-header">
+                  <h3>Inclusion Criteria</h3>
+                  <button type="button" class="btn btn-text btn-sm" onclick="addCriterion('inclusion')">+ Add Rule</button>
+                </div>
+                <div id="inclusion-criteria" class="criteria-list">
+                  <div class="criterion-row" data-index="0">
+                    <select class="criterion-category">
+                      <option value="demographic">Demographic</option>
+                      <option value="condition">Condition</option>
+                      <option value="lab">Lab</option>
+                      <option value="medication">Medication</option>
+                    </select>
+                    <input type="text" class="criterion-field" placeholder="Field (e.g. age)" />
+                    <select class="criterion-operator">
+                      <option value="gte">≥</option>
+                      <option value="lte">≤</option>
+                      <option value="eq">=</option>
+                      <option value="gt">></option>
+                      <option value="lt"><</option>
+                      <option value="neq">≠</option>
+                      <option value="in">in</option>
+                    </select>
+                    <input type="text" class="criterion-value" placeholder="Value" />
+                    <button type="button" class="btn-icon-sm" onclick="removeCriterion(this)" title="Remove">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Exclusion criteria -->
+              <div class="form-group full-width">
+                <div class="criteria-section-header">
+                  <h3>Exclusion Criteria</h3>
+                  <button type="button" class="btn btn-text btn-sm" onclick="addCriterion('exclusion')">+ Add Rule</button>
+                </div>
+                <div id="exclusion-criteria" class="criteria-list">
+                  <!-- Empty by default -->
+                </div>
+                <p class="form-hint">Patients matching any exclusion rule will be disqualified.</p>
+              </div>
+
+              <div class="form-actions full-width">
+                <button type="submit" class="btn btn-primary" id="struct-submit-btn">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  Run Screening
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SCREENING RESULTS ═══ -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="panel fade-up visible" id="results-panel" style="display:none;">
+          <div class="panel-header">
+            <div class="panel-icon green">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <h2 class="panel-title">Screening Results</h2>
+              <p class="panel-subtitle" id="results-subtitle">Federated screening complete.</p>
+            </div>
+          </div>
+
+          <!-- Aggregate stats -->
+          <div class="result-stats" id="result-stats"></div>
+
+          <!-- Per-site results -->
+          <div id="site-results" class="site-results-grid"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══ TOAST ═══ -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>Built for The MedGemma Impact Challenge &copy; <span id="year"></span></p>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="/app.js"></script>
+  <script src="/screening.js"></script>
+</body>
+</html>

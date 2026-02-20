@@ -1,0 +1,53 @@
+{
+  "patient_id": "SB-P006",
+  "documents": [
+    {
+      "visit_number": 1,
+      "date": "2025-06-20",
+      "type": "progress_note",
+      "text": "--- Visit 1 | Date: 2025-06-20 ---\n\nRoutine protocol visit 1. Patient ID: SB-P006.\n\nOn exam, BP is 120/77, pulse 74, wt 85.9 kg. Patient appears mildly fatigued but alert and oriented.\n\nPatient reports Elevated ALT (severe, Grade 3). First noted day 19. Resolved by day 32. Study drug dose was reduced per protocol guidelines.\n\nLabs drawn today:\n  - PSA: 7.09 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 10.62 U/L [ref 7.0-56.0]\n  - AST: 12.97 U/L [ref 10.0-40.0]\n  - Hemoglobin: 12.41 g/dL [ref 12.0-17.5]\n  - WBC: 6.01 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.17 mg/dL [ref 0.7-1.3]\n\nPlan: Continue current regimen. Follow up in 3 weeks.\n"
+    },
+    {
+      "visit_number": 2,
+      "date": "2025-07-11",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 2 | Date: 2025-07-11 ---\n\nVisit 2 clinical encounter for SB-P006.\n\nVS: 117/78 | HR 75 | Wt 68.4 kg. Patient slightly pale but hemodynamically stable.\n\nPatient reports Elevated ALT (mild, Grade 1). First noted day 32. Resolved by day 44. Study drug dose was reduced per protocol guidelines.\n\nLab panel results from today's draw:\n  - PSA: 5.73 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 12.91 U/L [ref 7.0-56.0]\n  - AST: 10.93 U/L [ref 10.0-40.0]\n  - Hemoglobin: 12.23 g/dL [ref 12.0-17.5]\n  - WBC: 6.56 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.18 mg/dL [ref 0.7-1.3]\n\nImaging reveals meaningful tumor shrinkage consistent with partial response (PR). Target lesion regression of ~20.2%.\n\nSerum PSA: 2.56 ng/mL, representing a decrease of 20.2% compared to baseline.\n\nAssessment: Tolerating therapy. Plan to continue protocol. Next visit in 3 weeks.\n"
+    },
+    {
+      "visit_number": 3,
+      "date": "2025-08-01",
+      "type": "progress_note",
+      "text": "--- Visit 3 | Date: 2025-08-01 ---\n\nVisit 3 clinical encounter for SB-P006.\n\nVitals: BP 104/80 mmHg, HR 77 bpm, Weight 53.6 kg.\n\nBlood work results:\n  - PSA: 5.78 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 15.25 U/L [ref 7.0-56.0]\n  - AST: 13.13 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.8 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 6.18 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.16 mg/dL [ref 0.7-1.3]\n\nAssessment: Tolerating therapy. Plan to continue protocol. Next visit in 3 weeks.\n"
+    },
+    {
+      "visit_number": 4,
+      "date": "2025-08-22",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 4 | Date: 2025-08-22 ---\n\nSB-P006 \u2014 Cycle 4, Day 1 visit.\n\nVitals: BP 122/77 mmHg, HR 52 bpm, Weight 64.2 kg.\n\nLab panel results from today's draw:\n  - PSA: 5.81 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 15.68 U/L [ref 7.0-56.0]\n  - AST: 12.87 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.99 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 5.74 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.24 mg/dL [ref 0.7-1.3]\n\nCT shows disease progression \u2014 new lesion identified in the liver. Target measurements also increased (22.3%). RECIST classification: PD.\n\nSerum PSA: 3.92 ng/mL, representing a increase of 22.3% compared to baseline.\n\nPlan: Monitor closely and reassess at next visit. Return for cycle 5 in 3 weeks.\n"
+    },
+    {
+      "visit_number": 5,
+      "date": "2025-09-12",
+      "type": "progress_note",
+      "text": "--- Visit 5 | Date: 2025-09-12 ---\n\nSB-P006 \u2014 Cycle 5, Day 1 visit.\n\nVitals: BP 110/87 mmHg, HR 79 bpm, Weight 91.6 kg.\n\nNo new adverse events reported since last visit.\n\nLabs drawn today:\n  - PSA: 5.07 ng/mL [ref 0.0-4.0] (HIGH)\n  - ALT: 15.16 U/L [ref 7.0-56.0]\n  - AST: 17.03 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.83 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 6.09 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.23 mg/dL [ref 0.7-1.3]\n\nContinue study protocol. Monitor labs. Return visit 6 scheduled in 3 weeks.\n"
+    },
+    {
+      "visit_number": 6,
+      "date": "2025-10-03",
+      "type": "missed_visit_note",
+      "text": "--- Visit 6 | Date: 2025-10-03 ---\n\nVisit 6 \u2014 MISSED. Patient called to reschedule but did not attend. patient reported feeling too unwell to travel to site.\n"
+    },
+    {
+      "visit_number": 7,
+      "date": "2025-10-24",
+      "type": "progress_note",
+      "text": "--- Visit 7 | Date: 2025-10-24 ---\n\nRoutine protocol visit 7. Patient ID: SB-P006.\n\nOn exam, BP is 150/70, pulse 87, wt 62.4 kg. Patient appears mildly fatigued but alert and oriented.\n\nAdverse event noted: Headache \u2014 mild (CTCAE Grade 1). Onset day 142. Currently ongoing. Assessed as probable to study drug. Study drug dose was reduced per protocol guidelines.\n\nLabs drawn today:\n  - PSA: 3.79 ng/mL [ref 0.0-4.0]\n  - ALT: 16.51 U/L [ref 7.0-56.0]\n  - AST: 15.34 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.31 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 5.71 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.28 mg/dL [ref 0.7-1.3]\n\nPlan: Continue current regimen. Follow up in 3 weeks.\n"
+    },
+    {
+      "visit_number": 8,
+      "date": "2025-11-14",
+      "type": "progress_note_with_imaging",
+      "text": "--- Visit 8 | Date: 2025-11-14 ---\n\nPatient SB-P006 presents for scheduled cycle 8 visit.\n\nVS: 123/68 | HR 111 | Wt 75.2 kg. Patient slightly pale but hemodynamically stable.\n\nNo new adverse events reported since last visit.\n\nRoutine labs obtained:\n  - PSA: 3.38 ng/mL [ref 0.0-4.0]\n  - ALT: 16.72 U/L [ref 7.0-56.0]\n  - AST: 15.21 U/L [ref 10.0-40.0]\n  - Hemoglobin: 11.62 g/dL [ref 12.0-17.5] (LOW)\n  - WBC: 5.18 10^3/uL [ref 4.5-11.0]\n  - Creatinine: 1.31 mg/dL [ref 0.7-1.3] (HIGH)\n\nCT restaging shows partial response. Target lesions reduced significantly (49.5% decrease from baseline). No new lesions identified. RECIST: PR.\n\nSerum PSA: 1.62 ng/mL, representing a decrease of 49.5% compared to baseline.\n\nPlan: Continue current regimen. Follow up in 3 weeks.\n"
+    }
+  ]
+}
