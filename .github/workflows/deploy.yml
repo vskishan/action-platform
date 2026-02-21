@@ -27,8 +27,9 @@ jobs:
             # Stop and remove existing containers
             docker-compose down
 
-            # Rebuild the backend image to include new code/dependencies
-            docker-compose build backend
+            # Rebuild images
+            docker-compose build
 
             # Start all containers in detached mode
             docker-compose up -d
+

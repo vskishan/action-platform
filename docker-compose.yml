@@ -72,8 +72,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: action-platform-backend
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     environment:
       - OLLAMA_HOST=http://action-platform-ollama:11434
     depends_on:
@@ -81,5 +81,25 @@ services:
         condition: service_healthy
     restart: unless-stopped
 
+  # ----------------------------------------------------------------
+  # Caddy - Reverse Proxy with automatic HTTPS (Let's Encrypt)
+  # ----------------------------------------------------------------
+  caddy:
+    image: caddy:2-alpine
+    container_name: action-platform-caddy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - backend
+    restart: unless-stopped
+
 volumes:
   ollama_data:
+  caddy_data:
+  caddy_config:
