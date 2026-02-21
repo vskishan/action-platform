@@ -25,25 +25,25 @@ services:
   # ----------------------------------------------------------------
   ollama:
     image: ollama/ollama:latest
-    container_name: sparc-ollama
+    container_name: action-platform-ollama
     ports:
       - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost:11434/api/tags | grep -q alibayram"]
+      test: ["CMD-SHELL", "curl -sf http://localhost:11434/api/tags" ]
       interval: 10s
       timeout: 5s
-      retries: 60
-      start_period: 60s
+      retries: 30
+      start_period: 30s
 
   # ----------------------------------------------------------------
   # Model puller - one-shot job that ensures MedGemma is downloaded
   # ----------------------------------------------------------------
   model-puller:
     image: ollama/ollama:latest
-    container_name: sparc-model-puller
+    container_name: action-platform-model-puller
     environment:
       - OLLAMA_HOST=http://ollama:11434
     entrypoint: ["/bin/sh", "-c"]
@@ -71,7 +71,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: sparc-backend
+    container_name: action-platform-backend
     ports:
       - "8000:8000"
     environment:
