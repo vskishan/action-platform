@@ -32,7 +32,7 @@ services:
       - ollama_data:/root/.ollama
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost:11434/api/tags" ]
+      test: ["CMD", "sh", "-c", "curl -sf http://localhost:11434/api/tags"]
       interval: 10s
       timeout: 5s
       retries: 30
