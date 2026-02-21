@@ -24,11 +24,11 @@ jobs:
             # Pull the latest changes from the main branch
             git pull origin main
 
+            # Stop and remove existing containers
+            docker-compose down
+
             # Rebuild the backend image to include new code/dependencies
             docker-compose build backend
 
-            # Restart the containers in detached mode
-            docker-compose up -d --no-deps backend
-            
-            
-            
+            # Start all containers in detached mode
+            docker-compose up -d
