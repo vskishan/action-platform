@@ -57,7 +57,22 @@ class WorkflowEngine:
         The workflow is immediately set to PAUSED at the first stage
         so the user can navigate directly to the stage page without
         an extra "Start" step.
+
+        Raises
+        ------
+        ValueError
+            If another workflow is already in progress (RUNNING, PAUSED,
+            or CREATED).  Only one active workflow is allowed at a time.
         """
+        # ── Guard: only one active workflow at a time ──
+        active = self._store.get_active_workflow()
+        if active is not None:
+            raise ValueError(
+                f"A workflow is already in progress: "
+                f"'{active.name}' (id={active.id}, status={active.status.value}). "
+                f"Please complete or delete it before creating a new one."
+            )
+
         first_stage = STAGE_ORDER[0]
 
         workflow = Workflow(

@@ -59,10 +59,15 @@ _store = WorkflowStore()
 
 @router.post("", response_model=WorkflowDetailResponse, status_code=201)
 def create_workflow(request: WorkflowCreateRequest) -> WorkflowDetailResponse:
-    """Create a new clinical-trial workflow."""
+    """Create a new clinical-trial workflow.
+
+    Returns 409 if another workflow is already in progress.
+    """
     try:
         workflow = _engine.create_workflow(request)
         return WorkflowDetailResponse(workflow=workflow)
+    except ValueError as exc:
+        raise HTTPException(status_code=409, detail=str(exc))
     except Exception as exc:
         logger.exception("Failed to create workflow: %s", exc)
         raise HTTPException(status_code=500, detail=str(exc))

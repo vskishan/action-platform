@@ -31,6 +31,11 @@
       const workflows = data.workflows || [];
       countEl.textContent = `${workflows.length} workflow${workflows.length !== 1 ? 's' : ''}`;
 
+      // ── Check for active workflow and toggle create form ──
+      const ACTIVE_STATUSES = new Set(['running', 'paused', 'created']);
+      const activeWf = workflows.find(wf => ACTIVE_STATUSES.has(wf.status));
+      _toggleCreateForm(activeWf);
+
       if (workflows.length === 0) {
         emptyEl.style.display = '';
         return;
@@ -78,8 +83,29 @@
   }
 
   /* ══════════════════════════════════════════════════════
-     Create Workflow
+     Create Workflow – with active-workflow guard
      ══════════════════════════════════════════════════════ */
+
+  /**
+   * Toggle the create form enabled/disabled based on whether an
+   * active (running/paused/created) workflow exists.
+   */
+  function _toggleCreateForm(activeWf) {
+    const banner = document.getElementById('active-workflow-banner');
+    const form   = document.getElementById('create-workflow-form');
+    const info   = document.getElementById('active-workflow-info');
+
+    if (activeWf) {
+      banner.style.display = '';
+      info.textContent = ` "${activeWf.name}" is currently ${activeWf.status}.`;
+      form.classList.add('form-disabled');
+    } else {
+      banner.style.display = 'none';
+      info.textContent = '';
+      form.classList.remove('form-disabled');
+    }
+  }
+
   document.getElementById('create-workflow-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = e.target.querySelector('button[type="submit"]');
@@ -97,7 +123,14 @@
       e.target.reset();
       loadWorkflows();
     } catch (err) {
-      showToast(err.message, 'error');
+      // Show a specific message for the "already in progress" conflict
+      const msg = (err.message || '').toLowerCase();
+      if (msg.includes('already in progress') || err.status === 409) {
+        showToast('A workflow is already in progress. Complete or delete it first.', 'error');
+        loadWorkflows();  // Refresh to show the banner
+      } else {
+        showToast(err.message, 'error');
+      }
     } finally {
       setLoading(btn, false);
     }

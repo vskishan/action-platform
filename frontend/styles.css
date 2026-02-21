@@ -1903,3 +1903,44 @@ a.stage-link:hover .stage-name {
   font-size: 0.78rem;
   color: var(--text-3);
 }
+
+/* ═══════════════════════════════════════════════════════
+   ACTIVE WORKFLOW BANNER
+   ═══════════════════════════════════════════════════════ */
+.active-workflow-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  border-radius: var(--r-sm);
+  background: var(--yellow-dim);
+  border: 1px solid rgba(249, 171, 0, 0.25);
+  color: var(--text-1);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  animation: bannerSlideIn 0.35s var(--ease-o);
+}
+
+.active-workflow-banner svg {
+  flex-shrink: 0;
+  color: var(--yellow);
+  margin-top: 2px;
+}
+
+.active-workflow-banner strong {
+  color: var(--text-1);
+}
+
+@keyframes bannerSlideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Disabled state for the create form when a workflow is active */
+#create-workflow-form.form-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  filter: grayscale(0.6);
+  user-select: none;
+}

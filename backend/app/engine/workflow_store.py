@@ -87,6 +87,28 @@ class WorkflowStore:
         with self._rw_lock:
             return len(self._workflows)
 
+    def has_active_workflow(self) -> bool:
+        """Return ``True`` if any workflow is currently in progress.
+
+        A workflow is considered *active* if its status is ``RUNNING``
+        or ``PAUSED`` — i.e. it has not yet completed or failed.
+        """
+        active_statuses = {WorkflowStatus.RUNNING, WorkflowStatus.PAUSED, WorkflowStatus.CREATED}
+        with self._rw_lock:
+            return any(
+                wf.status in active_statuses
+                for wf in self._workflows.values()
+            )
+
+    def get_active_workflow(self) -> Optional[Workflow]:
+        """Return the currently active workflow, or ``None``."""
+        active_statuses = {WorkflowStatus.RUNNING, WorkflowStatus.PAUSED, WorkflowStatus.CREATED}
+        with self._rw_lock:
+            for wf in self._workflows.values():
+                if wf.status in active_statuses:
+                    return wf
+        return None
+
     # Query helpers
     def get_by_trial(self, trial_name: str) -> list[WorkflowSummary]:
         """Return summaries for workflows matching a trial name."""

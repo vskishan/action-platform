@@ -48,6 +48,19 @@
               <p class="panel-subtitle">Define a new clinical trial workflow to begin the pipeline.</p>
             </div>
           </div>
+
+          <!-- Active workflow warning — shown by JS when a workflow is already in progress -->
+          <div id="active-workflow-banner" class="active-workflow-banner" style="display:none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <div>
+              <strong>A workflow is already in progress.</strong>
+              <span id="active-workflow-info"></span>
+              <br/>Please complete or delete the active workflow before creating a new one.
+            </div>
+          </div>
+
           <form id="create-workflow-form" class="form-grid">
             <div class="form-group">
               <label for="wf-name">Workflow Name</label>
@@ -62,7 +75,7 @@
               <textarea id="wf-desc" rows="2" placeholder="Multi-site RCT for novel androgen-deprivation therapy..."></textarea>
             </div>
             <div class="form-actions full-width">
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" class="btn btn-primary" id="create-workflow-btn">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 Create Workflow
               </button>
