@@ -253,17 +253,32 @@ class CentralServer:
         aggregate_eligible = sum(r.eligible_patients for r in site_results)
         any_errors = any(r.errors for r in site_results) or bool(client_errors)
 
+        # Aggregate audit metrics from self-correcting screening
+        aggregate_corrected = sum(r.corrected_count for r in site_results)
+        aggregate_flagged = sum(r.flagged_for_review_count for r in site_results)
+        aggregate_high_conf = sum(r.high_confidence_count for r in site_results)
+        aggregate_low_conf = sum(r.low_confidence_count for r in site_results)
+
         status = "completed"
         if len(site_results) < num_sites:
             status = "partial"
         elif any_errors:
             status = "completed_with_warnings"
 
+        audit_summary = ""
+        if aggregate_corrected or aggregate_flagged:
+            audit_summary = (
+                f" | Self-correction: {aggregate_corrected} decision(s) corrected, "
+                f"{aggregate_flagged} flagged for review, "
+                f"{aggregate_high_conf} high-confidence, "
+                f"{aggregate_low_conf} low-confidence."
+            )
+
         message = (
             f"Screening complete. "
             f"{aggregate_eligible} of {aggregate_total} total patients "
             f"across {len(site_results)} site(s) are eligible for "
-            f"trial '{criteria.trial_name}'."
+            f"trial '{criteria.trial_name}'.{audit_summary}"
         )
 
         logger.info(message)
@@ -276,6 +291,10 @@ class CentralServer:
             aggregate_eligible_patients=aggregate_eligible,
             status=status,
             message=message,
+            aggregate_corrected_count=aggregate_corrected,
+            aggregate_flagged_for_review=aggregate_flagged,
+            aggregate_high_confidence=aggregate_high_conf,
+            aggregate_low_confidence=aggregate_low_conf,
         )
 
 

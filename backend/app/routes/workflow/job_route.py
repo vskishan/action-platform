@@ -78,11 +78,14 @@ def _screening_worker(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def _cohort_worker(payload: dict[str, Any]) -> dict[str, Any]:
-    """Run cohort query synchronously."""
-    from backend.app.llm.agent import Agent
+    """Run cohort query using the ReAct agent (agentic AI)."""
+    from backend.app.llm.react_agent import ReactAgent
 
-    agent = Agent()
-    result = agent.handle(payload["query"])
+    agent = ReactAgent()
+    result = agent.handle(
+        user_query=payload["query"],
+        session_id=payload.get("session_id"),
+    )
     return result
 
 

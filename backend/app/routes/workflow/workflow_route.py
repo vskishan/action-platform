@@ -40,6 +40,7 @@ from backend.app.schema.workflow_schema import (
     WorkflowCreateRequest,
     WorkflowDetailResponse,
     WorkflowListResponse,
+    WorkflowRecommendationResponse,
     WorkflowStage,
     WorkflowStageResponse,
     WorkflowSummary,
@@ -284,3 +285,53 @@ def save_stage_conversation(
         "stage": stage.value,
         "message": f"Conversation saved ({len(body.messages)} messages).",
     }
+
+
+# ── Autonomous Workflow Orchestration ─────────────────────────────
+
+@router.post(
+    "/{workflow_id}/analyze/{stage}",
+    response_model=WorkflowRecommendationResponse,
+)
+def analyze_stage(
+    workflow_id: str,
+    stage: WorkflowStage,
+    auto_advance: bool = False,
+) -> WorkflowRecommendationResponse:
+    """Analyse a completed stage and get an AI recommendation.
+
+    The workflow orchestration agent examines the stage results and
+    returns a recommendation (PROCEED / ADJUST / REVIEW / ALERT)
+    with quality scoring, anomaly detection, and focus areas for
+    the next stage.
+
+    If ``auto_advance=True`` and the recommendation is PROCEED,
+    the workflow is automatically advanced to the next stage.
+    """
+    from backend.app.llm.workflow_orchestrator import WorkflowOrchestrationAgent
+
+    try:
+        orchestrator = WorkflowOrchestrationAgent()
+        recommendation, was_advanced = orchestrator.analyse_and_recommend(
+            workflow_id=workflow_id,
+            completed_stage=stage,
+            auto_advance=auto_advance,
+        )
+        return WorkflowRecommendationResponse(
+            workflow_id=workflow_id,
+            recommendation=recommendation,
+            auto_advanced=was_advanced,
+        )
+    except KeyError:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Workflow '{workflow_id}' not found.",
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
+    except Exception as exc:
+        logger.exception(
+            "Failed to analyse stage %s for workflow %s: %s",
+            stage, workflow_id, exc,
+        )
+        raise HTTPException(status_code=500, detail=str(exc))

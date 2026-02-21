@@ -43,6 +43,7 @@ from backend.app.schema.screening_schema import (
     Criterion,
     CriterionCategory,
     Operator,
+    PatientAuditDetail,
     ScreeningCriteria,
     SiteScreeningResult,
 )
@@ -206,9 +207,12 @@ class ScreeningClient(fl.client.NumPyClient):
         parameters: NDArrays,
         config: dict[str, Any],
     ) -> tuple[NDArrays, int, dict[str, Any]]:
-        """Screen each patient's FHIR record using MedGemma.
+        """Screen each patient's FHIR record using MedGemma with self-correction.
 
-        Returns aggregate counts only — no patient data leaves the site.
+        Uses the ScreeningAuditorAgent for a two-pass screen → audit → reflect
+        pipeline.  Each patient decision includes confidence scoring and an
+        audit trail.  Returns aggregate counts only — no patient data leaves
+        the site.
         """
         logger.info("[%s] Received fit request from server.", self.site_id)
 
@@ -236,41 +240,82 @@ class ScreeningClient(fl.client.NumPyClient):
             )
             return result_to_ndarrays(result), 0, {"site_id": self.site_id}
 
-        # Get MedGemma client
-        from backend.app.llm.medgemma_client import MedGemmaClient
-        medgemma = MedGemmaClient.get_instance()
+        # Initialise the ScreeningAuditorAgent for self-correcting screening
+        from backend.app.llm.screening_auditor import ScreeningAuditorAgent
+        auditor_agent = ScreeningAuditorAgent()
 
-        # Screen each patient
+        # Screen each patient with audit
         eligible_count = 0
-        reasons: list[str] = []
+        patient_audit_details: list[PatientAuditDetail] = []
+        high_conf = 0
+        medium_conf = 0
+        low_conf = 0
+        corrected_count = 0
+        flagged_count = 0
 
         for idx, (patient_id, bundle) in enumerate(bundles.items(), 1):
-            progress = f"[{self.site_id}] Screening patient {idx}/{total} ({patient_id})"
+            progress = f"[{self.site_id}] Screening patient {idx}/{total} ({patient_id}) [with audit]"
             logger.info(progress)
             print(progress, flush=True)
 
             try:
-                prompt = _build_screening_prompt(
-                    criteria.trial_name, criteria_text, bundle,
-                )
-                response = medgemma.chat(
-                    prompt=prompt,
-                    system=SCREENING_SYSTEM_PROMPT,
-                    temperature=0.0,
+                # Run the full screen → audit → (reflect) pipeline
+                decision = auditor_agent.screen_and_audit(
+                    patient_id=patient_id,
+                    fhir_bundle=bundle,
+                    criteria_text=criteria_text,
+                    trial_name=criteria.trial_name,
                 )
 
-                is_eligible, reason = _parse_decision(response)
-
-                if is_eligible:
+                if decision.final_decision == "ELIGIBLE":
                     eligible_count += 1
 
-                if reason:
-                    reasons.append(reason)
+                # Track confidence counts
+                if decision.confidence.value == "high":
+                    high_conf += 1
+                elif decision.confidence.value == "low":
+                    low_conf += 1
+                else:
+                    medium_conf += 1
 
-                decision_str = "ELIGIBLE" if is_eligible else "INELIGIBLE"
-                log_msg = f"[{self.site_id}] {patient_id} -> {decision_str} ({reason})"
+                if decision.was_corrected:
+                    corrected_count += 1
+                if decision.flagged_for_review:
+                    flagged_count += 1
+
+                # Build audit detail (no PHI — just decisions)
+                audit_detail = PatientAuditDetail(
+                    patient_id=patient_id,
+                    initial_decision=decision.initial_decision,
+                    initial_reason=decision.initial_reason,
+                    final_decision=decision.final_decision,
+                    final_reason=decision.final_reason,
+                    confidence=decision.confidence.value,
+                    was_corrected=decision.was_corrected,
+                    screening_passes=decision.screening_passes,
+                    flagged_for_review=decision.flagged_for_review,
+                    audit_issues=(
+                        decision.audit_result.issues
+                        if decision.audit_result else []
+                    ),
+                )
+                patient_audit_details.append(audit_detail)
+
+                decision_str = decision.final_decision
+                conf_str = decision.confidence.value.upper()
+                corrected_str = " [CORRECTED]" if decision.was_corrected else ""
+                flagged_str = " [FLAGGED]" if decision.flagged_for_review else ""
+                log_msg = (
+                    f"[{self.site_id}] {patient_id} -> {decision_str} "
+                    f"(confidence={conf_str}, passes={decision.screening_passes})"
+                    f"{corrected_str}{flagged_str}"
+                )
                 logger.info(log_msg)
-                print(f"  -> {decision_str}: {reason}", flush=True)
+                print(
+                    f"  -> {decision_str}: {decision.final_reason} "
+                    f"[{conf_str}]{corrected_str}{flagged_str}",
+                    flush=True,
+                )
 
             except Exception as exc:
                 msg = f"Failed to screen {patient_id}: {exc}"
@@ -280,23 +325,36 @@ class ScreeningClient(fl.client.NumPyClient):
 
         summary = (
             f"[{self.site_id}] Done - {eligible_count}/{total} eligible "
-            f"({eligible_count / total * 100:.0f}%)"
+            f"({eligible_count / total * 100:.0f}%) | "
+            f"Confidence: H={high_conf} M={medium_conf} L={low_conf} | "
+            f"Corrected: {corrected_count} | Flagged: {flagged_count}"
         )
         logger.info(summary)
         print(summary, flush=True)
 
-        # Build aggregate result
+        # Build aggregate result with audit metadata
         result = SiteScreeningResult(
             site_id=self.site_id,
             total_patients=total,
             eligible_patients=eligible_count,
             errors=self._errors,
+            patient_audit_details=patient_audit_details,
+            high_confidence_count=high_conf,
+            medium_confidence_count=medium_conf,
+            low_confidence_count=low_conf,
+            corrected_count=corrected_count,
+            flagged_for_review_count=flagged_count,
         )
 
         metrics = {
             "site_id": self.site_id,
             "total_patients": total,
             "eligible_patients": eligible_count,
+            "high_confidence": high_conf,
+            "medium_confidence": medium_conf,
+            "low_confidence": low_conf,
+            "corrected": corrected_count,
+            "flagged_for_review": flagged_count,
         }
 
         return result_to_ndarrays(result), total, metrics

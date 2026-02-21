@@ -20,6 +20,14 @@ class QueryRequest(BaseModel):
         min_length=1,
         examples=["What is the average survival rate of patients with the age of 60 and above?"],
     )
+    session_id: Optional[str] = Field(
+        default=None,
+        description=(
+            "Conversation session ID for multi-turn context.  "
+            "Omit or pass null for the first message — the response "
+            "will include a session_id for follow-ups."
+        ),
+    )
 
 
 class ClassificationResult(BaseModel):
@@ -36,4 +44,16 @@ class QueryResponse(BaseModel):
     query: str = Field(..., description="Original user query.")
     response: str = Field(
         ..., description="Formatted natural-language answer."
+    )
+    session_id: Optional[str] = Field(
+        default=None,
+        description="Session ID for follow-up queries in the same conversation.",
+    )
+    tools_used: list[str] = Field(
+        default_factory=list,
+        description="Tools the agent called during this query.",
+    )
+    steps: int = Field(
+        default=1,
+        description="Number of reasoning steps the agent took.",
     )

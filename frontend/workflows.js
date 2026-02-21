@@ -236,7 +236,7 @@
           `;
         }
 
-        // Stage action bar (Mark Complete / View Results / Rerun) — not for locked stages
+        // Stage action bar (Mark Complete / View Results / Rerun / AI Analyze) — not for locked stages
         if (!isFutureStage && (hasResults || canRerun || canMarkComplete)) {
           html += '<div class="stage-actions-bar">';
           if (canMarkComplete) {
@@ -251,11 +251,51 @@
               View Results
             </button>`;
           }
+          // AI Analyze button — only for completed stages
+          if (rawStatus === 'completed') {
+            html += `<button id="analyze-btn-${s}" class="btn btn-text btn-xs stage-analyze-btn" onclick="event.stopPropagation(); analyzeStage('${wf.id}', '${s}')" title="Get AI recommendation for this stage" style="color:var(--blue);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              AI Analyze
+            </button>`;
+          }
           if (canRerun) {
             html += `<button class="btn btn-text btn-xs stage-rerun-btn" onclick="event.stopPropagation(); rerunStage('${wf.id}', '${s}')" title="Re-run this stage">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
               Re-run
             </button>`;
+          }
+          html += '</div>';
+        }
+
+        // AI Recommendation panel (if previously analysed)
+        const recKey = `${s}_recommendation`;
+        const stageRec = wf.metadata?.[recKey];
+        if (stageRec) {
+          const recColor = stageRec.recommendation === 'proceed' ? 'var(--green)'
+            : stageRec.recommendation === 'adjust' ? 'var(--yellow)'
+            : stageRec.recommendation === 'alert' ? 'var(--red)'
+            : 'var(--blue)';
+          const qualPct = (stageRec.quality_score * 100).toFixed(0);
+          html += `<div class="ai-recommendation-panel" style="margin-top:8px; padding:10px 12px; border-radius:8px; background:var(--bg-2); border-left:3px solid ${recColor}; font-size:0.82rem;">`;
+          html += `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-weight:600; color:${recColor}; text-transform:uppercase; font-size:0.75rem; letter-spacing:0.05em;">
+              AI: ${escapeHtml(stageRec.recommendation)}
+            </span>
+            <span style="color:var(--text-3); font-size:0.72rem;">Quality: ${qualPct}%</span>
+          </div>`;
+          if (stageRec.stage_summary) {
+            html += `<div style="color:var(--text-2); margin-bottom:4px;">${escapeHtml(stageRec.stage_summary)}</div>`;
+          }
+          if (stageRec.anomalies?.length) {
+            html += '<div style="color:var(--yellow); font-size:0.75rem; margin-top:4px;">';
+            stageRec.anomalies.forEach(a => { html += `<div>⚠ ${escapeHtml(a)}</div>`; });
+            html += '</div>';
+          }
+          if (stageRec.focus_areas?.length) {
+            html += '<div style="font-size:0.75rem; color:var(--text-3); margin-top:4px;">';
+            html += '<strong style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.05em;">Focus Areas:</strong>';
+            stageRec.focus_areas.forEach(f => { html += `<div>• ${escapeHtml(f)}</div>`; });
+            html += '</div>';
           }
           html += '</div>';
         }
@@ -291,6 +331,13 @@
         const isLastStage = currentStageIdx === STAGES.length - 1;
         const advanceLabel = isLastStage ? 'Complete Workflow' : 'Advance Stage';
         actions.innerHTML += `<button class="btn btn-${isLastStage ? 'primary' : 'secondary'} btn-sm" onclick="workflowAction('${wf.id}', 'advance')">${advanceLabel}</button>`;
+        // AI Analyze & Auto-Advance button
+        if (!isLastStage) {
+          actions.innerHTML += `<button class="btn btn-primary btn-sm" onclick="analyzeAndAdvance('${wf.id}', '${wf.current_stage}')" title="Let AI analyze this stage and auto-advance if approved" style="display:inline-flex;align-items:center;gap:4px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            AI Analyze & Advance
+          </button>`;
+        }
       }
       if (canPause) {
         actions.innerHTML += `<button class="btn btn-secondary btn-sm" onclick="workflowAction('${wf.id}', 'pause')">Pause</button>`;
@@ -373,6 +420,77 @@
       const wf = data.workflow;
       const pageUrl = stagePageUrl(STAGE_PAGES[stage], wf.id, wf.trial_name, wf.name);
       window.location.href = pageUrl;
+    } catch (err) {
+      showToast(err.message, 'error');
+    }
+  };
+
+  /* ── AI Analyze a completed stage ── */
+  window.analyzeStage = async function (workflowId, stage) {
+    showToast('Running AI analysis…', 'info');
+
+    // Find the specific button for this stage by unique ID
+    const btn = document.getElementById(`analyze-btn-${stage}`);
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '<div class="spinner" style="width:14px;height:14px;"></div> Analysing…';
+    }
+
+    try {
+      const data = await api.post(`/api/workflow/${workflowId}/analyze/${stage}?auto_advance=false`);
+      const rec = data.recommendation;
+
+      // Build a readable toast message
+      const recLabel = rec.recommendation.toUpperCase();
+      const qualPct = (rec.quality_score * 100).toFixed(0);
+      let msg = `AI: ${recLabel} (quality ${qualPct}%)`;
+      if (rec.stage_summary) msg += ` — ${rec.stage_summary}`;
+
+      const toastType = rec.recommendation === 'proceed' ? 'success'
+        : rec.recommendation === 'alert' ? 'error'
+        : 'info';
+      showToast(msg, toastType);
+
+      if (data.auto_advanced) {
+        showToast('Workflow auto-advanced to next stage.', 'success');
+      }
+
+      // Refresh the modal to show the recommendation panel
+      await openWorkflowDetail(workflowId);
+      loadWorkflows();
+    } catch (err) {
+      showToast(err.message, 'error');
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          AI Analyze`;
+      }
+    }
+  };
+
+  /* ── AI Analyze and auto-advance ── */
+  window.analyzeAndAdvance = async function (workflowId, stage) {
+    if (!confirm('Let the AI analyse this stage and automatically advance if the recommendation is PROCEED?')) return;
+    showToast('Running AI analysis with auto-advance…', 'info');
+    try {
+      const data = await api.post(`/api/workflow/${workflowId}/analyze/${stage}?auto_advance=true`);
+      const rec = data.recommendation;
+      const recLabel = rec.recommendation.toUpperCase();
+      const qualPct = (rec.quality_score * 100).toFixed(0);
+
+      if (data.auto_advanced) {
+        showToast(`AI: ${recLabel} (quality ${qualPct}%) — Workflow auto-advanced!`, 'success');
+      } else {
+        let msg = `AI: ${recLabel} (quality ${qualPct}%)`;
+        if (rec.rationale) msg += ` — ${rec.rationale}`;
+        const toastType = rec.recommendation === 'alert' ? 'error' : 'info';
+        showToast(msg, toastType);
+      }
+
+      await openWorkflowDetail(workflowId);
+      loadWorkflows();
     } catch (err) {
       showToast(err.message, 'error');
     }

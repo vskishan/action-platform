@@ -228,7 +228,7 @@
       ? ((data.aggregate_eligible_patients / data.aggregate_total_patients) * 100).toFixed(1)
       : 0;
 
-    statsEl.innerHTML = `
+    let statsHtml = `
       <div class="result-stat-card accent-blue">
         <div class="stat-number">${data.site_results?.length || 0}</div>
         <div class="stat-label">Sites Queried</div>
@@ -246,6 +246,36 @@
         <div class="stat-label">Eligibility Rate</div>
       </div>
     `;
+
+    // Self-correcting screening audit stats (if available)
+    const hasCorrected = (data.aggregate_corrected_count || 0) > 0;
+    const hasFlagged   = (data.aggregate_flagged_for_review || 0) > 0;
+    const hasHighConf  = (data.aggregate_high_confidence || 0) > 0;
+    const hasLowConf   = (data.aggregate_low_confidence || 0) > 0;
+    const hasAuditData = hasCorrected || hasFlagged || hasHighConf || hasLowConf;
+
+    if (hasAuditData) {
+      statsHtml += `
+        <div class="result-stat-card accent-green">
+          <div class="stat-number">${data.aggregate_high_confidence || 0}</div>
+          <div class="stat-label">High Confidence</div>
+        </div>
+        <div class="result-stat-card accent-yellow">
+          <div class="stat-number">${data.aggregate_low_confidence || 0}</div>
+          <div class="stat-label">Low Confidence</div>
+        </div>
+        <div class="result-stat-card accent-blue">
+          <div class="stat-number">${data.aggregate_corrected_count || 0}</div>
+          <div class="stat-label">Self-corrected</div>
+        </div>
+        <div class="result-stat-card accent-red">
+          <div class="stat-number">${data.aggregate_flagged_for_review || 0}</div>
+          <div class="stat-label">Flagged for Review</div>
+        </div>
+      `;
+    }
+
+    statsEl.innerHTML = statsHtml;
 
     // Per-site cards
     const colors = ['blue', 'green', 'red', 'yellow'];
@@ -271,6 +301,68 @@
           <span class="site-metric-value">${siteEligRate}%</span>
         </div>
       `;
+
+      // Self-correcting screening audit metrics for this site
+      const siteHasAudit = (site.high_confidence_count || 0) + (site.medium_confidence_count || 0) + (site.low_confidence_count || 0) > 0;
+      if (siteHasAudit) {
+        metricsHtml += '<div style="margin-top:12px;"><strong style="font-size:0.78rem;color:var(--text-2);text-transform:uppercase;letter-spacing:0.08em;">Audit & Confidence</strong></div>';
+        metricsHtml += `
+          <div class="site-metric-row">
+            <span class="site-metric-label">High Confidence</span>
+            <span class="site-metric-value" style="color:var(--green);">${site.high_confidence_count || 0}</span>
+          </div>
+          <div class="site-metric-row">
+            <span class="site-metric-label">Medium Confidence</span>
+            <span class="site-metric-value">${site.medium_confidence_count || 0}</span>
+          </div>
+          <div class="site-metric-row">
+            <span class="site-metric-label">Low Confidence</span>
+            <span class="site-metric-value" style="color:var(--yellow);">${site.low_confidence_count || 0}</span>
+          </div>
+          <div class="site-metric-row">
+            <span class="site-metric-label">Self-corrected</span>
+            <span class="site-metric-value" style="color:var(--blue);">${site.corrected_count || 0}</span>
+          </div>
+          <div class="site-metric-row">
+            <span class="site-metric-label">Flagged for Review</span>
+            <span class="site-metric-value" style="color:var(--red);">${site.flagged_for_review_count || 0}</span>
+          </div>
+        `;
+      }
+
+      // Per-patient audit details (collapsible)
+      if (site.patient_audit_details?.length) {
+        metricsHtml += `<div style="margin-top:12px;">
+          <button class="btn btn-text btn-xs" onclick="togglePatientAudit(this, 'audit-${i}')" style="padding:0;font-size:0.78rem;color:var(--text-2);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            Patient Audit Details (${site.patient_audit_details.length})
+          </button>
+        </div>
+        <div id="audit-${i}" style="display:none; margin-top:8px;">`;
+
+        site.patient_audit_details.forEach(pd => {
+          const confColor = pd.confidence === 'high' ? 'var(--green)' : pd.confidence === 'low' ? 'var(--yellow)' : 'var(--text-2)';
+          const correctedTag = pd.was_corrected ? ' <span style="color:var(--blue);font-weight:600;font-size:0.72rem;">CORRECTED</span>' : '';
+          const flaggedTag = pd.flagged_for_review ? ' <span style="color:var(--red);font-weight:600;font-size:0.72rem;">FLAGGED</span>' : '';
+
+          metricsHtml += `
+            <div style="padding:6px 8px; border-radius:6px; background:var(--bg-2); margin-bottom:4px; font-size:0.8rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <strong>${escapeHtml(pd.patient_id)}</strong>
+                <span style="color:${confColor}; font-weight:600; font-size:0.72rem; text-transform:uppercase;">${pd.confidence}</span>
+              </div>
+              <div style="color:var(--text-3); font-size:0.75rem; margin-top:2px;">
+                ${escapeHtml(pd.final_decision)}: ${escapeHtml(pd.final_reason)}
+                ${pd.screening_passes > 1 ? `<span style="color:var(--text-3);"> (${pd.screening_passes} passes)</span>` : ''}
+                ${correctedTag}${flaggedTag}
+              </div>
+              ${pd.audit_issues?.length ? `<div style="color:var(--yellow); font-size:0.72rem; margin-top:2px;">Issues: ${pd.audit_issues.map(i => escapeHtml(i)).join(', ')}</div>` : ''}
+            </div>
+          `;
+        });
+
+        metricsHtml += '</div>';
+      }
 
       // Inclusion pass counts
       if (site.inclusion_pass_counts && Object.keys(site.inclusion_pass_counts).length) {
@@ -313,6 +405,18 @@
       showToast(data.message, 'info');
     }
   }
+
+  /* ── Toggle patient audit details ── */
+  window.togglePatientAudit = function (btn, panelId) {
+    const panel = document.getElementById(panelId);
+    if (!panel) return;
+    const isVisible = panel.style.display !== 'none';
+    panel.style.display = isVisible ? 'none' : '';
+    const svg = btn.querySelector('svg');
+    if (svg) {
+      svg.style.transform = isVisible ? '' : 'rotate(180deg)';
+    }
+  };
 
   /* ══════════════════════════════════════════════════════
      Init — load conversation & check for pending jobs

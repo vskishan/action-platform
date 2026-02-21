@@ -227,3 +227,69 @@ class WorkflowActionResponse(BaseModel):
     status: WorkflowStatus
     current_stage: Optional[WorkflowStage] = None
     message: str = ""
+
+
+# ── Autonomous Workflow Orchestration models ─────────────────────────────
+
+class RecommendationAction(str, Enum):
+    """Action the orchestration agent recommends for the workflow."""
+
+    PROCEED = "proceed"   # Advance to the next stage
+    ADJUST  = "adjust"    # Tweak criteria / parameters before continuing
+    REVIEW  = "review"    # Requires human review
+    ALERT   = "alert"     # Serious anomaly detected
+
+
+class WorkflowRecommendation(BaseModel):
+    """AI-generated recommendation after analysing a completed stage."""
+
+    workflow_id: str = Field(
+        ..., description="Workflow this recommendation pertains to."
+    )
+    completed_stage: WorkflowStage = Field(
+        ..., description="The stage that just completed."
+    )
+    next_stage: Optional[WorkflowStage] = Field(
+        None, description="The next stage if the workflow continues."
+    )
+    quality_score: float = Field(
+        ...,
+        ge=0.0,
+        le=1.0,
+        description="Overall quality score (0.0 = unusable, 1.0 = excellent).",
+    )
+    recommendation: RecommendationAction = Field(
+        ..., description="Recommended action."
+    )
+    rationale: str = Field(
+        "", description="2-4 sentence explanation of the recommendation."
+    )
+    anomalies: list[str] = Field(
+        default_factory=list,
+        description="Detected anomalies in the stage results.",
+    )
+    focus_areas: list[str] = Field(
+        default_factory=list,
+        description="Suggested focus areas for the next stage.",
+    )
+    suggested_adjustments: dict[str, Any] = Field(
+        default_factory=dict,
+        description="Specific parameter adjustments (for ADJUST recommendation).",
+    )
+    stage_summary: str = Field(
+        "", description="1-2 sentence plain-language summary of what happened."
+    )
+
+
+class WorkflowRecommendationResponse(BaseModel):
+    """API response wrapping a workflow recommendation."""
+
+    workflow_id: str
+    recommendation: WorkflowRecommendation
+    auto_advanced: bool = Field(
+        False,
+        description=(
+            "If True the orchestrator auto-advanced the workflow to the "
+            "next stage because the recommendation was PROCEED."
+        ),
+    )

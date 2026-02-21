@@ -1,7 +1,13 @@
 """
 Routes corresponding to AI Control Arm
 
-Handles requests related to queries related to control arm cohort formation
+Handles requests related to queries related to control arm cohort formation.
+
+Uses the **ReAct Agent** — an agentic AI orchestrator that autonomously:
+1. Reasons about what data is needed.
+2. Selects and calls tools (survival engine, analytics engine, etc.).
+3. Iterates until it has enough information.
+4. Maintains conversation memory across turns via session_id.
 """
 
 from __future__ import annotations
@@ -16,35 +22,43 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/cohort", tags=["query"])
 
-# The agent is initialised lazily on first request (see _get_agent).
-_agent = None
+# The ReAct agent is initialised lazily on first request.
+_react_agent = None
 
 
-def _get_agent():
-    """Lazy-initialise the Agent singleton."""
-    global _agent
-    if _agent is None:
-        from backend.app.llm.agent import Agent
-        _agent = Agent()
-    return _agent
+def _get_react_agent():
+    """Lazy-initialise the ReactAgent singleton."""
+    global _react_agent
+    if _react_agent is None:
+        from backend.app.llm.react_agent import ReactAgent
+        _react_agent = ReactAgent()
+    return _react_agent
 
 
 @router.post("/query", response_model=QueryResponse)
 def query(request: QueryRequest) -> QueryResponse:
-    """Handle a natural-language query from the frontend.
+    """Handle a natural-language query using the ReAct agent.
 
-    The pipeline is:
-    1. LLM classifies the query → engine + intent + parameters
-    2. Route to the appropriate engine
-    3. LLM formats the raw result into a human-readable answer
+    The agentic pipeline:
+    1. Agent reasons about the query (Thought).
+    2. Agent autonomously selects and calls tools (Action).
+    3. Agent observes tool results and decides next step (Observation).
+    4. Repeats until it has enough data, then produces a final Answer.
+    5. Conversation memory allows multi-turn follow-ups via session_id.
     """
     try:
-        agent = _get_agent()
-        result = agent.handle(request.query)
+        agent = _get_react_agent()
+        result = agent.handle(
+            user_query=request.query,
+            session_id=request.session_id,
+        )
 
         return QueryResponse(
             query=result["query"],
             response=result["response"],
+            session_id=result.get("session_id"),
+            tools_used=result.get("tools_used", []),
+            steps=result.get("steps", 1),
         )
 
     except Exception as exc:

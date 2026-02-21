@@ -1676,6 +1676,21 @@ a.stage-link:hover .stage-name {
   background: rgba(245, 158, 11, 0.12) !important;
 }
 
+/* AI Analyze button in stage action bar */
+.stage-analyze-btn {
+  color: var(--blue) !important;
+}
+.stage-analyze-btn:hover {
+  background: var(--blue-dim) !important;
+}
+
+/* AI Recommendation panel within stage card */
+.ai-recommendation-panel {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  transition: all 0.2s var(--ease);
+}
+
 /* Collapsible results panel */
 .stage-results-panel {
   border-top: 1px solid var(--border);

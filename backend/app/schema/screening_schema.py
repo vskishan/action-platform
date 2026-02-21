@@ -83,6 +83,43 @@ class ScreeningCriteria(BaseModel):
         description="Optional free-text description of eligibility criteria (MedGemma will interpret this directly).",
     )
 
+
+# ── Per-patient screening detail (self-correcting screening) ─────────────
+
+class PatientAuditDetail(BaseModel):
+    """Audit trail for a single patient's screening decision."""
+
+    patient_id: str = Field(..., description="The patient identifier.")
+    initial_decision: str = Field(
+        ..., description="First-pass decision: ELIGIBLE or INELIGIBLE."
+    )
+    initial_reason: str = Field(
+        ..., description="First-pass reasoning."
+    )
+    final_decision: str = Field(
+        ..., description="Final decision after audit and possible reflection."
+    )
+    final_reason: str = Field(
+        ..., description="Final reasoning."
+    )
+    confidence: str = Field(
+        "medium", description="Confidence level: high, medium, or low."
+    )
+    was_corrected: bool = Field(
+        False, description="Whether the auditor caused the decision to change."
+    )
+    screening_passes: int = Field(
+        1, description="Number of screening passes (1=single, 2=re-screened)."
+    )
+    flagged_for_review: bool = Field(
+        False, description="Whether this patient was flagged for human review."
+    )
+    audit_issues: list[str] = Field(
+        default_factory=list,
+        description="Issues identified by the auditor.",
+    )
+
+
 # Aggregate counts a single site reports back (no patient-level data)
 class SiteScreeningResult(BaseModel):
     """Aggregate counts a single site reports back (no patient-level data)."""
@@ -106,6 +143,27 @@ class SiteScreeningResult(BaseModel):
         default_factory=list,
         description="Non-fatal issues encountered during screening.",
     )
+    # ── Self-correcting screening fields ─────────────────────────────
+    patient_audit_details: list[PatientAuditDetail] = Field(
+        default_factory=list,
+        description="Per-patient audit trail (no PHI, just decisions).",
+    )
+    high_confidence_count: int = Field(
+        0, description="Patients screened with HIGH confidence."
+    )
+    medium_confidence_count: int = Field(
+        0, description="Patients screened with MEDIUM confidence."
+    )
+    low_confidence_count: int = Field(
+        0, description="Patients screened with LOW confidence."
+    )
+    corrected_count: int = Field(
+        0, description="Patients whose decision was changed by the auditor."
+    )
+    flagged_for_review_count: int = Field(
+        0, description="Patients flagged for human review."
+    )
+
 
 # Combined response returned by the API after all sites report
 class FederatedScreeningResponse(BaseModel):
@@ -120,3 +178,18 @@ class FederatedScreeningResponse(BaseModel):
         "completed", description="Overall status: 'completed' | 'partial' | 'error'."
     )
     message: str = ""
+    # ── Aggregate audit metrics ──────────────────────────────────────
+    aggregate_corrected_count: int = Field(
+        0,
+        description="Total patients whose decision was corrected by the auditor.",
+    )
+    aggregate_flagged_for_review: int = Field(
+        0,
+        description="Total patients flagged for human review.",
+    )
+    aggregate_high_confidence: int = Field(
+        0, description="Total patients with HIGH confidence decisions."
+    )
+    aggregate_low_confidence: int = Field(
+        0, description="Total patients with LOW confidence decisions."
+    )

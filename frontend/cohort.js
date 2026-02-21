@@ -11,6 +11,9 @@
   // In-memory conversation history for persistence
   let conversationHistory = [];
 
+  // Session ID for multi-turn agentic conversation (ReAct agent memory)
+  let agentSessionId = null;
+
   /* ── Save conversation to backend ── */
   async function saveConversation() {
     if (!wfCtx.workflowId) return;
@@ -82,12 +85,19 @@
       await submitJob({
         workflowId: wfCtx.workflowId,
         stage: 'cohort_formation',
-        payload: { query: queryText },
+        payload: { query: queryText, session_id: agentSessionId },
         description: 'Running cohort analytics query…',
         onComplete: (result) => {
           removeTypingIndicator(typingId);
+          // Track session_id for multi-turn conversations
+          if (result.session_id) agentSessionId = result.session_id;
           const responseText = result.response || JSON.stringify(result);
           addBubble(responseText, 'ai', false);
+          // Show agentic info (tools used, steps)
+          if (result.tools_used && result.tools_used.length > 0) {
+            const agentInfo = `🔧 Agent used ${result.steps || 1} step(s) and called: ${result.tools_used.join(', ')}`;
+            addAgentInfoBubble(agentInfo);
+          }
           // Replace pending entry with actual result
           const pendingIdx = conversationHistory.findIndex(m => m.role === 'pending');
           if (pendingIdx >= 0) conversationHistory.splice(pendingIdx, 1);
@@ -145,6 +155,15 @@
     conversationEl.appendChild(el);
     el.scrollIntoView({ behavior: 'smooth', block: 'end' });
     return id;
+  }
+
+  function addAgentInfoBubble(text) {
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble agent-info';
+    bubble.textContent = text;
+    bubble.style.cssText = 'font-size:0.8em;opacity:0.7;font-style:italic;padding:4px 12px;';
+    conversationEl.appendChild(bubble);
+    bubble.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }
 
   function removeTypingIndicator(id) {
