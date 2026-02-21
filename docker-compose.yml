@@ -45,16 +45,16 @@ services:
     image: ollama/ollama:latest
     container_name: action-platform-model-puller
     environment:
-      - OLLAMA_HOST=http://ollama:11434
+      - OLLAMA_HOST=http://action-platform-ollama:11434
     entrypoint: ["/bin/sh", "-c"]
     command:
       - |
         echo "Waiting for Ollama to be ready..."
-        until curl -sf http://ollama:11434/api/tags > /dev/null 2>&1; do
+        until curl -sf http://action-platform-ollama:11434/api/tags > /dev/null 2>&1; do
           sleep 2
         done
         echo "Ollama is ready. Checking for MedGemma model..."
-        if curl -sf http://ollama:11434/api/tags | grep -q "alibayram/medgemma"; then
+        if curl -sf http://action-platform-ollama:11434/api/tags | grep -q "alibayram/medgemma"; then
           echo "MedGemma already available. Skipping download."
         else
           echo "Pulling MedGemma model (~2.5 GB). This may take a few minutes..."
@@ -75,7 +75,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - OLLAMA_HOST=http://ollama:11434
+      - OLLAMA_HOST=http://action-platform-ollama:11434
     depends_on:
       ollama:
         condition: service_healthy
