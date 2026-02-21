@@ -23,9 +23,7 @@ from backend.app.engine.workflow_store import WorkflowStore
 from backend.app.engine.workflow_engine import WorkflowEngine
 
 
-# ---------------------------------------------------------------------------
 # Fixtures
-# ---------------------------------------------------------------------------
 
 @pytest.fixture(autouse=True)
 def _clean_store():
@@ -64,9 +62,7 @@ def _complete_workflow(engine: WorkflowEngine, wf_id: str) -> None:
         engine.advance_workflow(wf_id)
 
 
-# ---------------------------------------------------------------------------
 # Store tests
-# ---------------------------------------------------------------------------
 
 class TestWorkflowStore:
     def test_save_and_get(self, engine: WorkflowEngine, store: WorkflowStore):
@@ -120,9 +116,7 @@ class TestWorkflowStore:
             assert stages[s].status == StageStatus.NOT_STARTED
 
 
-# ---------------------------------------------------------------------------
 # Engine lifecycle tests (no execution — state management only)
-# ---------------------------------------------------------------------------
 
 class TestWorkflowEngine:
     def test_create_workflow(self, engine: WorkflowEngine):
@@ -312,9 +306,7 @@ class TestWorkflowEngine:
         assert wf.status == WorkflowStatus.PAUSED
 
 
-# ---------------------------------------------------------------------------
 # Route tests (using FastAPI TestClient)
-# ---------------------------------------------------------------------------
 
 class TestWorkflowRoutes:
     @pytest.fixture(autouse=True)

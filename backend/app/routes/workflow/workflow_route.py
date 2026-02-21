@@ -55,7 +55,7 @@ _engine = WorkflowEngine()
 _store = WorkflowStore()
 
 
-# ── CRUD ──────────────────────────────────────────────────────────
+# CRUD
 
 @router.post("", response_model=WorkflowDetailResponse, status_code=201)
 def create_workflow(request: WorkflowCreateRequest) -> WorkflowDetailResponse:
@@ -99,7 +99,7 @@ def delete_workflow(workflow_id: str) -> None:
         raise HTTPException(status_code=404, detail=f"Workflow '{workflow_id}' not found.")
 
 
-# ── Lifecycle controls (state transitions only) ───────────────────
+# Lifecycle controls (state transitions only)
 
 @router.post("/{workflow_id}/start", response_model=WorkflowActionResponse)
 def start_workflow(workflow_id: str) -> WorkflowActionResponse:
@@ -194,7 +194,7 @@ def pause_workflow(workflow_id: str) -> WorkflowActionResponse:
         raise HTTPException(status_code=500, detail=str(exc))
 
 
-# ── Per-stage status updates & inspection ─────────────────────────
+# Per-stage status updates & inspection
 
 @router.put(
     "/{workflow_id}/stage/{stage}",
@@ -258,7 +258,7 @@ def get_stage_result(
     return WorkflowStageResponse(workflow_id=workflow.id, stage=stage_result)
 
 
-# ── Per-stage conversation persistence ────────────────────────────
+# Per-stage conversation persistence
 
 @router.get("/{workflow_id}/stage/{stage}/conversation")
 def get_stage_conversation(
@@ -292,7 +292,7 @@ def save_stage_conversation(
     }
 
 
-# ── Autonomous Workflow Orchestration ─────────────────────────────
+# Autonomous Workflow Orchestration
 
 @router.post(
     "/{workflow_id}/analyze/{stage}",

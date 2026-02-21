@@ -31,9 +31,10 @@ router = APIRouter(prefix="/api/jobs", tags=["jobs"])
 _store = JobStore()
 
 
-# ── Request / response schemas ────────────────────────────
+# Request / response schemas
 
 class JobSubmitRequest(BaseModel):
+    """Payload to submit a new background job."""
     workflow_id: str
     stage: str  # patient_screening | cohort_formation | cohort_monitoring
     payload: dict[str, Any] = Field(default_factory=dict)
@@ -41,6 +42,7 @@ class JobSubmitRequest(BaseModel):
 
 
 class JobResponse(BaseModel):
+    """Standard response format for job polling and creation."""
     job_id: str
     status: str
     created_at: Optional[str] = None
@@ -64,7 +66,7 @@ def _job_to_response(job) -> JobResponse:
     )
 
 
-# ── Worker functions for each stage ──────────────────────
+# Worker functions for each stage
 
 def _screening_worker(payload: dict[str, Any]) -> dict[str, Any]:
     """Run federated screening synchronously."""
@@ -109,7 +111,7 @@ _STAGE_WORKERS = {
 }
 
 
-# ── Endpoints ─────────────────────────────────────────────
+# Endpoints
 
 @router.post("/submit", response_model=JobResponse, status_code=202)
 def submit_job(request: JobSubmitRequest) -> JobResponse:

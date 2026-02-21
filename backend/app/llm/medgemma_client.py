@@ -1,14 +1,14 @@
 """
 MedGemma Client
 
-
 A centralised wrapper around the Ollama API for the MedGemma model.
 
 This gives us a single place to:
 
 * Configure the model name and default parameters.
 * Validate that Ollama is reachable and the model is pulled.
-* Swap out the backend later (e.g. HuggingFace, vLLM) without touching every consumer.
+* Swap out the backend later (e.g. HuggingFace, vLLM) without
+  touching every consumer.
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ import ollama
 
 logger = logging.getLogger(__name__)
 
-# ── Defaults ──────────────────────────────────────────────────────────────
+# Defaults
 DEFAULT_MODEL = "alibayram/medgemma"
 
 
@@ -53,7 +53,7 @@ class MedGemmaClient:
         self.model = model or DEFAULT_MODEL
         self.default_temperature = default_temperature
 
-    # Factory / singleton 
+    # Factory / singleton
     @classmethod
     def get_instance(cls, **kwargs) -> "MedGemmaClient":
         """Return (and optionally create) the shared singleton."""

@@ -88,6 +88,7 @@ def collapse_age_group(age_group: str) -> str:
         return "60-69"
     return "70+"
 
+
 class SurvivalAnalysisEngine:
     """Cox Proportional-Hazards survival analysis engine.
 

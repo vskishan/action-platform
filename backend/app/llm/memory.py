@@ -15,6 +15,7 @@ Features
 
 from __future__ import annotations
 
+import json
 import logging
 import threading
 import uuid
@@ -24,7 +25,7 @@ from typing import Any, Literal
 
 logger = logging.getLogger(__name__)
 
-# ── Message types ─────────────────────────────────────────────────────────
+# Message types
 
 MessageRole = Literal["user", "assistant", "tool_call", "tool_result", "system"]
 
@@ -49,7 +50,7 @@ class Conversation:
     updated_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 
-# ── Memory store ──────────────────────────────────────────────────────────
+# Memory store
 
 class ConversationMemory:
     """In-memory conversation store with session management.
@@ -86,11 +87,12 @@ class ConversationMemory:
 
     @classmethod
     def get_instance(cls, **kwargs) -> "ConversationMemory":
+        """Return (and optionally create) the shared singleton."""
         if cls._instance is None:
             cls._instance = cls(**kwargs)
         return cls._instance
 
-    # ── Session lifecycle ─────────────────────────────────────────────
+    # Session lifecycle
 
     def create_session(self) -> str:
         """Create a new conversation session and return its ID."""
@@ -112,13 +114,15 @@ class ConversationMemory:
         return self.create_session()
 
     def session_exists(self, session_id: str) -> bool:
+        """Return ``True`` if the session exists."""
         return session_id in self._sessions
 
     def delete_session(self, session_id: str) -> None:
+        """Remove a session and all its messages."""
         with self._lock:
             self._sessions.pop(session_id, None)
 
-    # ── Message management ────────────────────────────────────────────
+    # Message management
 
     def add_message(self, session_id: str, message: Message) -> None:
         """Append a message to the session, trimming if needed."""
@@ -170,7 +174,6 @@ class ConversationMemory:
     ) -> None:
         """Record the result of a tool invocation."""
         # Truncate very long results to keep context reasonable.
-        import json
         result_str = json.dumps(result, indent=2, default=str)
         if len(result_str) > 3000:
             result_str = result_str[:3000] + "\n... (truncated)"
@@ -184,7 +187,7 @@ class ConversationMemory:
             ),
         )
 
-    # ── Context retrieval ─────────────────────────────────────────────
+    # Context retrieval
 
     def get_messages(self, session_id: str) -> list[Message]:
         """Return the raw message list for a session."""
@@ -254,7 +257,7 @@ class ConversationMemory:
 
         return result
 
-    # ── Internal helpers ──────────────────────────────────────────────
+    # Internal helpers
 
     def _trim(self, conv: Conversation) -> None:
         """Remove oldest non-system messages to stay within limits."""

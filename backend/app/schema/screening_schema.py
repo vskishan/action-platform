@@ -24,6 +24,7 @@ class CriterionCategory(str, Enum):
 
 # Comparison operators for numeric criteria
 class Operator(str, Enum):
+    """Operators for evaluating screening criteria."""
     EQ  = "eq"   # ==
     NEQ = "neq"  # !=
     GT  = "gt"   # >
@@ -84,7 +85,7 @@ class ScreeningCriteria(BaseModel):
     )
 
 
-# ── Per-patient screening detail (self-correcting screening) ─────────────
+# Per-patient screening detail (self-correcting screening)
 
 class PatientAuditDetail(BaseModel):
     """Audit trail for a single patient's screening decision."""
@@ -143,7 +144,7 @@ class SiteScreeningResult(BaseModel):
         default_factory=list,
         description="Non-fatal issues encountered during screening.",
     )
-    # ── Self-correcting screening fields ─────────────────────────────
+    # Self-correcting screening fields
     patient_audit_details: list[PatientAuditDetail] = Field(
         default_factory=list,
         description="Per-patient audit trail (no PHI, just decisions).",
@@ -178,7 +179,7 @@ class FederatedScreeningResponse(BaseModel):
         "completed", description="Overall status: 'completed' | 'partial' | 'error'."
     )
     message: str = ""
-    # ── Aggregate audit metrics ──────────────────────────────────────
+    # Aggregate audit metrics
     aggregate_corrected_count: int = Field(
         0,
         description="Total patients whose decision was corrected by the auditor.",

@@ -47,9 +47,7 @@ class WorkflowEngine:
     def __init__(self) -> None:
         self._store = WorkflowStore()
 
-    # ------------------------------------------------------------------
     # Workflow lifecycle
-    # ------------------------------------------------------------------
 
     def create_workflow(self, request: WorkflowCreateRequest) -> Workflow:
         """Create and persist a new workflow, auto-started at stage 1.
@@ -64,7 +62,7 @@ class WorkflowEngine:
             If another workflow is already in progress (RUNNING, PAUSED,
             or CREATED).  Only one active workflow is allowed at a time.
         """
-        # ── Guard: only one active workflow at a time ──
+        # Guard: only one active workflow at a time
         active = self._store.get_active_workflow()
         if active is not None:
             raise ValueError(
@@ -211,9 +209,7 @@ class WorkflowEngine:
         logger.info("Workflow %s paused at stage '%s'.", workflow_id, workflow.current_stage)
         return workflow
 
-    # ------------------------------------------------------------------
     # Stage status updates  (called by frontend after using dedicated APIs)
-    # ------------------------------------------------------------------
 
     def update_stage(
         self,
@@ -279,9 +275,7 @@ class WorkflowEngine:
         )
         return workflow
 
-    # ------------------------------------------------------------------
     # Helpers
-    # ------------------------------------------------------------------
 
     def _get_or_raise(self, workflow_id: str) -> Workflow:
         wf = self._store.get(workflow_id)

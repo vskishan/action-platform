@@ -28,7 +28,7 @@ from backend.app.schema.monitoring_schema import (
 )
 
 
-# ── Fixtures ──
+# Fixtures
 
 def _write_json(path: Path, data: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -76,7 +76,7 @@ def monitoring_site(tmp_path: Path) -> Path:
     return tmp_path
 
 
-# ── Serialisation tests ──
+# Serialisation tests
 
 class TestSerializationHelpers:
     """Test MonitoringQuery / SiteMonitoringResult NumPy round-trips."""
@@ -124,7 +124,7 @@ class TestSerializationHelpers:
         assert restored.total_patients_monitored == 30
 
 
-# ── Adverse-event handler tests ──
+# Adverse-event handler tests
 
 class TestAdverseEventsHandler:
     """Test MonitoringClient._compute_adverse_events."""
@@ -166,7 +166,7 @@ class TestAdverseEventsHandler:
         assert result["dose_modifications"]["dose_reduced"] == 1
 
 
-# ── Visit-progress handler tests ──
+# Visit-progress handler tests
 
 class TestVisitProgressHandler:
     """Test MonitoringClient._compute_visit_progress."""
@@ -203,7 +203,7 @@ class TestVisitProgressHandler:
         assert result["adherence_rate_pct"] == 0.0
 
 
-# ── Response-summary handler tests ──
+# Response-summary handler tests
 
 class TestResponseSummaryHandler:
     """Test MonitoringClient._compute_response_summary."""
@@ -229,7 +229,7 @@ class TestResponseSummaryHandler:
         assert result["disease_control_rate_pct"] == pytest.approx(66.67, abs=0.1)
 
 
-# ── Dropout-summary handler tests ──
+# Dropout-summary handler tests
 
 class TestDropoutSummaryHandler:
     """Test MonitoringClient._compute_dropout_summary."""
@@ -255,7 +255,7 @@ class TestDropoutSummaryHandler:
             assert isinstance(result["by_reason"], dict)
 
 
-# ── Lab-trends handler tests ──
+# Lab-trends handler tests
 
 class TestLabTrendsHandler:
     """Test MonitoringClient._compute_lab_trends."""
@@ -286,7 +286,7 @@ class TestLabTrendsHandler:
         assert result["lab_trends"] == {}
 
 
-# ── Overall-progress handler tests ──
+# Overall-progress handler tests
 
 class TestOverallProgressHandler:
     """Test MonitoringClient._compute_overall_progress."""
@@ -303,7 +303,7 @@ class TestOverallProgressHandler:
         assert "retention_rate_pct" in result
 
 
-# ── Data loading tests ──
+# Data loading tests
 
 class TestDataLoading:
     """Test MonitoringClient._load_monitoring_data."""
@@ -339,7 +339,7 @@ class TestDataLoading:
         assert len(data["adverse_events"]) == 0
 
 
-# ── Flower evaluate interface test ──
+# Flower evaluate interface test
 
 class TestEvaluateInterface:
     """Test the Flower evaluate() method end-to-end locally."""

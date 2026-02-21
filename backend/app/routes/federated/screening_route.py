@@ -1,7 +1,6 @@
 """
 Federated Screening API Routes
 
-
 Exposes an endpoint that triggers the federated patient-screening.
 """
 

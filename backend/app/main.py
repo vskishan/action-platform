@@ -1,8 +1,13 @@
 """
-ACTION Platform - Backend Layer
+ACTION Platform — Backend Entry Point
 
-Entry point for the backend server.
+FastAPI application that serves the ACTION platform backend.
 
+Responsibilities:
+    - Configures logging, CORS, and application lifespan.
+    - Registers all API routers (cohort, federated, workflow, jobs).
+    - Performs preflight checks (Ollama / MedGemma readiness).
+    - Optionally serves the frontend as static files.
 """
 
 from __future__ import annotations
@@ -30,7 +35,7 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-# Shared MedGemma client (singleton)
+# Shared singletons
 _medgemma = MedGemmaClient.get_instance()
 
 
@@ -38,18 +43,18 @@ _medgemma = MedGemmaClient.get_instance()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Run startup and shutdown logic for the FastAPI application."""
-    # --- Startup ---
+    # Startup
     logger.info("Starting ACTION Platform...")
     _medgemma.check_ready()
     logger.info("All preflight checks passed.")
 
     yield  # Application runs here.
 
-    # --- Shutdown ---
+    # Shutdown
     logger.info("Shutting down ACTION Platform.")
 
 
-# Application
+# Application factory
 app = FastAPI(
     title="ACTION Platform",
     description=(
@@ -59,6 +64,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# Middleware
 # Allow the frontend (served from file:// or localhost) to call the API.
 app.add_middleware(
     CORSMiddleware,
@@ -75,6 +81,7 @@ app.include_router(monitoring_router)
 app.include_router(workflow_router)
 app.include_router(job_router)
 
+
 # Health check
 @app.get("/health")
 async def health_check():
@@ -87,8 +94,11 @@ async def health_check():
         "model": _medgemma.model,
     }
 
+
+# Static frontend
 # Serve the frontend as static files (fallback, after all API routes).
 _frontend_dir = Path(__file__).resolve().parent.parent.parent / "frontend"
 if _frontend_dir.is_dir():
     app.mount("/", StaticFiles(directory=str(_frontend_dir), html=True), name="frontend")
     logger.info("Serving frontend from %s", _frontend_dir)
+

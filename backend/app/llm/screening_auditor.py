@@ -40,7 +40,7 @@ from backend.app.llm.prompts import (
 logger = logging.getLogger(__name__)
 
 
-# ── Data Models ───────────────────────────────────────────────────────────
+# Data Models
 
 class ConfidenceLevel(str, Enum):
     """Confidence in a screening decision."""
@@ -113,7 +113,7 @@ class PatientScreeningDecision(BaseModel):
     )
 
 
-# ── Screening Auditor Agent ──────────────────────────────────────────────
+# Screening Auditor Agent
 
 class ScreeningAuditorAgent:
     """Multi-agent screening with auditor-driven self-correction.
@@ -133,7 +133,7 @@ class ScreeningAuditorAgent:
     def __init__(self, model_name: str | None = None) -> None:
         self._client = MedGemmaClient.get_instance(model=model_name)
 
-    # ── Public API ────────────────────────────────────────────────────
+    # Public API
 
     def screen_and_audit(
         self,
@@ -161,7 +161,7 @@ class ScreeningAuditorAgent:
             Complete decision with confidence score and audit trail.
         """
 
-        # ── Pass 1: Initial Screening ────────────────────────────────
+        # Pass 1: Initial Screening
         initial_decision, initial_reason = self._screen_patient(
             fhir_bundle=fhir_bundle,
             criteria_text=criteria_text,
@@ -173,7 +173,7 @@ class ScreeningAuditorAgent:
             patient_id, initial_decision, initial_reason,
         )
 
-        # ── Pass 2: Audit ────────────────────────────────────────────
+        # Pass 2: Audit
         audit_result = self._audit_decision(
             patient_id=patient_id,
             fhir_bundle=fhir_bundle,
@@ -190,7 +190,7 @@ class ScreeningAuditorAgent:
             audit_result.issues,
         )
 
-        # ── Pass 3: Reflection (only if auditor disagrees) ───────────
+        # Pass 3: Reflection (only if auditor disagrees)
         final_decision = initial_decision
         final_reason = initial_reason
         was_corrected = False
@@ -217,7 +217,7 @@ class ScreeningAuditorAgent:
                 patient_id, final_decision, was_corrected,
             )
 
-        # ── Determine confidence & flag status ───────────────────────
+        # Determine confidence & flag status
         confidence = audit_result.confidence
 
         # Flag for human review if: low confidence, or the decision
@@ -243,7 +243,7 @@ class ScreeningAuditorAgent:
             flagged_for_review=flagged,
         )
 
-    # ── Private Methods ───────────────────────────────────────────────
+    # Private Methods
 
     def _screen_patient(
         self,
@@ -338,7 +338,7 @@ class ScreeningAuditorAgent:
 
         return self._parse_decision(response)
 
-    # ── Parsing Helpers ───────────────────────────────────────────────
+    # Parsing Helpers
 
     @staticmethod
     def _parse_decision(response: str) -> tuple[str, str]:

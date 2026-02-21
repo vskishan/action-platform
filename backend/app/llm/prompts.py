@@ -1,8 +1,16 @@
 """
 LLM Prompt Templates
 
-Centralised prompt strings used by the intent classifier and
-response formatter.
+Centralised prompt strings used throughout the LLM layer:
+
+- **Screening** — patient eligibility evaluation via MedGemma.
+- **Intent Classification** — user query → engine/intent routing.
+- **Response Formatting** — raw JSON → human-readable answer.
+- **Monitoring** — federated monitoring query classification & formatting.
+- **Clinical Note Extraction** — unstructured notes → structured data.
+- **ReAct Agent** — Thought → Action → Observation reasoning loop.
+- **Screening Auditor** — self-correcting screen → audit → reflect.
+- **Workflow Orchestration** — autonomous stage analysis & recommendation.
 """
 
 # MedGemma screening prompts
@@ -247,7 +255,7 @@ Return a JSON object with exactly this structure:
 """
 
 
-# ── ReAct Agent Prompts ──────────────────────────────────────────────────
+# ReAct Agent Prompts
 
 REACT_SYSTEM_PROMPT = """\
 You are an intelligent clinical-trial research agent powered by MedGemma.
@@ -327,7 +335,7 @@ call the appropriate tools.
 """
 
 
-# ── Self-correcting Screening Prompts ────────────────────────────────────
+# Self-correcting Screening Prompts
 
 SCREENING_AUDIT_SYSTEM_PROMPT = """\
 You are a clinical-trial eligibility AUDITOR.  Your role is to review
@@ -395,7 +403,7 @@ REASON: One concise sentence citing ONLY a specific criterion from the provided 
 """
 
 
-# ── Autonomous Workflow Orchestration Prompts ────────────────────────────
+# Autonomous Workflow Orchestration Prompts
 
 WORKFLOW_STAGE_ANALYSIS_PROMPT = """\
 You are an autonomous clinical-trial workflow coordinator powered by

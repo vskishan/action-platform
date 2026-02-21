@@ -21,7 +21,7 @@ from backend.app.llm.tools import ToolRegistry, build_tool_registry
 
 logger = logging.getLogger(__name__)
 
-# ── Constants ─────────────────────────────────────────────────────────────
+# Constants
 
 MAX_REACT_STEPS = 5          # Maximum tool calls per query
 REACT_TEMPERATURE = 0.1      # Low temperature for structured reasoning
@@ -60,7 +60,7 @@ class ReactAgent:
 
         logger.info("ReAct agent is ready with %d tools.", len(self._tools.names))
 
-    # ── Public API ────────────────────────────────────────────────────
+    # Public API
 
     def handle(
         self,
@@ -139,7 +139,7 @@ class ReactAgent:
             "steps": steps,
         }
 
-    # ── ReAct loop ────────────────────────────────────────────────────
+    # ReAct loop
 
     def _react_loop(
         self,
@@ -255,7 +255,7 @@ class ReactAgent:
         # Last resort — return the raw LLM text.
         return forced_response, tools_used, step
 
-    # ── Parsing helpers ───────────────────────────────────────────────
+    # Parsing helpers
 
     @staticmethod
     def _parse_action(text: str) -> dict[str, Any] | None:
@@ -341,7 +341,7 @@ class ReactAgent:
 
         return None
 
-    # ── Convenience ───────────────────────────────────────────────────
+    # Convenience
 
     @property
     def available_tools(self) -> list[str]:

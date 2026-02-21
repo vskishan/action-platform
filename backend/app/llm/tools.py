@@ -20,7 +20,7 @@ from typing import Any, Callable
 logger = logging.getLogger(__name__)
 
 
-# ── Tool definition ───────────────────────────────────────────────────────
+# Tool definition
 
 @dataclass
 class Tool:
@@ -46,7 +46,7 @@ class Tool:
     fn: Callable[..., dict[str, Any]] = field(default=lambda **kw: {})
 
 
-# ── Tool registry ─────────────────────────────────────────────────────────
+# Tool registry
 
 class ToolRegistry:
     """Container for all tools available to the agent.
@@ -67,6 +67,7 @@ class ToolRegistry:
         logger.debug("Registered tool: %s", tool.name)
 
     def get(self, name: str) -> Tool | None:
+        """Look up a tool by name."""
         return self._tools.get(name)
 
     def execute(self, name: str, parameters: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -95,6 +96,7 @@ class ToolRegistry:
 
     @property
     def names(self) -> list[str]:
+        """Return the names of all registered tools."""
         return list(self._tools.keys())
 
     def describe_for_llm(self) -> str:
@@ -119,7 +121,7 @@ class ToolRegistry:
         return "\n".join(lines)
 
 
-# ── Factory: build registry from engines ──────────────────────────────────
+# Factory: build registry from engines
 
 def build_tool_registry(
     survival_engine,
@@ -131,7 +133,7 @@ def build_tool_registry(
     """
     registry = ToolRegistry()
 
-    # ── Survival tools ────────────────────────────────────────────────
+    # Survival tools
 
     def _model_summary(**_kw) -> dict[str, Any]:
         model = survival_engine.fitted_model
@@ -244,7 +246,7 @@ def build_tool_registry(
         fn=_survival_prediction,
     ))
 
-    # ── Analytics tools ───────────────────────────────────────────────
+    # Analytics tools
 
     def _make_analytics_tool(intent: str):
         """Factory: wrap analytics_engine.query(intent, params)."""

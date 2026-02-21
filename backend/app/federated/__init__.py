@@ -1,7 +1,6 @@
 """
 Federated Learning Module (Flower-based)
 
-
 Simulates a federated patient-screening workflow using the
 `Flower <https://flower.ai>`_ framework:
 

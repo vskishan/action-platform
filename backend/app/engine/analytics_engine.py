@@ -30,6 +30,9 @@ logger = logging.getLogger(__name__)
 # Re-use shared constants from the survival engine.
 SUBJECT_KEY: list[str] = ["TRIAL", "TRIALS_D"]
 
+# CTCAE intensity codes → human-readable severity labels.
+_SEVERITY_MAP = {1: "mild", 2: "moderate", 3: "severe"}
+
 # Resolve data directory relative to this file.
 _DATA_DIR = Path(__file__).resolve().parent.parent.parent.parent / "data" / "control_arm"
 
@@ -106,9 +109,8 @@ class AnalyticsEngine(BaseEngine):
 
     @property
     def capabilities(self) -> list[str]:
+        """Return the list of intent strings this engine can handle."""
         return list(self._INTENTS)
-
-    # Analytics handlers
 
     def _progression_stats(self, params: dict[str, Any]) -> dict[str, Any]:
         """Disease-progression rates and timelines."""
@@ -269,7 +271,7 @@ class AnalyticsEngine(BaseEngine):
             "ae_rate_pct": round(100 * ae_subject_count / total_subjects, 2),
             "severity_distribution": (
                 ae_demo["INTEN"]
-                .map({1: "mild", 2: "moderate", 3: "severe"})
+                .map(_SEVERITY_MAP)
                 .value_counts()
                 .to_dict()
             ),
@@ -280,41 +282,12 @@ class AnalyticsEngine(BaseEngine):
         # Breakdown by age group
         by_age: dict[str, Any] = {}
         for age_grp, grp in ae_demo.groupby("AGEGRP"):
-            age_subjects = grp[SUBJECT_KEY].drop_duplicates()
             total_in_age = len(
                 self._demographics[self._demographics["AGEGRP"] == age_grp]
             )
-            severity_counts = (
-                grp["INTEN"]
-                .map({1: "mild", 2: "moderate", 3: "severe"})
-                .value_counts()
-                .to_dict()
+            by_age[str(age_grp)] = self._compute_group_metrics(
+                grp, total_in_age,
             )
-            top_aes = (
-                grp["KEYTEXT"]
-                .value_counts()
-                .head(5)
-                .to_dict()
-            )
-            by_age[str(age_grp)] = {
-                "total_subjects_in_group": int(total_in_age),
-                "subjects_with_ae": int(len(age_subjects)),
-                "ae_rate_pct": round(
-                    100 * len(age_subjects) / total_in_age, 2
-                ) if total_in_age > 0 else 0.0,
-                "total_ae_records": int(len(grp)),
-                "mean_ae_per_subject": round(
-                    len(grp) / len(age_subjects), 2
-                ) if len(age_subjects) > 0 else 0.0,
-                "severity_distribution": severity_counts,
-                "top_adverse_events": top_aes,
-                "hospitalisation_rate_pct": round(
-                    100 * (grp["HOSP"] == "Y").sum() / len(grp), 2
-                ) if len(grp) > 0 else 0.0,
-                "life_threatening_rate_pct": round(
-                    100 * (grp["LTHREAT"] == "Y").sum() / len(grp), 2
-                ) if len(grp) > 0 else 0.0,
-            }
 
         # Breakdown by race
         race_label_map = {
@@ -326,42 +299,13 @@ class AnalyticsEngine(BaseEngine):
         }
         by_race: dict[str, Any] = {}
         for race_code, grp in ae_demo.groupby("RACE"):
-            race_subjects = grp[SUBJECT_KEY].drop_duplicates()
             total_in_race = len(
                 self._demographics[self._demographics["RACE"] == race_code]
             )
-            severity_counts = (
-                grp["INTEN"]
-                .map({1: "mild", 2: "moderate", 3: "severe"})
-                .value_counts()
-                .to_dict()
-            )
-            top_aes = (
-                grp["KEYTEXT"]
-                .value_counts()
-                .head(5)
-                .to_dict()
-            )
             label = race_label_map.get(str(race_code), str(race_code))
-            by_race[label] = {
-                "total_subjects_in_group": int(total_in_race),
-                "subjects_with_ae": int(len(race_subjects)),
-                "ae_rate_pct": round(
-                    100 * len(race_subjects) / total_in_race, 2
-                ) if total_in_race > 0 else 0.0,
-                "total_ae_records": int(len(grp)),
-                "mean_ae_per_subject": round(
-                    len(grp) / len(race_subjects), 2
-                ) if len(race_subjects) > 0 else 0.0,
-                "severity_distribution": severity_counts,
-                "top_adverse_events": top_aes,
-                "hospitalisation_rate_pct": round(
-                    100 * (grp["HOSP"] == "Y").sum() / len(grp), 2
-                ) if len(grp) > 0 else 0.0,
-                "life_threatening_rate_pct": round(
-                    100 * (grp["LTHREAT"] == "Y").sum() / len(grp), 2
-                ) if len(grp) > 0 else 0.0,
-            }
+            by_race[label] = self._compute_group_metrics(
+                grp, total_in_race,
+            )
 
         # Median onset day by age group
         onset_by_age = (
@@ -390,9 +334,55 @@ class AnalyticsEngine(BaseEngine):
                 "Analytics data has not been loaded. Call run() first."
             )
 
+    # Reusable helpers
+
+    @staticmethod
+    def _compute_group_metrics(
+        grp: pd.DataFrame,
+        total_in_group: int,
+    ) -> dict[str, Any]:
+        """Compute AE metrics for a single demographic sub-group.
+
+        This is shared between the age-group and race breakdowns to
+        avoid duplicating the same rate / count calculations.
+        """
+        group_subjects = grp[SUBJECT_KEY].drop_duplicates()
+        n_subjects = len(group_subjects)
+        n_records = len(grp)
+
+        severity_counts = (
+            grp["INTEN"].map(_SEVERITY_MAP).value_counts().to_dict()
+        )
+        top_aes = grp["KEYTEXT"].value_counts().head(5).to_dict()
+
+        return {
+            "total_subjects_in_group": int(total_in_group),
+            "subjects_with_ae": int(n_subjects),
+            "ae_rate_pct": (
+                round(100 * n_subjects / total_in_group, 2)
+                if total_in_group > 0 else 0.0
+            ),
+            "total_ae_records": int(n_records),
+            "mean_ae_per_subject": (
+                round(n_records / n_subjects, 2) if n_subjects > 0 else 0.0
+            ),
+            "severity_distribution": severity_counts,
+            "top_adverse_events": top_aes,
+            "hospitalisation_rate_pct": (
+                round(100 * (grp["HOSP"] == "Y").sum() / n_records, 2)
+                if n_records > 0 else 0.0
+            ),
+            "life_threatening_rate_pct": (
+                round(100 * (grp["LTHREAT"] == "Y").sum() / n_records, 2)
+                if n_records > 0 else 0.0
+            ),
+        }
+
 
 # Standalone smoke test.
 if __name__ == "__main__":
+    import json
+
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
@@ -405,5 +395,4 @@ if __name__ == "__main__":
         print(f"\n{'=' * 60}")
         print(f"Intent: {intent}")
         print(f"{'=' * 60}")
-        import json
         print(json.dumps(result, indent=2, default=str))

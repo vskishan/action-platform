@@ -27,6 +27,8 @@ logger = logging.getLogger(__name__)
 
 
 class JobStatus(str, Enum):
+    """Execution status of a background job."""
+
     PENDING = "pending"
     RUNNING = "running"
     COMPLETED = "completed"
@@ -34,6 +36,7 @@ class JobStatus(str, Enum):
 
 
 class Job(BaseModel):
+    """Metadata and state for a single background job."""
     id: str
     workflow_id: str
     stage: str
@@ -61,7 +64,7 @@ class JobStore:
                 cls._instance._stage_jobs: dict[str, str] = {}  # "wf_id:stage" → job_id
             return cls._instance
 
-    # ── Create & run ──────────────────────────────────────
+    # Create & run
 
     def submit(
         self,
@@ -142,9 +145,10 @@ class JobStore:
             job.completed_at = datetime.now(timezone.utc)
             logger.exception("Job %s failed: %s", job_id, exc)
 
-    # ── Queries ───────────────────────────────────────────
+    # Queries
 
     def get(self, job_id: str) -> Optional[Job]:
+        """Retrieve a job by ID, or ``None`` if not found."""
         return self._jobs.get(job_id)
 
     def get_active_for_stage(self, workflow_id: str, stage: str) -> Optional[Job]:

@@ -30,7 +30,7 @@ from backend.app.schema.monitoring_schema import (
 )
 
 
-# ── Helpers ──
+# Helpers
 
 def _write_json(path: Path, data: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -113,7 +113,7 @@ def _make_extraction_response(patient_id: str) -> dict:
     }
 
 
-# ── Fixtures ──
+# Fixtures
 
 @pytest.fixture()
 def notes_site(tmp_path: Path) -> Path:
@@ -139,7 +139,7 @@ def structured_site(tmp_path: Path) -> Path:
     return tmp_path
 
 
-# ── _load_clinical_notes tests ──
+# _load_clinical_notes tests
 
 class TestLoadClinicalNotes:
     """Test loading clinical-note files from disk."""
@@ -190,7 +190,7 @@ class TestLoadClinicalNotes:
         assert notes == []
 
 
-# ── _extract_from_clinical_notes tests ──
+# _extract_from_clinical_notes tests
 
 class TestExtractFromClinicalNotes:
     """Test MedGemma extraction with mocked LLM responses."""
@@ -277,7 +277,7 @@ class TestExtractFromClinicalNotes:
         assert call_args.kwargs["temperature"] == 0.1
 
 
-# ── _load_monitoring_data_with_extraction tests ──
+# _load_monitoring_data_with_extraction tests
 
 class TestLoadMonitoringDataWithExtraction:
     """Test the full extraction pipeline (notes→MedGemma→structured data)."""
@@ -370,7 +370,7 @@ class TestLoadMonitoringDataWithExtraction:
         assert any("P002" in e for e in client._errors)
 
 
-# ── Evaluate with use_extraction flag ──
+# Evaluate with use_extraction flag
 
 class TestEvaluateWithExtraction:
     """Test that evaluate() routes correctly based on use_extraction flag."""
@@ -452,7 +452,7 @@ class TestEvaluateWithExtraction:
         assert result.result_data["total_ae_count"] == 3  # 1 AE × 3 patients
 
 
-# ── Query serialisation with use_extraction ──
+# Query serialisation with use_extraction
 
 class TestExtractionQuerySerialization:
     """Verify use_extraction flag survives Flower transport."""

@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from typing import Any, Optional
 
 from backend.app.engine.workflow_engine import WorkflowEngine
@@ -66,7 +67,7 @@ class WorkflowOrchestrationAgent:
         self._engine = WorkflowEngine()
         self._store = WorkflowStore()
 
-    # ── Public API ────────────────────────────────────────────────────
+    # Public API
 
     def analyse_and_recommend(
         self,
@@ -181,7 +182,7 @@ class WorkflowOrchestrationAgent:
 
         return recommendation, was_advanced
 
-    # ── Private Methods ───────────────────────────────────────────────
+    # Private Methods
 
     def _parse_recommendation(
         self,
@@ -269,7 +270,6 @@ class WorkflowOrchestrationAgent:
     @staticmethod
     def _extract_json(text: str) -> dict[str, Any] | None:
         """Extract a JSON object from LLM output (handles code fences)."""
-        import re
 
         # Try: direct JSON parse
         try:

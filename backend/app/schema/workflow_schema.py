@@ -17,7 +17,7 @@ point.
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Optional
 
@@ -120,8 +120,8 @@ class Workflow(BaseModel):
         default_factory=dict,
         description="Per-stage execution state.",
     )
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     metadata: dict[str, Any] = Field(
         default_factory=dict,
         description="Arbitrary user-defined metadata for the trial.",
@@ -229,7 +229,7 @@ class WorkflowActionResponse(BaseModel):
     message: str = ""
 
 
-# ── Autonomous Workflow Orchestration models ─────────────────────────────
+# Autonomous Workflow Orchestration models
 
 class RecommendationAction(str, Enum):
     """Action the orchestration agent recommends for the workflow."""
