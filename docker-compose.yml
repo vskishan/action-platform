@@ -32,7 +32,7 @@ services:
       - ollama_data:/root/.ollama
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "sh", "-c", "curl -sf http://localhost:11434/api/tags"]
+      test: ["CMD", "ollama", "list"]
       interval: 10s
       timeout: 5s
       retries: 30
@@ -50,11 +50,11 @@ services:
     command:
       - |
         echo "Waiting for Ollama to be ready..."
-        until curl -sf http://action-platform-ollama:11434/api/tags > /dev/null 2>&1; do
+        until ollama list > /dev/null 2>&1; do
           sleep 2
         done
         echo "Ollama is ready. Checking for MedGemma model..."
-        if curl -sf http://action-platform-ollama:11434/api/tags | grep -q "alibayram/medgemma"; then
+        if ollama list | grep -q "alibayram/medgemma"; then
           echo "MedGemma already available. Skipping download."
         else
           echo "Pulling MedGemma model (~2.5 GB). This may take a few minutes..."
