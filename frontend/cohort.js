@@ -1,4 +1,4 @@
-/* ─── cohort.js ─── Cohort Analytics page logic ─── */
+/* cohort.js - Cohort Analytics page logic */
 (() => {
   'use strict';
 
@@ -14,7 +14,7 @@
   // Session ID for multi-turn agentic conversation (ReAct agent memory)
   let agentSessionId = null;
 
-  /* ── Save conversation to backend ── */
+  /* Save conversation to backend */
   async function saveConversation() {
     if (!wfCtx.workflowId) return;
     try {
@@ -27,7 +27,7 @@
     }
   }
 
-  /* ── Load conversation from backend ── */
+  /* Load conversation from backend */
   async function loadConversation() {
     if (!wfCtx.workflowId) return;
     try {
@@ -48,14 +48,12 @@
     }
   }
 
-  /* ── Set query from quick pills ── */
+  /* Set query from quick pills */
   window.setCohortQuery = function (text) {
     document.getElementById('cohort-query').value = text;
   };
 
-  /* ══════════════════════════════════════════════════════
-     Submit Cohort Query
-     ══════════════════════════════════════════════════════ */
+  /* Submit Cohort Query */
   document.getElementById('cohort-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('cohort-submit-btn');
@@ -126,9 +124,7 @@
     }
   });
 
-  /* ══════════════════════════════════════════════════════
-     Chat Helpers
-     ══════════════════════════════════════════════════════ */
+  /* Chat Helpers */
   function addBubble(text, role, persist = false) {
     const bubble = document.createElement('div');
     bubble.className = `chat-bubble ${role}`;
@@ -171,9 +167,7 @@
     if (el) el.remove();
   }
 
-  /* ══════════════════════════════════════════════════════
-     Init — load conversation & check for pending jobs
-     ══════════════════════════════════════════════════════ */
+  /* Init - load conversation & check for pending jobs */
   async function init() {
     await loadConversation();
 

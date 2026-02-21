@@ -1,7 +1,4 @@
-/* =====================================================
-   ACTION Platform – Antigravity-inspired Design
-   Dark, bold, spacious, Google-aesthetic
-   ===================================================== */
+/* ACTION Platform – CSS */
 
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Display:wght@400;500;700&family=Google+Sans+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap');
 
@@ -53,7 +50,7 @@
   --ease-o: cubic-bezier(0, 0, .2, 1);
 }
 
-/* ─── Reset ─── */
+/* Reset */
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
@@ -84,7 +81,7 @@ img { max-width: 100%; display: block; }
 h1, h2, h3, h4 { margin: 0; }
 p { margin: 0; }
 
-/* ─── Ambient background ─── */
+/* Ambient background */
 .page-bg {
   position: fixed;
   inset: 0;
@@ -94,15 +91,13 @@ p { margin: 0; }
     #ffffff;
 }
 
-/* ─── Container ─── */
+/* Container */
 .container {
   width: min(1200px, 92%);
   margin: 0 auto;
 }
 
-/* ═══════════════════════════════════════════════════════
-   HEADER
-   ═══════════════════════════════════════════════════════ */
+/* HEADER */
 .site-header {
   position: sticky;
   top: 0;
@@ -175,7 +170,7 @@ p { margin: 0; }
   background: var(--blue-dim);
 }
 
-/* ─── Buttons ─── */
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -224,9 +219,7 @@ p { margin: 0; }
   background: var(--blue-dim);
 }
 
-/* ═══════════════════════════════════════════════════════
-   SECTIONS
-   ═══════════════════════════════════════════════════════ */
+/* == SECTIONS == */
 .section {
   padding: 96px 0;
 }
@@ -267,9 +260,7 @@ p { margin: 0; }
   line-height: 1.7;
 }
 
-/* ═══════════════════════════════════════════════════════
-   HERO
-   ═══════════════════════════════════════════════════════ */
+/* HERO */
 .hero {
   padding: 120px 0 64px;
   text-align: center;
@@ -408,9 +399,7 @@ h1 .highlight {
   color: var(--text-1);
 }
 
-/* ═══════════════════════════════════════════════════════
-   CAPABILITIES (proof strip)
-   ═══════════════════════════════════════════════════════ */
+/* CAPABILITIES */
 .capabilities {
   padding: 48px 0;
 }
@@ -464,9 +453,7 @@ h1 .highlight {
   line-height: 1.65;
 }
 
-/* ═══════════════════════════════════════════════════════
-   FEATURES (What We Do)
-   ═══════════════════════════════════════════════════════ */
+/* FEATURES SECTION */
 .features-grid {
   display: grid;
   gap: 16px;
@@ -516,9 +503,7 @@ h1 .highlight {
   line-height: 1.65;
 }
 
-/* ═══════════════════════════════════════════════════════
-   TRUST (Why It Matters)
-   ═══════════════════════════════════════════════════════ */
+/* TRUST SECTION */
 .trust-section {
   background: var(--bg-raised);
 }
@@ -570,10 +555,7 @@ h1 .highlight {
   line-height: 1.65;
 }
 
-/* ═══════════════════════════════════════════════════════
-   WHY SECTION
-   ═══════════════════════════════════════════════════════ */
-
+/* WHY SECTION */
 .why-section {
   background: var(--bg);
 }
@@ -635,9 +617,7 @@ h1 .highlight {
   opacity: 0.85;
 }
 
-/* ═══════════════════════════════════════════════════════
-   VIDEO SECTION
-   ═══════════════════════════════════════════════════════ */
+/* VIDEO SECTION */
 .video-wrap {
   border: 1px solid var(--border);
   border-radius: var(--r-xl);
@@ -707,9 +687,7 @@ h1 .highlight {
   font-size: 0.9rem;
 }
 
-/* ═══════════════════════════════════════════════════════
-   CTA BAND
-   ═══════════════════════════════════════════════════════ */
+/* CTA BAND */
 .cta-band {
   padding-top: 16px;
 }
@@ -753,9 +731,7 @@ h1 .highlight {
   margin-top: 28px;
 }
 
-/* ═══════════════════════════════════════════════════════
-   FOOTER
-   ═══════════════════════════════════════════════════════ */
+/* FOOTER */
 .site-footer {
   border-top: 1px solid var(--border);
   background: var(--bg);
@@ -786,9 +762,7 @@ h1 .highlight {
   align-items: center;
 }
 
-/* ═══════════════════════════════════════════════════════
-   SCROLL ANIMATION
-   ═══════════════════════════════════════════════════════ */
+/* SCROLL ANIMATION */
 .fade-up {
   opacity: 0;
   transform: translateY(32px);
@@ -805,9 +779,7 @@ h1 .highlight {
 .stagger > .fade-up:nth-child(3) { transition-delay: 0.14s; }
 .stagger > .fade-up:nth-child(4) { transition-delay: 0.21s; }
 
-/* ═══════════════════════════════════════════════════════
-   RESPONSIVE
-   ═══════════════════════════════════════════════════════ */
+/* RESPONSIVE */
 @media (max-width: 1024px) {
   .stats-row {
     grid-template-columns: 1fr;
@@ -846,17 +818,14 @@ h1 .highlight {
   .footer-links { flex-direction: column; gap: 8px; }
 }
 
-/* ═══════════════════════════════════════════════════════
-   APP PAGES – SHARED STYLES
-   ═══════════════════════════════════════════════════════ */
-
+/* APP PAGES */
 /* Small button variant */
 .btn-sm {
   padding: 6px 16px;
   font-size: 0.8rem;
 }
 
-/* ─── Workflow context banner ─── */
+/* Workflow context banner */
 .wf-context-banner {
   background: var(--blue-dim);
   border-bottom: 1px solid rgba(26, 115, 232, 0.12);
@@ -890,7 +859,7 @@ h1 .highlight {
   font-size: 0.7rem;
 }
 
-/* ─── Clickable stage links in modal ─── */
+/* Clickable stage links in modal */
 a.stage-link {
   text-decoration: none;
   color: inherit;
@@ -936,7 +905,7 @@ a.stage-link:hover .stage-name {
   line-height: 1.7;
 }
 
-/* ─── Panels (cards with header) ─── */
+/* Panels (cards with header) */
 .panel {
   border: 1px solid var(--border);
   border-radius: var(--r-xl);
@@ -979,7 +948,7 @@ a.stage-link:hover .stage-name {
   color: var(--text-2);
 }
 
-/* ─── Forms ─── */
+/* Forms */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1058,7 +1027,7 @@ a.stage-link:hover .stage-name {
   grid-column: 1 / -1;
 }
 
-/* ─── Tab Bar ─── */
+/* Tab Bar */
 .tab-bar {
   display: inline-flex;
   background: var(--surface);
@@ -1099,7 +1068,7 @@ a.stage-link:hover .stage-name {
   display: block;
 }
 
-/* ─── Criteria rows (Screening) ─── */
+/* Criteria rows (Screening) */
 .criteria-section-header {
   display: flex;
   align-items: center;
@@ -1168,7 +1137,7 @@ a.stage-link:hover .stage-name {
   border-color: var(--red);
 }
 
-/* ─── Quick query pills ─── */
+/* Quick query pills */
 .quick-queries {
   display: flex;
   gap: 8px;
@@ -1194,7 +1163,7 @@ a.stage-link:hover .stage-name {
   background: var(--blue-dim);
 }
 
-/* ─── Result stats row ─── */
+/* Result stats row */
 .result-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1231,7 +1200,7 @@ a.stage-link:hover .stage-name {
 .result-stat-card.accent-red    .stat-number { color: var(--red); }
 .result-stat-card.accent-yellow .stat-number { color: var(--yellow); }
 
-/* ─── Site results grid ─── */
+/* Site results grid */
 .site-results-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -1306,7 +1275,7 @@ a.stage-link:hover .stage-name {
   color: var(--text-1);
 }
 
-/* ─── AI Response Card ─── */
+/* AI Response Card */
 .ai-response-card {
   background: var(--blue-dim);
   border: 1px solid rgba(26, 115, 232, 0.15);
@@ -1323,7 +1292,7 @@ a.stage-link:hover .stage-name {
   display: none;
 }
 
-/* ─── Conversation (Cohort page) ─── */
+/* Conversation (Cohort page) */
 .conversation {
   display: flex;
   flex-direction: column;
@@ -1354,7 +1323,7 @@ a.stage-link:hover .stage-name {
   white-space: pre-wrap;
 }
 
-/* ─── Workflow card list ─── */
+/* Workflow card list */
 .workflow-card-list {
   display: grid;
   gap: 12px;
@@ -1448,7 +1417,7 @@ a.stage-link:hover .stage-name {
 .status-badge.pending  { background: var(--yellow-dim); color: var(--yellow); }
 .status-badge.locked   { background: var(--surface); color: var(--text-3); border: 1px solid var(--border); }
 
-/* ─── Empty / loading states ─── */
+/* Empty / loading states */
 .empty-state {
   text-align: center;
   padding: 48px 24px;
@@ -1485,7 +1454,7 @@ a.stage-link:hover .stage-name {
   to { transform: rotate(360deg); }
 }
 
-/* ─── Modal ─── */
+/* Modal */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -1725,7 +1694,7 @@ a.stage-link:hover .stage-name {
   word-break: break-word;
 }
 
-/* ─── Toast notifications ─── */
+/* Toast notifications */
 .toast-container {
   position: fixed;
   bottom: 24px;
@@ -1757,7 +1726,7 @@ a.stage-link:hover .stage-name {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ─── Button loading state ─── */
+/* Button loading state */
 .btn.loading {
   pointer-events: none;
   opacity: 0.7;
@@ -1775,7 +1744,7 @@ a.stage-link:hover .stage-name {
   margin-left: 6px;
 }
 
-/* ─── Data table (for richer results) ─── */
+/* Data table (for richer results) */
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -1810,7 +1779,7 @@ a.stage-link:hover .stage-name {
   background: var(--surface);
 }
 
-/* ─── Responsive for app pages ─── */
+/* Responsive for app pages */
 @media (max-width: 768px) {
   .page-hero { padding: 80px 0 32px; }
 
@@ -1850,7 +1819,7 @@ a.stage-link:hover .stage-name {
   }
 }
 
-/* ─── Background Job Banner ─── */
+/* Background Job Banner */
 .job-banner {
   position: fixed;
   bottom: 0;
@@ -1904,9 +1873,7 @@ a.stage-link:hover .stage-name {
   color: var(--text-3);
 }
 
-/* ═══════════════════════════════════════════════════════
-   ACTIVE WORKFLOW BANNER
-   ═══════════════════════════════════════════════════════ */
+/* ACTIVE WORKFLOW BANNER */
 .active-workflow-banner {
   display: flex;
   align-items: flex-start;

@@ -1,4 +1,4 @@
-/* ─── monitoring.js ─── Monitoring page logic ─── */
+/* monitoring.js - Monitoring page logic */
 (() => {
   'use strict';
 
@@ -9,7 +9,7 @@
   // In-memory conversation history for persistence
   let conversationHistory = [];
 
-  /* ── Save conversation to backend ── */
+  /* Save conversation to backend */
   async function saveConversation() {
     if (!wfCtx.workflowId) return;
     try {
@@ -22,7 +22,7 @@
     }
   }
 
-  /* ── Load conversation from backend ── */
+  /* Load conversation from backend */
   async function loadConversation() {
     if (!wfCtx.workflowId) return;
     try {
@@ -42,14 +42,12 @@
     }
   }
 
-  /* ── Set query from quick pills ── */
+  /* Set query from quick pills */
   window.setQuery = function (text) {
     document.getElementById('mon-query').value = text;
   };
 
-  /* ══════════════════════════════════════════════════════
-     Submit Monitoring Query
-     ══════════════════════════════════════════════════════ */
+  /* Submit Monitoring Query */
   document.getElementById('monitoring-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('mon-submit-btn');
@@ -92,9 +90,7 @@
     });
   });
 
-  /* ══════════════════════════════════════════════════════
-     Render Monitoring Results
-     ══════════════════════════════════════════════════════ */
+  /* Render Monitoring Results */
   function renderMonitoringResults(data) {
     const panel = document.getElementById('mon-results-panel');
     const subtitle = document.getElementById('mon-results-subtitle');
@@ -219,9 +215,7 @@
     return sites.reduce((sum, s) => sum + (s[field] || 0), 0);
   }
 
-  /* ══════════════════════════════════════════════════════
-     Init — load conversation & check for pending jobs
-     ══════════════════════════════════════════════════════ */
+  /* Init - load conversation & check for pending jobs */
   async function init() {
     await loadConversation();
 

@@ -1,4 +1,4 @@
-/* ─── screening.js ─── Patient Screening page logic ─── */
+/* screening.js - Patient Screening page logic */
 (() => {
   'use strict';
 
@@ -9,7 +9,7 @@
   // In-memory conversation history for persistence
   let conversationHistory = [];
 
-  /* ── Save conversation to backend ── */
+  /* Save conversation to backend */
   async function saveConversation() {
     if (!wfCtx.workflowId) return;
     try {
@@ -22,7 +22,7 @@
     }
   }
 
-  /* ── Load conversation from backend ── */
+  /* Load conversation from backend */
   async function loadConversation() {
     if (!wfCtx.workflowId) return;
     try {
@@ -42,9 +42,7 @@
     }
   }
 
-  /* ══════════════════════════════════════════════════════
-     Natural Language Screening
-     ══════════════════════════════════════════════════════ */
+  /* Natural Language Screening */
   document.getElementById('nl-screening-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('nl-submit-btn');
@@ -95,9 +93,7 @@
     }
   });
 
-  /* ══════════════════════════════════════════════════════
-     Structured Screening
-     ══════════════════════════════════════════════════════ */
+  /* Structured Screening */
   document.getElementById('structured-screening-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('struct-submit-btn');
@@ -173,9 +169,7 @@
     return criteria;
   }
 
-  /* ══════════════════════════════════════════════════════
-     Add / Remove Criteria Rows
-     ══════════════════════════════════════════════════════ */
+  /* Add / Remove Criteria Rows */
   window.addCriterion = function (type) {
     const container = document.getElementById(`${type}-criteria`);
     if (!container) return;
@@ -211,9 +205,7 @@
     if (row) row.remove();
   };
 
-  /* ══════════════════════════════════════════════════════
-     Render Screening Results
-     ══════════════════════════════════════════════════════ */
+  /* Render Screening Results */
   function renderScreeningResults(data) {
     const panel = document.getElementById('results-panel');
     const statsEl = document.getElementById('result-stats');
@@ -406,7 +398,7 @@
     }
   }
 
-  /* ── Toggle patient audit details ── */
+  /* Toggle patient audit details */
   window.togglePatientAudit = function (btn, panelId) {
     const panel = document.getElementById(panelId);
     if (!panel) return;
@@ -418,9 +410,7 @@
     }
   };
 
-  /* ══════════════════════════════════════════════════════
-     Init — load conversation & check for pending jobs
-     ══════════════════════════════════════════════════════ */
+  /* Init - load conversation & check for pending jobs */
   async function init() {
     await loadConversation();
 

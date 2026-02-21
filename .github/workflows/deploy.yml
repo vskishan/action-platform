@@ -1,4 +1,4 @@
-name: Deploy to GCP VM
+name: Deploy
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to GCP
+    name: Deploy to GCP VM
     runs-on: ubuntu-latest
 
     steps:
@@ -18,6 +18,8 @@ jobs:
           username: ${{ secrets.GCP_VM_USERNAME }}
           key: ${{ secrets.GCP_VM_SSH_KEY }}
           script: |
+            set -e # Stops the script if any command fails
+
             # Navigate to the application directory
             cd ~/action-platform
 

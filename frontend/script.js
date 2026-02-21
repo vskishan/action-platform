@@ -1,12 +1,12 @@
-/* ─── script.js ─── */
+/* script.js */
 (() => {
   'use strict';
 
-  /* ── Footer year ── */
+  /* Footer year */
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ── Header scroll effect ── */
+  /* Header scroll effect */
   const header = document.querySelector('.site-header');
   if (header) {
     const onScroll = () => {
@@ -16,7 +16,7 @@
     onScroll();
   }
 
-  /* ── Intersection-observer fade-up ── */
+  /* Intersection-observer fade-up */
   const fadeEls = document.querySelectorAll('.fade-up');
   if (fadeEls.length && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver(
@@ -43,7 +43,7 @@
     fadeEls.forEach((el) => el.classList.add('visible'));
   }
 
-  /* ── Active nav link highlighting ── */
+  /* Active nav link highlighting */
   const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
   if (navLinks.length && 'IntersectionObserver' in window) {
     const sections = [...navLinks].map((a) =>
@@ -67,7 +67,7 @@
     sections.forEach((s) => navIO.observe(s));
   }
 
-  /* ── Smooth scroll for anchor links ── */
+  /* Smooth scroll for anchor links */
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener('click', (e) => {
       const target = document.querySelector(a.getAttribute('href'));

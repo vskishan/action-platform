@@ -1,10 +1,10 @@
-/* ─── app.js ─── Shared utilities for ACTION Platform ─── */
+/* app.js - Shared utilities for ACTION Platform */
 (() => {
   'use strict';
 
   const API = window.location.origin;
 
-  /* ── API helper ── */
+  /* API helper */
   window.api = {
     async get(path) {
       const res = await fetch(`${API}${path}`);
@@ -53,7 +53,7 @@
     },
   };
 
-  /* ── Toast notifications ── */
+  /* Toast notifications */
   window.showToast = function (message, type = 'info', duration = 4000) {
     const container = document.getElementById('toast-container');
     if (!container) return;
@@ -69,7 +69,7 @@
     }, duration);
   };
 
-  /* ── Tab switching ── */
+  /* Tab switching */
   window.switchTab = function (btn, tabId) {
     // Deactivate all tabs and content
     btn.closest('.tab-bar').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -81,7 +81,7 @@
     if (target) target.classList.add('active');
   };
 
-  /* ── Button loading state ── */
+  /* Button loading state */
   window.setLoading = function (btn, loading) {
     if (loading) {
       btn._originalText = btn.innerHTML;
@@ -94,7 +94,7 @@
     }
   };
 
-  /* ── Format date ── */
+  /* Format date */
   window.formatDate = function (isoStr) {
     if (!isoStr) return '—';
     const d = new Date(isoStr);
@@ -104,7 +104,7 @@
     });
   };
 
-  /* ── Prettify stage name ── */
+  /* Prettify stage name */
   window.stageName = function (key) {
     const names = {
       patient_screening: 'Patient Screening',
@@ -114,14 +114,14 @@
     return names[key] || key;
   };
 
-  /* ── Escape HTML ── */
+  /* Escape HTML */
   window.escapeHtml = function (str) {
     const div = document.createElement('div');
     div.textContent = str;
     return div.innerHTML;
   };
 
-  /* ── Workflow context from URL params ── */
+  /* Workflow context from URL params */
   window.getWorkflowContext = function () {
     const params = new URLSearchParams(window.location.search);
     return {
@@ -191,11 +191,11 @@
     return `/${page}?${params.toString()}`;
   };
 
-  /* ── Footer year ── */
+  /* Footer year */
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ── Intersection-observer fade-up ── */
+  /* Intersection-observer fade-up */
   const fadeEls = document.querySelectorAll('.fade-up:not(.visible)');
   if (fadeEls.length && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver(
@@ -220,10 +220,7 @@
     fadeEls.forEach((el) => el.classList.add('visible'));
   }
 
-  /* ══════════════════════════════════════════════════════
-     Background Job Helpers
-     ══════════════════════════════════════════════════════ */
-
+  /* == Background Job Helpers == */
   /**
    * Submit a background job for a stage and start polling.
    *
@@ -353,7 +350,7 @@
     }
   };
 
-  /* ── Job banner (fixed bottom notification) ── */
+  /* Job banner (fixed bottom notification) */
 
   function _ensureBannerEl() {
     let el = document.getElementById('job-banner');

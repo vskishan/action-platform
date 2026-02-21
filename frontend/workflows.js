@@ -1,4 +1,4 @@
-/* ─── workflows.js ─── Workflow Studio page logic ─── */
+/* workflows.js - Workflow Studio page logic */
 (() => {
   'use strict';
 
@@ -11,9 +11,7 @@
     cohort_monitoring: 'monitoring.html',
   };
 
-  /* ══════════════════════════════════════════════════════
-     Load & Render Workflows
-     ══════════════════════════════════════════════════════ */
+  /* Load & Render Workflows */
   window.loadWorkflows = async function () {
     const listEl = document.getElementById('wf-list');
     const emptyEl = document.getElementById('wf-empty');
@@ -31,7 +29,7 @@
       const workflows = data.workflows || [];
       countEl.textContent = `${workflows.length} workflow${workflows.length !== 1 ? 's' : ''}`;
 
-      // ── Check for active workflow and toggle create form ──
+      // Check for active workflow and toggle create form
       const ACTIVE_STATUSES = new Set(['running', 'paused', 'created']);
       const activeWf = workflows.find(wf => ACTIVE_STATUSES.has(wf.status));
       _toggleCreateForm(activeWf);
@@ -82,10 +80,7 @@
     return card;
   }
 
-  /* ══════════════════════════════════════════════════════
-     Create Workflow – with active-workflow guard
-     ══════════════════════════════════════════════════════ */
-
+  /* Create Workflow – with active-workflow guard */
   /**
    * Toggle the create form enabled/disabled based on whether an
    * active (running/paused/created) workflow exists.
@@ -136,9 +131,7 @@
     }
   });
 
-  /* ══════════════════════════════════════════════════════
-     Workflow Detail Modal
-     ══════════════════════════════════════════════════════ */
+  /* Workflow Detail Modal */
   window.openWorkflowDetail = async function (id) {
     const modal = document.getElementById('wf-modal');
     const title = document.getElementById('modal-title');
@@ -389,9 +382,7 @@
     document.getElementById('wf-modal').style.display = 'none';
   };
 
-  /* ══════════════════════════════════════════════════════
-     Workflow Actions
-     ══════════════════════════════════════════════════════ */
+  /* Workflow Actions */
   window.workflowAction = async function (id, action) {
     try {
       const data = await api.post(`/api/workflow/${id}/${action}`);
@@ -406,7 +397,7 @@
     }
   };
 
-  /* ── Toggle stage results visibility ── */
+  /* Toggle stage results visibility */
   window.toggleStageResults = function (panelId) {
     const panel = document.getElementById(panelId);
     if (!panel) return;
@@ -424,7 +415,7 @@
     }
   };
 
-  /* ── Mark a stage as complete ── */
+  /* Mark a stage as complete */
   window.markStageComplete = async function (workflowId, stage) {
     if (!confirm(`Mark "${stageName(stage)}" as complete?`)) return;
     try {
@@ -439,7 +430,7 @@
     }
   };
 
-  /* ── Re-run a specific stage ── */
+  /* Re-run a specific stage */
   window.rerunStage = async function (workflowId, stage) {
     if (!confirm(`Reset the "${stageName(stage)}" stage and navigate to re-run it?`)) return;
     try {
@@ -458,7 +449,7 @@
     }
   };
 
-  /* ── AI Analyze a completed stage ── */
+  /* AI Analyze a completed stage */
   window.analyzeStage = async function (workflowId, stage) {
     showToast('Running AI analysis…', 'info');
 
@@ -503,7 +494,7 @@
     }
   };
 
-  /* ── AI Analyze and auto-advance ── */
+  /* AI Analyze and auto-advance */
   window.analyzeAndAdvance = async function (workflowId, stage) {
     if (!confirm('Let the AI analyse this stage and automatically advance if the recommendation is PROCEED?')) return;
     showToast('Running AI analysis with auto-advance…', 'info');
@@ -541,8 +532,6 @@
     }
   };
 
-  /* ══════════════════════════════════════════════════════
-     Init
-     ══════════════════════════════════════════════════════ */
+  /* Init */
   loadWorkflows();
 })();
