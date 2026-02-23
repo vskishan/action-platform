@@ -39,6 +39,11 @@ services:
       - OLLAMA_FLASH_ATTENTION=1
     restart: unless-stopped
     # No mem_limit here — Ollama gets all remaining host RAM.
+    logging:
+      driver: gcplogs
+      options:
+        gcp-log-cmd: "true"       # include the container command in the log entry
+        labels: service=ollama
     healthcheck:
       test: ["CMD", "ollama", "list"]
       interval: 10s
@@ -55,7 +60,7 @@ services:
     mem_limit: 256m   # Just a shell script — needs almost no RAM.
     environment:
       - OLLAMA_HOST=http://action-platform-ollama:11434
-      - MEDGEMMA_MODEL=${MEDGEMMA_MODEL:-MedAIBase/MedGemma1.5:4b}
+      - MEDGEMMA_MODEL=${MEDGEMMA_MODEL}
     entrypoint: ["/bin/sh", "-c"]
     command:
       - |
@@ -73,6 +78,10 @@ services:
         fi
     depends_on:
       - ollama
+    logging:
+      driver: gcplogs
+      options:
+        labels: service=model-puller
 
   # ----------------------------------------------------------------
   # FastAPI backend
@@ -92,6 +101,11 @@ services:
       ollama:
         condition: service_healthy
     restart: unless-stopped
+    logging:
+      driver: gcplogs
+      options:
+        gcp-log-cmd: "true"
+        labels: service=backend
 
   # ----------------------------------------------------------------
   # Caddy - Reverse Proxy with automatic HTTPS (Let's Encrypt)
@@ -111,6 +125,10 @@ services:
     depends_on:
       - backend
     restart: unless-stopped
+    logging:
+      driver: gcplogs
+      options:
+        labels: service=caddy
 
 volumes:
   ollama_data:
