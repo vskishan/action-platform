@@ -21,7 +21,7 @@ import ollama
 
 logger = logging.getLogger(__name__)
 
-# Model name is resolved at import time from the environment
+# Model name is resolved at import time from the environment.
 DEFAULT_MODEL = os.environ.get("MEDGEMMA_MODEL")
 
 

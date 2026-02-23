@@ -5,7 +5,7 @@
 #
 # What gets installed automatically:
 #   1. Ollama (LLM inference server)
-#   2. MedGemma model (~2.5 GB, downloaded on first start)
+#   2. MedGemma model (pulled on first start, model set via MEDGEMMA_MODEL env var)
 #   3. FastAPI backend + all Python dependencies
 #
 # Usage:
@@ -30,7 +30,15 @@ services:
       - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
+    environment:
+      # Keep only one model loaded at a time to conserve RAM.
+      - OLLAMA_MAX_LOADED_MODELS=1
+      # Only one concurrent inference request on a CPU-only instance.
+      - OLLAMA_NUM_PARALLEL=1
+      # Flash-attention halves the KV-cache footprint (~10-15% RAM saving).
+      - OLLAMA_FLASH_ATTENTION=1
     restart: unless-stopped
+    # No mem_limit here — Ollama gets all remaining host RAM.
     healthcheck:
       test: ["CMD", "ollama", "list"]
       interval: 10s
@@ -44,6 +52,7 @@ services:
   model-puller:
     image: ollama/ollama:latest
     container_name: action-platform-model-puller
+    mem_limit: 256m   # Just a shell script — needs almost no RAM.
     environment:
       - OLLAMA_HOST=http://action-platform-ollama:11434
       - MEDGEMMA_MODEL=${MEDGEMMA_MODEL:-MedAIBase/MedGemma1.5:4b}
@@ -73,6 +82,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: action-platform-backend
+    mem_limit: 1g    # FastAPI + Python deps; keeps RAM free for Ollama.
     expose:
       - "8000"
     environment:
@@ -89,6 +99,7 @@ services:
   caddy:
     image: caddy:2-alpine
     container_name: action-platform-caddy
+    mem_limit: 128m  # Reverse proxy — very low memory footprint.
     ports:
       - "80:80"
       - "443:443"

@@ -60,7 +60,6 @@ There is currently no privacy-preserving, medically grounded, agentic AI layer t
 | **Sponsor** | Fragmented tools across trial stages | Unified AI orchestration from screening to monitoring |  
 
 <br>
-**Note: `Impact Potential` is intentionally placed at the conclusion, allowing readers to first understand the clinical constraints and solution design before evaluating projected outcomes.**
 
 ---
 
