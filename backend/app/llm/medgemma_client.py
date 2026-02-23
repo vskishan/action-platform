@@ -14,14 +14,15 @@ This gives us a single place to:
 from __future__ import annotations
 
 import logging
+import os
 from typing import Any, Optional
 
 import ollama
 
 logger = logging.getLogger(__name__)
 
-# Defaults
-DEFAULT_MODEL = "alibayram/medgemma"
+# Model name is resolved at import time from the environment
+DEFAULT_MODEL = os.environ.get("MEDGEMMA_MODEL")
 
 
 class MedGemmaClient:

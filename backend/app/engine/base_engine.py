@@ -1,6 +1,5 @@
 """
 Base Engine
-===========
 
 Abstract base class for all domain-specific analysis engines.
 

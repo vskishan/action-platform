@@ -17,6 +17,7 @@ jobs:
           host: ${{ secrets.GCP_VM_HOST }}
           username: ${{ secrets.GCP_VM_USERNAME }}
           key: ${{ secrets.GCP_VM_SSH_KEY }}
+          envs: MEDGEMMA_MODEL
           script: |
             set -e # Stops the script if any command fails
 
@@ -27,11 +28,13 @@ jobs:
             git pull origin main
 
             # Stop and remove existing containers
-            docker-compose down
+            MEDGEMMA_MODEL=$MEDGEMMA_MODEL docker-compose down
 
             # Rebuild images
-            docker-compose build
+            MEDGEMMA_MODEL=$MEDGEMMA_MODEL docker-compose build
 
             # Start all containers in detached mode
-            docker-compose up -d
+            MEDGEMMA_MODEL=$MEDGEMMA_MODEL docker-compose up -d
+        env:
+          MEDGEMMA_MODEL: ${{ secrets.MEDGEMMA_MODEL }}
 

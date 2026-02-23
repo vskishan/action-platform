@@ -46,6 +46,7 @@ services:
     container_name: action-platform-model-puller
     environment:
       - OLLAMA_HOST=http://action-platform-ollama:11434
+      - MEDGEMMA_MODEL=${MEDGEMMA_MODEL:-MedAIBase/MedGemma1.5:4b}
     entrypoint: ["/bin/sh", "-c"]
     command:
       - |
@@ -53,13 +54,13 @@ services:
         until ollama list > /dev/null 2>&1; do
           sleep 2
         done
-        echo "Ollama is ready. Checking for MedGemma model..."
-        if ollama list | grep -q "alibayram/medgemma"; then
-          echo "MedGemma already available. Skipping download."
+        echo "Ollama is ready. Checking for model: ${MEDGEMMA_MODEL}..."
+        if ollama list | grep -q "${MEDGEMMA_MODEL}"; then
+          echo "Model '${MEDGEMMA_MODEL}' already available. Skipping download."
         else
-          echo "Pulling MedGemma model (~2.5 GB). This may take a few minutes..."
-          ollama pull alibayram/medgemma
-          echo "MedGemma model ready!"
+          echo "Pulling model '${MEDGEMMA_MODEL}'. This may take a few minutes..."
+          ollama pull ${MEDGEMMA_MODEL}
+          echo "Model '${MEDGEMMA_MODEL}' ready!"
         fi
     depends_on:
       - ollama
@@ -76,6 +77,7 @@ services:
       - "8000"
     environment:
       - OLLAMA_HOST=http://action-platform-ollama:11434
+      - MEDGEMMA_MODEL=${MEDGEMMA_MODEL:-MedAIBase/MedGemma1.5:4b}
     depends_on:
       ollama:
         condition: service_healthy

@@ -4,8 +4,7 @@ Conversation Memory
 Session-based conversation memory that allows the ReAct agent to
 maintain context across multiple user turns.
 
-Features
---------
+This class deals with following aspects:
 - In-memory store keyed by ``session_id`` (UUID string).
 - Stores a rolling window of messages (user / assistant / tool).
 - Provides context injection into the ReAct prompt.

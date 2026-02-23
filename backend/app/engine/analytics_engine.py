@@ -10,8 +10,7 @@ Handles intents such as:
     - lab_summary                    : baseline lab-value distributions (PSA, bilirubin, etc.)
     - assessment_summary             : bone-metastasis and positive-node prevalence
     - gleason_distribution           : Gleason score distribution across the cohort
-    - adverse_events_by_demographics : adverse-event rates and severity broken down by
-                                       age group and race
+    - adverse_events_by_demographics : adverse-event rates and severity broken down by age group and race
 """
 
 from __future__ import annotations
@@ -379,7 +378,7 @@ class AnalyticsEngine(BaseEngine):
         }
 
 
-# Standalone smoke test.
+# Standalone smoke test
 if __name__ == "__main__":
     import json
 

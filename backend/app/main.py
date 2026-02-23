@@ -6,7 +6,7 @@ FastAPI application that serves the ACTION platform backend.
 Responsibilities:
     - Configures logging, CORS, and application lifespan.
     - Registers all API routers (cohort, federated, workflow, jobs).
-    - Performs preflight checks (Ollama / MedGemma readiness).
+    - Performs preflight checks (MedGemma readiness).
     - Optionally serves the frontend as static files.
 """
 
