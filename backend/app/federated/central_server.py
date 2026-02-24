@@ -244,9 +244,24 @@ class CentralServer:
             threads.append(t)
             logger.info("Started screening thread for '%s'.", site_id)
 
-        # Wait for all sites (MedGemma calls can take minutes)
+        # Per-site timeout: generous enough for all patients × per-patient cap
+        # (240 s each) plus some buffer.  The per-patient timeout in
+        # federated_client ensures the thread itself makes progress so
+        # this site-level cap is a genuine last-resort safety net.
+        PATIENTS_PER_SITE_ESTIMATE = 60
+        PER_PATIENT_CAP_SECONDS = 240
+        SITE_TIMEOUT_SECONDS = PATIENTS_PER_SITE_ESTIMATE * PER_PATIENT_CAP_SECONDS  # 14 400 s ≈ 4 h
+
         for t in threads:
-            t.join(timeout=1800)
+            t.join(timeout=SITE_TIMEOUT_SECONDS)
+            if t.is_alive():
+                logger.warning(
+                    "Site thread '%s' did not finish within %ds — "
+                    "it will be abandoned.  Partial results (if any) "
+                    "from that site will not be included.",
+                    t.name,
+                    SITE_TIMEOUT_SECONDS,
+                )
 
         # Aggregate
         aggregate_total = sum(r.total_patients for r in site_results)

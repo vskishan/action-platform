@@ -50,9 +50,13 @@ class MedGemmaClient:
         self,
         model: str | None = None,
         default_temperature: float = 0.3,
+        request_timeout: float = 180.0,
     ) -> None:
         self.model = model or DEFAULT_MODEL
         self.default_temperature = default_temperature
+        # Hard cap on a single Ollama API call.  Without this, a stalled
+        # inference blocks the calling thread indefinitely.
+        self.request_timeout = request_timeout
 
     # Factory / singleton
     @classmethod
@@ -145,6 +149,7 @@ class MedGemmaClient:
             model=self.model,
             messages=messages,
             options=options,
+            keep_alive="5m",
         )
 
         if raw:
@@ -163,5 +168,6 @@ class MedGemmaClient:
             model=self.model,
             messages=messages,
             options={"temperature": temperature or self.default_temperature},
+            keep_alive="5m",
         )
         return response.message.content.strip()

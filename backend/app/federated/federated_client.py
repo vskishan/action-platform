@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import json
 import logging
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
 from pathlib import Path
 from typing import Any
 
@@ -244,7 +245,8 @@ class ScreeningClient(fl.client.NumPyClient):
         from backend.app.llm.screening_auditor import ScreeningAuditorAgent
         auditor_agent = ScreeningAuditorAgent()
 
-        # Screen each patient with audit
+        # Counters — updated after every patient so partial results are
+        # always available if the thread is abandoned by the central server.
         eligible_count = 0
         patient_audit_details: list[PatientAuditDetail] = []
         high_conf = 0
@@ -252,20 +254,62 @@ class ScreeningClient(fl.client.NumPyClient):
         low_conf = 0
         corrected_count = 0
         flagged_count = 0
+        processed_count = 0
+
+        # Build the result object BEFORE the loop so it always reflects the
+        # latest state, even if this thread is abandoned mid-way.
+        result = SiteScreeningResult(
+            site_id=self.site_id,
+            total_patients=total,
+            eligible_patients=0,
+            errors=self._errors,
+            patient_audit_details=[],
+            high_confidence_count=0,
+            medium_confidence_count=0,
+            low_confidence_count=0,
+            corrected_count=0,
+            flagged_for_review_count=0,
+        )
+
+        # Per-patient timeout: if MedGemma stalls on one patient the
+        # executor future times out, the patient is skipped, and the loop
+        # continues — preserving all previously completed results.
+        # The timeout is intentionally longer than the Ollama-level timeout
+        # (180 s) to allow the inner exception to propagate naturally first.
+        PATIENT_TIMEOUT_SECONDS = 240
 
         for idx, (patient_id, bundle) in enumerate(bundles.items(), 1):
-            progress = f"[{self.site_id}] Screening patient {idx}/{total} ({patient_id}) [with audit]"
+            progress = (
+                f"[{self.site_id}] Screening patient {idx}/{total} "
+                f"({patient_id}) [with audit]"
+            )
             logger.info(progress)
             print(progress, flush=True)
 
             try:
-                # Run the full screen → audit → (reflect) pipeline
-                decision = auditor_agent.screen_and_audit(
-                    patient_id=patient_id,
-                    fhir_bundle=bundle,
-                    criteria_text=criteria_text,
-                    trial_name=criteria.trial_name,
-                )
+                # Run inside a one-shot executor so we can apply a hard
+                # deadline independently of the Ollama HTTP timeout.
+                with ThreadPoolExecutor(max_workers=1) as _ex:
+                    future = _ex.submit(
+                        auditor_agent.screen_and_audit,
+                        patient_id=patient_id,
+                        fhir_bundle=bundle,
+                        criteria_text=criteria_text,
+                        trial_name=criteria.trial_name,
+                    )
+                    try:
+                        decision = future.result(timeout=PATIENT_TIMEOUT_SECONDS)
+                    except FuturesTimeoutError:
+                        msg = (
+                            f"{patient_id}: inference timed out after "
+                            f"{PATIENT_TIMEOUT_SECONDS}s — skipped."
+                        )
+                        self._errors.append(msg)
+                        logger.warning("[%s] %s", self.site_id, msg)
+                        print(f"  -> TIMEOUT: {msg}", flush=True)
+                        # Update result with current state before moving on
+                        result.errors = list(self._errors)
+                        continue
 
                 if decision.final_decision == "ELIGIBLE":
                     eligible_count += 1
@@ -300,6 +344,7 @@ class ScreeningClient(fl.client.NumPyClient):
                     ),
                 )
                 patient_audit_details.append(audit_detail)
+                processed_count += 1
 
                 decision_str = decision.final_decision
                 conf_str = decision.confidence.value.upper()
@@ -323,28 +368,31 @@ class ScreeningClient(fl.client.NumPyClient):
                 logger.warning("[%s] %s", self.site_id, msg)
                 print(f"  -> ERROR: {exc}", flush=True)
 
+            # Checkpoint: keep result in sync after every patient so the
+            # central server gets meaningful data even on a partial run.
+            result.eligible_patients = eligible_count
+            result.patient_audit_details = patient_audit_details
+            result.high_confidence_count = high_conf
+            result.medium_confidence_count = medium_conf
+            result.low_confidence_count = low_conf
+            result.corrected_count = corrected_count
+            result.flagged_for_review_count = flagged_count
+            result.errors = list(self._errors)
+
         summary = (
-            f"[{self.site_id}] Done - {eligible_count}/{total} eligible "
-            f"({eligible_count / total * 100:.0f}%) | "
+            f"[{self.site_id}] Done - {eligible_count}/{processed_count} screened eligible "
+            f"({eligible_count / processed_count * 100:.0f}% of {processed_count} processed, "
+            f"{total} total) | "
             f"Confidence: H={high_conf} M={medium_conf} L={low_conf} | "
             f"Corrected: {corrected_count} | Flagged: {flagged_count}"
+        ) if processed_count > 0 else (
+            f"[{self.site_id}] No patients were successfully screened out of {total}."
         )
         logger.info(summary)
         print(summary, flush=True)
 
-        # Build aggregate result with audit metadata
-        result = SiteScreeningResult(
-            site_id=self.site_id,
-            total_patients=total,
-            eligible_patients=eligible_count,
-            errors=self._errors,
-            patient_audit_details=patient_audit_details,
-            high_confidence_count=high_conf,
-            medium_confidence_count=medium_conf,
-            low_confidence_count=low_conf,
-            corrected_count=corrected_count,
-            flagged_for_review_count=flagged_count,
-        )
+        # Final sync (loop completed normally)
+        result.total_patients = total
 
         metrics = {
             "site_id": self.site_id,
