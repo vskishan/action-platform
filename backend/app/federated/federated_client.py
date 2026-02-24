@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import json
 import logging
-from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
 from pathlib import Path
 from typing import Any
 
@@ -271,13 +270,6 @@ class ScreeningClient(fl.client.NumPyClient):
             flagged_for_review_count=0,
         )
 
-        # Per-patient timeout: if MedGemma stalls on one patient the
-        # executor future times out, the patient is skipped, and the loop
-        # continues — preserving all previously completed results.
-        # The timeout is intentionally longer than the Ollama-level timeout
-        # (180 s) to allow the inner exception to propagate naturally first.
-        PATIENT_TIMEOUT_SECONDS = 240
-
         for idx, (patient_id, bundle) in enumerate(bundles.items(), 1):
             progress = (
                 f"[{self.site_id}] Screening patient {idx}/{total} "
@@ -287,29 +279,18 @@ class ScreeningClient(fl.client.NumPyClient):
             print(progress, flush=True)
 
             try:
-                # Run inside a one-shot executor so we can apply a hard
-                # deadline independently of the Ollama HTTP timeout.
-                with ThreadPoolExecutor(max_workers=1) as _ex:
-                    future = _ex.submit(
-                        auditor_agent.screen_and_audit,
-                        patient_id=patient_id,
-                        fhir_bundle=bundle,
-                        criteria_text=criteria_text,
-                        trial_name=criteria.trial_name,
-                    )
-                    try:
-                        decision = future.result(timeout=PATIENT_TIMEOUT_SECONDS)
-                    except FuturesTimeoutError:
-                        msg = (
-                            f"{patient_id}: inference timed out after "
-                            f"{PATIENT_TIMEOUT_SECONDS}s — skipped."
-                        )
-                        self._errors.append(msg)
-                        logger.warning("[%s] %s", self.site_id, msg)
-                        print(f"  -> TIMEOUT: {msg}", flush=True)
-                        # Update result with current state before moving on
-                        result.errors = list(self._errors)
-                        continue
+                # The MedGemmaClient has a per-request HTTP timeout set on
+                # the underlying httpx connection.  If Ollama stalls mid-
+                # inference it raises an exception (httpx.ReadTimeout /
+                # ollama.ResponseError) that propagates naturally up through
+                # screen_and_audit() into this except block, causing the
+                # patient to be skipped without blocking the loop.
+                decision = auditor_agent.screen_and_audit(
+                    patient_id=patient_id,
+                    fhir_bundle=bundle,
+                    criteria_text=criteria_text,
+                    trial_name=criteria.trial_name,
+                )
 
                 if decision.final_decision == "ELIGIBLE":
                     eligible_count += 1
