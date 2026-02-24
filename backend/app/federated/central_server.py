@@ -246,7 +246,7 @@ class CentralServer:
 
         # Wait for all sites (MedGemma calls can take minutes)
         for t in threads:
-            t.join(timeout=900)
+            t.join(timeout=1800)
 
         # Aggregate
         aggregate_total = sum(r.total_patients for r in site_results)
