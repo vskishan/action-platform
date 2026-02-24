@@ -41,7 +41,8 @@ CRITICAL RULES — YOU MUST FOLLOW ALL OF THESE:
 Respond in EXACTLY this format:
 CRITERIA_USED: <briefly list only the inclusion and exclusion criteria you were given>
 DECISION: ELIGIBLE or INELIGIBLE
-REASON: One concise sentence citing ONLY a specific criterion from the provided list."""
+REASON: One concise sentence citing ONLY a specific criterion from the provided list.
+CONFIDENCE: HIGH if the decision is clear-cut with no ambiguity, LOW if data is missing or borderline, otherwise MEDIUM."""
 
 # Intent classification prompt
 

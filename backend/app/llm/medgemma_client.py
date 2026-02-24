@@ -106,6 +106,7 @@ class MedGemmaClient:
         *,
         system: str | None = None,
         temperature: float | None = None,
+        max_tokens: int | None = None,
         raw: bool = False,
     ) -> str:
         """Send a single-turn chat message and return the response text.
@@ -118,6 +119,10 @@ class MedGemmaClient:
             Optional system prompt.
         temperature : float | None
             Sampling temperature (overrides ``default_temperature``).
+        max_tokens : int | None
+            Maximum tokens to generate (maps to Ollama's ``num_predict``).
+            Use this to cap short-format responses (e.g. DECISION/REASON)
+            and avoid the model generating verbose preamble.
         raw : bool
             If ``True``, return the complete Ollama ``ChatResponse``
             object instead of just the text.
@@ -132,10 +137,14 @@ class MedGemmaClient:
             messages.append({"role": "system", "content": system})
         messages.append({"role": "user", "content": prompt})
 
+        options: dict = {"temperature": temperature or self.default_temperature}
+        if max_tokens is not None:
+            options["num_predict"] = max_tokens
+
         response = ollama.chat(
             model=self.model,
             messages=messages,
-            options={"temperature": temperature or self.default_temperature},
+            options=options,
         )
 
         if raw:
