@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import json
 import logging
+import threading
 from pathlib import Path
 from typing import Any
 
@@ -189,6 +190,9 @@ class ScreeningClient(fl.client.NumPyClient):
         # externally even when fit() has not returned yet (e.g. on timeout).
         self._current_result: SiteScreeningResult | None = None
         self._completed = False
+        # Cancellation token — set by the central server to tell this
+        # client to stop processing new patients and return immediately.
+        self._cancel_event = threading.Event()
 
     # Flower interface
 
@@ -279,6 +283,17 @@ class ScreeningClient(fl.client.NumPyClient):
         self._completed = False
 
         for idx, (patient_id, bundle) in enumerate(bundles.items(), 1):
+            # Check cancellation before starting the next patient.
+            if self._cancel_event.is_set():
+                msg = (
+                    f"Cancelled after {processed_count}/{total} patients "
+                    f"(central server timeout)."
+                )
+                logger.info("[%s] %s", self.site_id, msg)
+                self._errors.append(msg)
+                result.errors = list(self._errors)
+                break
+
             progress = (
                 f"[{self.site_id}] Screening patient {idx}/{total} "
                 f"({patient_id}) [with audit]"
@@ -396,6 +411,15 @@ class ScreeningClient(fl.client.NumPyClient):
         }
 
         return result_to_ndarrays(result), total, metrics
+
+    def cancel(self) -> None:
+        """Signal this client to stop after the current patient.
+
+        The ``fit()`` loop checks ``_cancel_event`` before starting each
+        new patient.  When set, it breaks out of the loop and returns
+        whatever results have been accumulated so far.
+        """
+        self._cancel_event.set()
 
     def get_partial_result(self) -> SiteScreeningResult | None:
         """Return the latest checkpoint of the screening result.

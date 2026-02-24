@@ -12,6 +12,7 @@ site boundaries.**
 
 import logging
 import threading
+import time
 from pathlib import Path
 from typing import Any, Optional, Union
 
@@ -269,21 +270,32 @@ class CentralServer:
             site_id_by_thread[t.name] = site_id
             logger.info("Started screening thread for '%s'.", site_id)
 
-        # Per-site timeout: Generous enough to allow slow CPU inferences
-        SITE_TIMEOUT_SECONDS = 1800
+        # Overall deadline: all sites share ONE wall-clock budget.
+        # This prevents N × timeout when threads are joined sequentially.
+        SCREENING_DEADLINE_SECONDS = 1800
+        deadline = time.monotonic() + SCREENING_DEADLINE_SECONDS
 
         timed_out_sites: list[str] = []
         for t in threads:
-            t.join(timeout=SITE_TIMEOUT_SECONDS)
+            remaining = max(0, deadline - time.monotonic())
+            t.join(timeout=remaining)
             if t.is_alive():
                 sid = site_id_by_thread.get(t.name, t.name)
                 timed_out_sites.append(sid)
                 logger.warning(
-                    "Site thread '%s' did not finish within %ds — "
-                    "attempting to recover partial results.",
+                    "Site thread '%s' did not finish within the %ds "
+                    "deadline — attempting to recover partial results.",
                     t.name,
-                    SITE_TIMEOUT_SECONDS,
+                    SCREENING_DEADLINE_SECONDS,
                 )
+
+        # Signal timed-out clients to stop processing new patients so
+        # they don't keep consuming CPU/memory in the background.
+        for sid in timed_out_sites:
+            client = site_clients.get(sid)
+            if client is not None:
+                client.cancel()
+                logger.info("Sent cancel signal to site '%s'.", sid)
 
         # Recover partial results from timed-out sites so we never
         # lose patients that were already screened before the timeout.
@@ -303,7 +315,7 @@ class CentralServer:
             partial = client.get_partial_result()
             if partial is not None and len(partial.patient_audit_details) > 0:
                 partial.errors.append(
-                    f"Timeout after {SITE_TIMEOUT_SECONDS}s — "
+                    f"Timeout after {SCREENING_DEADLINE_SECONDS}s — "
                     f"partial result: {len(partial.patient_audit_details)}/"
                     f"{partial.total_patients} patients processed."
                 )
