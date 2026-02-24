@@ -25,9 +25,9 @@ logger = logging.getLogger(__name__)
 DEFAULT_MODEL = os.environ.get("MEDGEMMA_MODEL")
 
 # Hard cap on a single Ollama inference call (seconds).
-# The timeout is set on the underlying httpx client so when Ollama stalls
-# the connection itself raises an exception — no background thread needed.
-DEFAULT_REQUEST_TIMEOUT = float(os.environ.get("OLLAMA_REQUEST_TIMEOUT", "180"))
+# Set to None to remove the timeout so long-running CPU inferences can finish.
+_timeout_env = os.environ.get("OLLAMA_REQUEST_TIMEOUT", "")
+DEFAULT_REQUEST_TIMEOUT = float(_timeout_env) if _timeout_env else None
 
 
 class MedGemmaClient:
@@ -60,7 +60,7 @@ class MedGemmaClient:
         self,
         model: str | None = None,
         default_temperature: float = 0.3,
-        request_timeout: float = DEFAULT_REQUEST_TIMEOUT,
+        request_timeout: float | None = DEFAULT_REQUEST_TIMEOUT,
     ) -> None:
         self.model = model or DEFAULT_MODEL
         self.default_temperature = default_temperature
@@ -72,10 +72,11 @@ class MedGemmaClient:
         # after `request_timeout` seconds, which propagates naturally through
         # screen_and_audit() back to the caller's try/except block.
         self._ollama = ollama.Client(timeout=request_timeout)
+        timeout_msg = f"{self.request_timeout:.0f}s" if self.request_timeout else "None"
         logger.info(
-            "MedGemmaClient initialised — model=%s, timeout=%.0fs",
+            "MedGemmaClient initialised — model=%s, timeout=%s",
             self.model,
-            self.request_timeout,
+            timeout_msg,
         )
 
     # Factory / singleton

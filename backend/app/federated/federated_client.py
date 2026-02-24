@@ -185,6 +185,10 @@ class ScreeningClient(fl.client.NumPyClient):
         self.site_id = site_id
         self.ehr_data_dir = Path(ehr_data_dir)
         self._errors: list[str] = []
+        # Holds the in-progress result so partial data can be retrieved
+        # externally even when fit() has not returned yet (e.g. on timeout).
+        self._current_result: SiteScreeningResult | None = None
+        self._completed = False
 
     # Flower interface
 
@@ -269,6 +273,10 @@ class ScreeningClient(fl.client.NumPyClient):
             corrected_count=0,
             flagged_for_review_count=0,
         )
+        # Expose to the instance so the central server can read partial
+        # results even when this method is still running (timeout path).
+        self._current_result = result
+        self._completed = False
 
         for idx, (patient_id, bundle) in enumerate(bundles.items(), 1):
             progress = (
@@ -374,6 +382,7 @@ class ScreeningClient(fl.client.NumPyClient):
 
         # Final sync (loop completed normally)
         result.total_patients = total
+        self._completed = True
 
         metrics = {
             "site_id": self.site_id,
@@ -387,6 +396,33 @@ class ScreeningClient(fl.client.NumPyClient):
         }
 
         return result_to_ndarrays(result), total, metrics
+
+    def get_partial_result(self) -> SiteScreeningResult | None:
+        """Return the latest checkpoint of the screening result.
+
+        This is safe to call from another thread while ``fit()`` is
+        still running.  The result is a *snapshot* of the counters and
+        audit trail accumulated so far.
+
+        Returns ``None`` if ``fit()`` has not yet initialised the result
+        object (i.e. still loading FHIR bundles).
+        """
+        if self._current_result is None:
+            return None
+        # Return a shallow copy so downstream can't mutate the live object.
+        import copy
+        snapshot = copy.copy(self._current_result)
+        # Mark the errors as a copy too so the list doesn't grow underneath
+        snapshot.errors = list(self._current_result.errors)
+        snapshot.patient_audit_details = list(
+            self._current_result.patient_audit_details
+        )
+        return snapshot
+
+    @property
+    def completed(self) -> bool:
+        """Whether ``fit()`` ran to completion."""
+        return self._completed
 
     def evaluate(self, parameters, config):
         """Not used in screening workflow."""

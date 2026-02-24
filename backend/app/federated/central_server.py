@@ -33,6 +33,7 @@ from backend.app.federated.federated_client import (
     ScreeningClient,
     criteria_to_ndarrays,
     ndarrays_to_result,
+    result_to_ndarrays,
 )
 from backend.app.schema.screening_schema import (
     FederatedScreeningResponse,
@@ -206,6 +207,9 @@ class CentralServer:
         # Run each site's client.fit() — optionally in parallel threads
         site_results: list[SiteScreeningResult] = []
         client_errors: list[str] = []
+        # Keep references to client objects so we can extract partial
+        # results from timed-out sites.
+        site_clients: dict[str, ScreeningClient] = {}
 
         def _run_site(site_id: str, ehr_dir: Path) -> None:
             """Run screening for one site (thread target)."""
@@ -214,6 +218,7 @@ class CentralServer:
                     site_id=site_id,
                     ehr_data_dir=ehr_dir,
                 )
+                site_clients[site_id] = client
                 result_arrays, num_examples, metrics = client.fit(
                     parameters=criteria_arrays,
                     config={},
@@ -230,9 +235,28 @@ class CentralServer:
                 msg = f"Site '{site_id}' screening failed: {exc}"
                 logger.error(msg, exc_info=True)
                 client_errors.append(msg)
+                # Even on crash, try to salvage whatever patients were
+                # already screened before the exception.
+                client = site_clients.get(site_id)
+                if client is not None:
+                    partial = client.get_partial_result()
+                    if partial is not None and len(partial.patient_audit_details) > 0:
+                        partial.errors.append(
+                            f"Site crashed after screening "
+                            f"{len(partial.patient_audit_details)}/"
+                            f"{partial.total_patients} patients: {exc}"
+                        )
+                        site_results.append(partial)
+                        logger.info(
+                            "  Site '%s' (CRASH-PARTIAL): recovered %d "
+                            "patient result(s).",
+                            site_id,
+                            len(partial.patient_audit_details),
+                        )
 
         # Launch one thread per site so they run concurrently
         threads: list[threading.Thread] = []
+        site_id_by_thread: dict[str, str] = {}  # thread.name -> site_id
         for site_id, ehr_dir in self.site_registry.items():
             t = threading.Thread(
                 target=_run_site,
@@ -242,25 +266,64 @@ class CentralServer:
             )
             t.start()
             threads.append(t)
+            site_id_by_thread[t.name] = site_id
             logger.info("Started screening thread for '%s'.", site_id)
 
-        # Per-site timeout: generous enough for all patients × per-patient cap
-        # (240 s each) plus some buffer.  The per-patient timeout in
-        # federated_client ensures the thread itself makes progress so
-        # this site-level cap is a genuine last-resort safety net.
-        PATIENTS_PER_SITE_ESTIMATE = 60
-        PER_PATIENT_CAP_SECONDS = 240
-        SITE_TIMEOUT_SECONDS = PATIENTS_PER_SITE_ESTIMATE * PER_PATIENT_CAP_SECONDS  # 14 400 s ≈ 4 h
+        # Per-site timeout: Generous enough to allow slow CPU inferences
+        SITE_TIMEOUT_SECONDS = 1800
 
+        timed_out_sites: list[str] = []
         for t in threads:
             t.join(timeout=SITE_TIMEOUT_SECONDS)
             if t.is_alive():
+                sid = site_id_by_thread.get(t.name, t.name)
+                timed_out_sites.append(sid)
                 logger.warning(
                     "Site thread '%s' did not finish within %ds — "
-                    "it will be abandoned.  Partial results (if any) "
-                    "from that site will not be included.",
+                    "attempting to recover partial results.",
                     t.name,
                     SITE_TIMEOUT_SECONDS,
+                )
+
+        # Recover partial results from timed-out sites so we never
+        # lose patients that were already screened before the timeout.
+        for sid in timed_out_sites:
+            client = site_clients.get(sid)
+            if client is None:
+                logger.warning(
+                    "Site '%s' timed out before its client was initialised "
+                    "— no partial results available.",
+                    sid,
+                )
+                client_errors.append(
+                    f"Site '{sid}' timed out before initialisation."
+                )
+                continue
+
+            partial = client.get_partial_result()
+            if partial is not None and len(partial.patient_audit_details) > 0:
+                partial.errors.append(
+                    f"Timeout after {SITE_TIMEOUT_SECONDS}s — "
+                    f"partial result: {len(partial.patient_audit_details)}/"
+                    f"{partial.total_patients} patients processed."
+                )
+                site_results.append(partial)
+                logger.info(
+                    "  Site '%s' (PARTIAL): %d / %d eligible "
+                    "(%d of %d patients processed before timeout).",
+                    sid,
+                    partial.eligible_patients,
+                    partial.total_patients,
+                    len(partial.patient_audit_details),
+                    partial.total_patients,
+                )
+            else:
+                logger.warning(
+                    "Site '%s' timed out with no usable partial results.",
+                    sid,
+                )
+                client_errors.append(
+                    f"Site '{sid}' timed out with no usable results."
                 )
 
         # Aggregate
@@ -274,8 +337,12 @@ class CentralServer:
         aggregate_high_conf = sum(r.high_confidence_count for r in site_results)
         aggregate_low_conf = sum(r.low_confidence_count for r in site_results)
 
+        has_timeouts = bool(timed_out_sites)
+
         status = "completed"
         if len(site_results) < num_sites:
+            status = "partial"
+        elif has_timeouts:
             status = "partial"
         elif any_errors:
             status = "completed_with_warnings"
